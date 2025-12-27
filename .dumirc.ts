@@ -11,7 +11,7 @@ export default defineConfig({
     ],
     footer: `Open-source MIT Licensed | Copyright © ${new Date().getFullYear()} Kage UI`,
     socialLinks: {
-      github: 'https://github.com/your-username/kage-ui',
+      github: 'https://github.com/hezihua/kage-ui',
     },
   },
   // 配置 sass 支持
