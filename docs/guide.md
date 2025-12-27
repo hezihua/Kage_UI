@@ -12,19 +12,19 @@ nav:
 
 ```bash
 # npm
-npm install kage-ui
+npm install wssf-kage-ui
 
 # yarn
-yarn add kage-ui
+yarn add wssf-kage-ui
 
 # pnpm
-pnpm add kage-ui
+pnpm add wssf-kage-ui
 ```
 
 ## 使用
 
 ```tsx | pure
-import { Button } from 'kage-ui';
+import { Button } from 'wssf-kage-ui';
 
 function App() {
   return (

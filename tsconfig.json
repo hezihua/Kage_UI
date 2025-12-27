@@ -7,8 +7,8 @@
     "jsx": "react-jsx",
     "baseUrl": "./",
     "paths": {
-      "kage-ui": ["src/index.ts"],
-      "kage-ui/*": ["src/*"]
+      "wssf-kage-ui": ["src/index.ts"],
+      "wssf-kage-ui/*": ["src/*"]
     },
     "moduleResolution": "node",
     "target": "ES2020",

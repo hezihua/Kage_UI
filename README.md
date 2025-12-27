@@ -12,17 +12,17 @@
 ## 📦 安装
 
 ```bash
-npm install kage-ui
+npm install wssf-kage-ui
 # 或
-yarn add kage-ui
+yarn add wssf-kage-ui
 # 或
-pnpm add kage-ui
+pnpm add wssf-kage-ui
 ```
 
 ## 🔨 使用
 
 ```tsx
-import { Button } from 'kage-ui';
+import { Button } from 'wssf-kage-ui';
 
 function App() {
   return <Button type="primary">Hello Kage UI</Button>;

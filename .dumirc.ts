@@ -18,7 +18,7 @@ export default defineConfig({
   // sass: {},
   // 配置别名
   alias: {
-    'kage-ui': '/src',
+    'wssf-kage-ui': '/src',
   },
   // 配置 demo 的全局包裹组件
   // mountElementId: 'root',

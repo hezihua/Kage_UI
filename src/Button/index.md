@@ -23,7 +23,7 @@ title: Button 按钮
 按钮有五种类型：主按钮、默认按钮、虚线按钮、文本按钮和链接按钮。
 
 ```tsx
-import { Button } from 'kage-ui';
+import { Button } from 'wssf-kage-ui';
 
 export default () => (
   <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
@@ -41,7 +41,7 @@ export default () => (
 按钮有大、中、小三种尺寸。
 
 ```tsx
-import { Button } from 'kage-ui';
+import { Button } from 'wssf-kage-ui';
 
 export default () => (
   <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
@@ -57,7 +57,7 @@ export default () => (
 添加 `disabled` 属性即可让按钮处于不可用状态。
 
 ```tsx
-import { Button } from 'kage-ui';
+import { Button } from 'wssf-kage-ui';
 
 export default () => (
   <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
@@ -73,7 +73,7 @@ export default () => (
 添加 `loading` 属性即可让按钮处于加载状态。
 
 ```tsx
-import { Button } from 'kage-ui';
+import { Button } from 'wssf-kage-ui';
 
 export default () => (
   <div style={{ display: 'flex', gap: '12px' }}>
@@ -88,7 +88,7 @@ export default () => (
 `block` 属性将使按钮适合其父宽度。
 
 ```tsx
-import { Button } from 'kage-ui';
+import { Button } from 'wssf-kage-ui';
 
 export default () => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', width: '300px' }}>
