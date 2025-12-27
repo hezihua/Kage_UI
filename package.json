@@ -1,0 +1,72 @@
+{
+  "name": "kage-ui",
+  "version": "0.1.0",
+  "description": "Kage UI - A modern React component library",
+  "keywords": [
+    "react",
+    "component",
+    "ui",
+    "kage"
+  ],
+  "license": "MIT",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/esm/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "start": "dumi dev",
+    "docs:build": "dumi build",
+    "build": "father build",
+    "build:watch": "father dev",
+    "prepare": "husky install && dumi setup",
+    "lint": "eslint src --ext .ts,.tsx",
+    "prepublishOnly": "father doctor && npm run build"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
+  "peerDependencies": {
+    "react": ">=16.9.0",
+    "react-dom": ">=16.9.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "@umijs/lint": "^4.0.0",
+    "dumi": "^2.4.0",
+    "eslint": "^8.0.0",
+    "father": "^4.4.0",
+    "husky": "^8.0.0",
+    "lint-staged": "^15.0.0",
+    "prettier": "^3.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "stylelint": "^15.0.0",
+    "typescript": "^5.0.0"
+  },
+  "lint-staged": {
+    "*.{md,json}": [
+      "prettier --write --no-error-on-unmatched-pattern"
+    ],
+    "*.{css,less}": [
+      "stylelint --fix",
+      "prettier --write"
+    ],
+    "*.{js,jsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
+  },
+  "sideEffects": [
+    "**/*.css",
+    "**/*.less"
+  ]
+}
+
