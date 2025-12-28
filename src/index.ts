@@ -43,3 +43,6 @@ export type { MenuProps, MenuItemType } from './Menu';
 export { default as Pagination } from './Pagination';
 export type { PaginationProps } from './Pagination';
 
+export { default as Steps } from './Steps';
+export type { StepsProps, StepItem, StepStatus } from './Steps';
+

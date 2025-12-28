@@ -1,0 +1,507 @@
+// Steps 步骤条组件样式
+
+@prefix: kage-steps;
+
+// 颜色变量
+@steps-primary-color: #6366f1;
+@steps-wait-color: rgba(0, 0, 0, 0.45);
+@steps-finish-color: #6366f1;
+@steps-process-color: #6366f1;
+@steps-error-color: #ff4d4f;
+@steps-text-color: rgba(0, 0, 0, 0.88);
+@steps-description-color: rgba(0, 0, 0, 0.45);
+@steps-tail-color: rgba(0, 0, 0, 0.06);
+@steps-icon-bg: #fff;
+@steps-icon-size: 32px;
+@steps-icon-size-small: 24px;
+@steps-dot-size: 8px;
+
+// ============ 基础样式 ============
+.@{prefix} {
+  display: flex;
+  font-size: 14px;
+  line-height: 1.5;
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+// ============ 水平方向 ============
+.@{prefix}-horizontal {
+  flex-direction: row;
+
+  .@{prefix}-item {
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+    padding-right: 16px;
+
+    &:last-child {
+      flex: none;
+      padding-right: 0;
+    }
+  }
+
+  .@{prefix}-item-tail {
+    position: absolute;
+    top: 16px;
+    left: @steps-icon-size + 8px;
+    right: 0;
+    height: 1px;
+    background: @steps-tail-color;
+
+    &::after {
+      content: '';
+      display: block;
+      width: 0;
+      height: 100%;
+      background: @steps-finish-color;
+      transition: width 0.3s ease;
+    }
+  }
+
+  .@{prefix}-item-finish .@{prefix}-item-tail::after {
+    width: 100%;
+  }
+}
+
+// ============ 垂直方向 ============
+.@{prefix}-vertical {
+  flex-direction: column;
+
+  .@{prefix}-item {
+    display: flex;
+    position: relative;
+    padding-bottom: 24px;
+
+    &:last-child {
+      padding-bottom: 0;
+    }
+  }
+
+  .@{prefix}-item-tail {
+    position: absolute;
+    top: @steps-icon-size + 8px;
+    left: 15px;
+    width: 1px;
+    height: calc(100% - @steps-icon-size - 8px);
+    background: @steps-tail-color;
+
+    &::after {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 0;
+      background: @steps-finish-color;
+      transition: height 0.3s ease;
+    }
+  }
+
+  .@{prefix}-item-finish .@{prefix}-item-tail::after {
+    height: 100%;
+  }
+
+  .@{prefix}-item-content {
+    min-height: 48px;
+    padding-top: 4px;
+  }
+}
+
+// ============ 步骤项 ============
+.@{prefix}-item {
+  display: inline-flex;
+  align-items: flex-start;
+  white-space: nowrap;
+}
+
+.@{prefix}-item-clickable {
+  cursor: pointer;
+
+  &:hover .@{prefix}-item-title {
+    color: @steps-primary-color;
+  }
+}
+
+.@{prefix}-item-disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+// ============ 图标 ============
+.@{prefix}-item-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: @steps-icon-size;
+  height: @steps-icon-size;
+  margin-right: 8px;
+  font-size: 16px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+.@{prefix}-icon-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border: 1px solid @steps-wait-color;
+  border-radius: 50%;
+  color: @steps-wait-color;
+  font-size: 14px;
+}
+
+.@{prefix}-icon-check,
+.@{prefix}-icon-error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 14px;
+}
+
+.@{prefix}-icon-check {
+  background: @steps-finish-color;
+}
+
+.@{prefix}-icon-error {
+  background: @steps-error-color;
+}
+
+.@{prefix}-icon-custom {
+  font-size: 24px;
+}
+
+// ============ 内容 ============
+.@{prefix}-item-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.@{prefix}-item-title {
+  font-size: 16px;
+  font-weight: 500;
+  color: @steps-text-color;
+  line-height: @steps-icon-size;
+  transition: color 0.3s ease;
+}
+
+.@{prefix}-item-subtitle {
+  margin-left: 8px;
+  font-size: 14px;
+  font-weight: normal;
+  color: @steps-description-color;
+}
+
+.@{prefix}-item-description {
+  font-size: 14px;
+  color: @steps-description-color;
+  margin-top: 4px;
+}
+
+// ============ 状态样式 ============
+.@{prefix}-item-wait {
+  .@{prefix}-icon-number {
+    border-color: @steps-wait-color;
+    color: @steps-wait-color;
+  }
+
+  .@{prefix}-item-title {
+    color: @steps-wait-color;
+  }
+}
+
+.@{prefix}-item-process {
+  .@{prefix}-icon-number {
+    border-color: @steps-process-color;
+    background: @steps-process-color;
+    color: #fff;
+  }
+
+  .@{prefix}-item-title {
+    color: @steps-text-color;
+    font-weight: 600;
+  }
+}
+
+.@{prefix}-item-finish {
+  .@{prefix}-icon-number {
+    border-color: @steps-finish-color;
+    color: @steps-finish-color;
+  }
+
+  .@{prefix}-item-title {
+    color: @steps-text-color;
+  }
+}
+
+.@{prefix}-item-error {
+  .@{prefix}-item-title {
+    color: @steps-error-color;
+  }
+
+  .@{prefix}-item-description {
+    color: @steps-error-color;
+  }
+}
+
+// ============ 小尺寸 ============
+.@{prefix}-small {
+  .@{prefix}-item-icon {
+    width: @steps-icon-size-small;
+    height: @steps-icon-size-small;
+    font-size: 12px;
+  }
+
+  .@{prefix}-icon-number {
+    font-size: 12px;
+  }
+
+  .@{prefix}-item-title {
+    font-size: 14px;
+    line-height: @steps-icon-size-small;
+  }
+
+  .@{prefix}-item-description {
+    font-size: 12px;
+  }
+
+  &.@{prefix}-horizontal .@{prefix}-item-tail {
+    top: 12px;
+    left: @steps-icon-size-small + 8px;
+  }
+
+  &.@{prefix}-vertical .@{prefix}-item-tail {
+    top: @steps-icon-size-small + 8px;
+    left: 11px;
+    height: calc(100% - @steps-icon-size-small - 8px);
+  }
+}
+
+// ============ 点状步骤条 ============
+.@{prefix}-dot {
+  .@{prefix}-item-icon {
+    width: @steps-dot-size;
+    height: @steps-dot-size;
+  }
+
+  .@{prefix}-dot {
+    display: block;
+    width: @steps-dot-size;
+    height: @steps-dot-size;
+    border-radius: 50%;
+    background: @steps-wait-color;
+    transition: all 0.3s ease;
+  }
+
+  .@{prefix}-item-process .@{prefix}-dot {
+    background: @steps-process-color;
+    transform: scale(1.5);
+  }
+
+  .@{prefix}-item-finish .@{prefix}-dot {
+    background: @steps-finish-color;
+  }
+
+  .@{prefix}-item-error .@{prefix}-dot {
+    background: @steps-error-color;
+  }
+
+  &.@{prefix}-horizontal {
+    .@{prefix}-item-tail {
+      top: 4px;
+      left: @steps-dot-size + 8px;
+    }
+
+    .@{prefix}-item-content {
+      margin-top: 8px;
+    }
+
+    .@{prefix}-item-title {
+      line-height: 1.5;
+    }
+  }
+
+  &.@{prefix}-vertical {
+    .@{prefix}-item-tail {
+      top: @steps-dot-size + 8px;
+      left: 3px;
+      height: calc(100% - @steps-dot-size - 8px);
+    }
+  }
+}
+
+// ============ 导航类型 ============
+.@{prefix}-navigation {
+  padding: 0;
+  background: transparent;
+
+  &.@{prefix}-horizontal {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+
+    .@{prefix}-item {
+      padding: 12px 32px;
+      margin-right: 0;
+      position: relative;
+      flex: none;
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -1px;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: transparent;
+        transition: background 0.3s ease;
+      }
+    }
+
+    .@{prefix}-item-process::after {
+      background: @steps-process-color;
+    }
+
+    .@{prefix}-item-tail {
+      display: none;
+    }
+
+    .@{prefix}-item-icon {
+      display: none;
+    }
+
+    .@{prefix}-item-title {
+      line-height: 1.5;
+    }
+  }
+}
+
+// ============ 标签垂直布局 ============
+.@{prefix}-label-vertical {
+  &.@{prefix}-horizontal {
+    .@{prefix}-item {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .@{prefix}-item-icon {
+      margin-right: 0;
+      margin-bottom: 8px;
+    }
+
+    .@{prefix}-item-content {
+      align-items: center;
+      text-align: center;
+    }
+
+    .@{prefix}-item-tail {
+      top: 16px;
+      left: 50%;
+      right: auto;
+      width: 100%;
+      margin-left: 16px;
+    }
+  }
+}
+
+// ============ 暗色模式适配 ============
+[data-theme='dark'],
+[data-prefers-color-scheme='dark'],
+[data-prefers-color='dark'] {
+  .@{prefix}-item-title {
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .@{prefix}-item-subtitle,
+  .@{prefix}-item-description {
+    color: rgba(255, 255, 255, 0.45);
+  }
+
+  .@{prefix}-item-tail {
+    background: rgba(255, 255, 255, 0.12);
+  }
+
+  .@{prefix}-item-wait {
+    .@{prefix}-icon-number {
+      border-color: rgba(255, 255, 255, 0.45);
+      color: rgba(255, 255, 255, 0.45);
+    }
+
+    .@{prefix}-item-title {
+      color: rgba(255, 255, 255, 0.45);
+    }
+  }
+
+  .@{prefix}-item-process {
+    .@{prefix}-icon-number {
+      border-color: #818cf8;
+      background: #818cf8;
+    }
+
+    .@{prefix}-item-title {
+      color: rgba(255, 255, 255, 0.85);
+    }
+  }
+
+  .@{prefix}-item-finish {
+    .@{prefix}-icon-number {
+      border-color: #818cf8;
+      color: #818cf8;
+    }
+
+    .@{prefix}-icon-check {
+      background: #818cf8;
+    }
+
+    .@{prefix}-item-tail::after {
+      background: #818cf8;
+    }
+  }
+
+  .@{prefix}-item-error {
+    .@{prefix}-item-title,
+    .@{prefix}-item-description {
+      color: #ff7875;
+    }
+
+    .@{prefix}-icon-error {
+      background: #ff7875;
+    }
+  }
+
+  .@{prefix}-dot {
+    .@{prefix}-dot {
+      background: rgba(255, 255, 255, 0.45);
+    }
+
+    .@{prefix}-item-process .@{prefix}-dot {
+      background: #818cf8;
+    }
+
+    .@{prefix}-item-finish .@{prefix}-dot {
+      background: #818cf8;
+    }
+
+    .@{prefix}-item-error .@{prefix}-dot {
+      background: #ff7875;
+    }
+  }
+
+  .@{prefix}-navigation.@{prefix}-horizontal {
+    border-bottom-color: rgba(255, 255, 255, 0.12);
+
+    .@{prefix}-item-process::after {
+      background: #818cf8;
+    }
+  }
+
+  .@{prefix}-item-clickable:hover .@{prefix}-item-title {
+    color: #818cf8;
+  }
+}
+
