@@ -193,3 +193,64 @@
   }
 }
 
+// ============ 暗色模式适配 ============
+.typography-dark-mode() {
+  .@{prefix} {
+    color: rgba(255, 255, 255, 0.85) !important;
+
+    &-secondary {
+      color: rgba(255, 255, 255, 0.45) !important;
+    }
+
+    &-disabled {
+      color: rgba(255, 255, 255, 0.25) !important;
+    }
+
+    &-link {
+      color: #818cf8 !important;
+
+      &:hover {
+        color: #a5b4fc !important;
+      }
+    }
+
+    &-code {
+      background: rgba(255, 255, 255, 0.1) !important;
+      border-color: rgba(255, 255, 255, 0.2) !important;
+      color: #e879f9 !important;
+    }
+
+    &-keyboard {
+      background: #2d2d2d !important;
+      border-color: #404040 !important;
+      color: rgba(255, 255, 255, 0.85) !important;
+    }
+
+    &-mark,
+    mark {
+      background-color: #854d0e !important;
+      color: #fef08a !important;
+    }
+  }
+
+  // 标题颜色
+  .@{prefix}-title {
+    color: rgba(255, 255, 255, 0.85) !important;
+  }
+}
+
+// 系统暗色模式
+@media (prefers-color-scheme: dark) {
+  .typography-dark-mode();
+}
+
+// dumi 暗色主题适配
+[data-theme='dark'],
+[data-prefers-color-scheme='dark'],
+[data-prefers-color='dark'],
+html.dark,
+body.dark,
+.dark {
+  .typography-dark-mode();
+}
+
