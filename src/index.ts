@@ -37,3 +37,6 @@ export type { BreadcrumbProps, BreadcrumbItemProps, BreadcrumbItemType } from '.
 export { default as Dropdown, DropdownButton } from './Dropdown';
 export type { DropdownProps, DropdownButtonProps, DropdownMenuItem, DropdownMenuProps } from './Dropdown';
 
+export { default as Menu } from './Menu';
+export type { MenuProps, MenuItemType } from './Menu';
+
