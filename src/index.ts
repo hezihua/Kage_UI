@@ -10,3 +10,9 @@ export type { TitleProps, TextProps, ParagraphProps, LinkProps } from './Typogra
 export { Divider } from './Divider';
 export type { DividerProps } from './Divider';
 
+export { Flex } from './Flex';
+export type { FlexProps } from './Flex';
+
+export { default as Grid, Row, Col } from './Grid';
+export type { RowProps, ColProps } from './Grid';
+
