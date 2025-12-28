@@ -1,0 +1,144 @@
+// Divider 分割线组件样式
+
+@prefix: kage-divider;
+
+// 基础变量
+@divider-color: #e5e5e5;
+@divider-text-color: #1f1f1f;
+@divider-text-font-size: 14px;
+@divider-orientation-margin: 5%;
+
+.@{prefix} {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-size: @divider-text-font-size;
+  font-variant: tabular-nums;
+  line-height: 1.5;
+  list-style: none;
+  border-block-start: 0 @divider-color;
+
+  // ============ 水平分割线 ============
+  &-horizontal {
+    display: flex;
+    align-items: center;
+    clear: both;
+    width: 100%;
+    min-width: 100%;
+    margin: 24px 0;
+
+    &::before,
+    &::after {
+      position: relative;
+      width: 50%;
+      border-block-start: 1px solid transparent;
+      border-block-start-color: inherit;
+      border-block-end: 0;
+      transform: translateY(50%);
+      content: '';
+    }
+  }
+
+  // ============ 垂直分割线 ============
+  &-vertical {
+    position: relative;
+    top: -0.06em;
+    display: inline-block;
+    height: 0.9em;
+    margin: 0 8px;
+    vertical-align: middle;
+    border-top: 0;
+    border-inline-start: 1px solid @divider-color;
+  }
+
+  // ============ 带文字的分割线 ============
+  &-with-text {
+    display: flex;
+    align-items: center;
+    margin: 16px 0;
+    color: @divider-text-color;
+    font-weight: 500;
+    font-size: @divider-text-font-size;
+    white-space: nowrap;
+    text-align: center;
+    border-block-start: 0;
+
+    &::before,
+    &::after {
+      position: relative;
+      width: 50%;
+      border-block-start: 1px solid transparent;
+      border-block-start-color: inherit;
+      border-block-end: 0;
+      transform: translateY(50%);
+      content: '';
+    }
+  }
+
+  &-with-text-left {
+    &::before {
+      width: var(--divider-text-margin-left, @divider-orientation-margin);
+    }
+    &::after {
+      width: calc(100% - var(--divider-text-margin-left, @divider-orientation-margin));
+    }
+  }
+
+  &-with-text-right {
+    &::before {
+      width: calc(100% - var(--divider-text-margin-right, @divider-orientation-margin));
+    }
+    &::after {
+      width: var(--divider-text-margin-right, @divider-orientation-margin);
+    }
+  }
+
+  &-inner-text {
+    display: inline-block;
+    padding: 0 1em;
+  }
+
+  // ============ 纯净模式 ============
+  &-plain {
+    font-weight: 400;
+    font-size: @divider-text-font-size;
+  }
+
+  // ============ 线条样式 ============
+  &-solid {
+    border-color: @divider-color;
+    
+    &.@{prefix}-vertical {
+      border-inline-start-style: solid;
+    }
+  }
+
+  &-dashed {
+    border-color: @divider-color;
+    border-style: dashed;
+    
+    &.@{prefix}-vertical {
+      border-inline-start-style: dashed;
+    }
+
+    &::before,
+    &::after {
+      border-style: dashed none none;
+    }
+  }
+
+  &-dotted {
+    border-color: @divider-color;
+    border-style: dotted;
+    
+    &.@{prefix}-vertical {
+      border-inline-start-style: dotted;
+    }
+
+    &::before,
+    &::after {
+      border-style: dotted none none;
+    }
+  }
+}
+
