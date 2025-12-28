@@ -252,18 +252,19 @@ export const Link: React.FC<LinkProps> = ({
 };
 
 // ============ Typography 命名空间导出 ============
-type TypographyType = React.FC & {
+interface TypographyType {
   Title: typeof Title;
   Text: typeof Text;
   Paragraph: typeof Paragraph;
   Link: typeof Link;
-};
+}
 
-const Typography: TypographyType = (() => null) as TypographyType;
-Typography.Title = Title;
-Typography.Text = Text;
-Typography.Paragraph = Paragraph;
-Typography.Link = Link;
+const Typography: TypographyType = {
+  Title,
+  Text,
+  Paragraph,
+  Link,
+};
 
 export default Typography;
 

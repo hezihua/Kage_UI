@@ -139,20 +139,21 @@ export const Tabs: React.FC<TabsProps> = ({
   const renderExtraContent = () => {
     if (!tabBarExtraContent) return null;
 
-    if (typeof tabBarExtraContent === 'object' && ('left' in tabBarExtraContent || 'right' in tabBarExtraContent)) {
+    if (typeof tabBarExtraContent === 'object' && tabBarExtraContent !== null && ('left' in tabBarExtraContent || 'right' in tabBarExtraContent)) {
+      const extraContent = tabBarExtraContent as { left?: React.ReactNode; right?: React.ReactNode };
       return (
         <>
-          {tabBarExtraContent.left && (
-            <div className="kage-tabs-extra-left">{tabBarExtraContent.left}</div>
+          {extraContent.left && (
+            <div className="kage-tabs-extra-left">{extraContent.left}</div>
           )}
-          {tabBarExtraContent.right && (
-            <div className="kage-tabs-extra-right">{tabBarExtraContent.right}</div>
+          {extraContent.right && (
+            <div className="kage-tabs-extra-right">{extraContent.right}</div>
           )}
         </>
       );
     }
 
-    return <div className="kage-tabs-extra-right">{tabBarExtraContent}</div>;
+    return <div className="kage-tabs-extra-right">{tabBarExtraContent as React.ReactNode}</div>;
   };
 
   const classNames = [
@@ -170,8 +171,8 @@ export const Tabs: React.FC<TabsProps> = ({
     <div ref={tabsRef} className={classNames} style={style}>
       {/* 标签栏 */}
       <div className="kage-tabs-nav">
-        {typeof tabBarExtraContent === 'object' && 'left' in tabBarExtraContent && (
-          <div className="kage-tabs-extra-left">{tabBarExtraContent.left}</div>
+        {tabBarExtraContent && typeof tabBarExtraContent === 'object' && 'left' in tabBarExtraContent && (
+          <div className="kage-tabs-extra-left">{(tabBarExtraContent as { left?: React.ReactNode }).left}</div>
         )}
         
         <div className="kage-tabs-nav-wrap">
@@ -219,11 +220,11 @@ export const Tabs: React.FC<TabsProps> = ({
         )}
 
         {/* 额外内容 */}
-        {tabBarExtraContent && !(typeof tabBarExtraContent === 'object' && 'left' in tabBarExtraContent) && (
-          <div className="kage-tabs-extra-right">{tabBarExtraContent}</div>
+        {tabBarExtraContent && !(typeof tabBarExtraContent === 'object' && 'left' in tabBarExtraContent && 'right' in tabBarExtraContent) && !(typeof tabBarExtraContent === 'object' && ('left' in tabBarExtraContent || 'right' in tabBarExtraContent)) && (
+          <div className="kage-tabs-extra-right">{tabBarExtraContent as React.ReactNode}</div>
         )}
-        {typeof tabBarExtraContent === 'object' && 'right' in tabBarExtraContent && (
-          <div className="kage-tabs-extra-right">{tabBarExtraContent.right}</div>
+        {tabBarExtraContent && typeof tabBarExtraContent === 'object' && 'right' in tabBarExtraContent && (
+          <div className="kage-tabs-extra-right">{(tabBarExtraContent as { right?: React.ReactNode }).right}</div>
         )}
       </div>
 
