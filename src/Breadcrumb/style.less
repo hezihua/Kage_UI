@@ -1,0 +1,96 @@
+// Breadcrumb 面包屑组件样式
+
+@prefix: kage-breadcrumb;
+
+// ============ 浅色模式（默认） ============
+.@{prefix} {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: rgba(0, 0, 0, 0.45);
+}
+
+.@{prefix}-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.@{prefix}-item {
+  display: inline-flex;
+  align-items: center;
+}
+
+.@{prefix}-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: rgba(0, 0, 0, 0.88);
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: #6366f1;
+  }
+
+  &-current {
+    color: rgba(0, 0, 0, 0.88);
+    cursor: default;
+    font-weight: 500;
+
+    &:hover {
+      color: rgba(0, 0, 0, 0.88);
+    }
+  }
+}
+
+.@{prefix}-icon {
+  display: inline-flex;
+  align-items: center;
+  font-size: 14px;
+}
+
+.@{prefix}-separator {
+  margin: 0 8px;
+  color: rgba(0, 0, 0, 0.45);
+  user-select: none;
+}
+
+// ============ 暗色模式适配 ============
+// 仅通过 dumi 主题选择器，不使用 prefers-color-scheme
+// 这样可以避免系统暗色+dumi浅色主题时的冲突
+
+[data-theme='dark'],
+[data-prefers-color-scheme='dark'],
+[data-prefers-color='dark'] {
+  .@{prefix} {
+    color: rgba(255, 255, 255, 0.45);
+  }
+
+  .@{prefix}-link {
+    color: rgba(255, 255, 255, 0.65);
+
+    &:hover {
+      color: #818cf8;
+    }
+
+    &-current {
+      color: rgba(255, 255, 255, 0.85);
+
+      &:hover {
+        color: rgba(255, 255, 255, 0.85);
+      }
+    }
+  }
+
+  .@{prefix}-separator {
+    color: rgba(255, 255, 255, 0.3);
+  }
+}
+

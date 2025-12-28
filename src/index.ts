@@ -31,3 +31,6 @@ export type { SplitterProps, PanelProps } from './Splitter';
 export { default as Anchor, AnchorLink } from './Anchor';
 export type { AnchorProps, AnchorLinkProps, AnchorItem } from './Anchor';
 
+export { default as Breadcrumb, BreadcrumbItem, BreadcrumbSeparator } from './Breadcrumb';
+export type { BreadcrumbProps, BreadcrumbItemProps, BreadcrumbItemType } from './Breadcrumb';
+

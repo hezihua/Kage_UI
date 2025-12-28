@@ -139,11 +139,15 @@
 }
 
 // ============ 暗色模式适配 ============
-// 定义暗色模式的 mixin
-.anchor-dark-mode() {
+// 仅通过 dumi 主题选择器，不使用 prefers-color-scheme
+// 避免系统暗色+dumi浅色主题时的冲突
+
+[data-theme='dark'],
+[data-prefers-color-scheme='dark'],
+[data-prefers-color='dark'] {
   .@{prefix} {
     &::before {
-      background: rgba(255, 255, 255, 0.2) !important;
+      background: rgba(255, 255, 255, 0.2);
     }
 
     &-fixed {
@@ -153,42 +157,27 @@
   }
 
   .@{prefix}-vertical::before {
-    background: rgba(255, 255, 255, 0.2) !important;
+    background: rgba(255, 255, 255, 0.2);
   }
 
   .@{prefix}-horizontal::before {
-    background: rgba(255, 255, 255, 0.2) !important;
+    background: rgba(255, 255, 255, 0.2);
   }
 
   .@{prefix}-link {
-    color: rgba(255, 255, 255, 0.65) !important;
+    color: rgba(255, 255, 255, 0.65);
 
     &:hover {
-      color: rgba(255, 255, 255, 0.85) !important;
+      color: rgba(255, 255, 255, 0.85);
     }
   }
 
   .@{prefix}-link-active {
-    color: #818cf8 !important;
+    color: #818cf8;
   }
 
   .@{prefix}-ink {
-    background: #818cf8 !important;
+    background: #818cf8;
   }
-}
-
-// 系统暗色模式
-@media (prefers-color-scheme: dark) {
-  .anchor-dark-mode();
-}
-
-// dumi 暗色主题适配（多种选择器）
-[data-theme='dark'],
-[data-prefers-color-scheme='dark'],
-[data-prefers-color='dark'],
-html.dark,
-body.dark,
-.dark {
-  .anchor-dark-mode();
 }
 
