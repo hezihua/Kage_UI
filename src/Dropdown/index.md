@@ -231,9 +231,9 @@ export default () => (
       style={{
         padding: 40,
         textAlign: 'center',
-        background: 'var(--dumi-default-border-color, #f0f0f0)',
-        border: '1px dashed var(--dumi-default-border-color, #d9d9d9)',
+        border: '1px dashed currentColor',
         borderRadius: 8,
+        opacity: 0.6,
       }}
     >
       右键点击此区域
