@@ -58,3 +58,6 @@ export type { CascaderProps, CascaderOption, CascaderValueType } from './Cascade
 export { default as Checkbox, CheckboxGroup } from './Checkbox';
 export type { CheckboxProps, CheckboxGroupProps, CheckboxOptionType } from './Checkbox';
 
+export { default as ColorPicker } from './ColorPicker';
+export type { ColorPickerProps } from './ColorPicker';
+

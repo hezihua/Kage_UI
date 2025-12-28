@@ -1,0 +1,276 @@
+// ColorPicker 颜色选择器组件样式
+
+@prefix: kage-color-picker;
+
+// 颜色变量
+@panel-bg: #fff;
+@panel-shadow: 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 3px 6px -4px rgba(0, 0, 0, 0.12);
+@border-color: #d9d9d9;
+@text-color: rgba(0, 0, 0, 0.88);
+@primary-color: #6366f1;
+
+// ============ 基础样式 ============
+.@{prefix} {
+  position: relative;
+  display: inline-block;
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+// ============ 触发器 ============
+.@{prefix}-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 4px;
+  background: @panel-bg;
+  border: 1px solid @border-color;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-color: @primary-color;
+  }
+}
+
+.@{prefix}-open .@{prefix}-trigger {
+  border-color: @primary-color;
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.1);
+}
+
+.@{prefix}-color-block {
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
+  box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.1);
+}
+
+.@{prefix}-disabled {
+  .@{prefix}-trigger {
+    cursor: not-allowed;
+    opacity: 0.5;
+
+    &:hover {
+      border-color: @border-color;
+    }
+  }
+}
+
+// ============ 尺寸 ============
+.@{prefix}-large .@{prefix}-trigger {
+  width: 44px;
+  height: 44px;
+}
+
+.@{prefix}-small .@{prefix}-trigger {
+  width: 28px;
+  height: 28px;
+  padding: 3px;
+}
+
+// ============ 面板 ============
+.@{prefix}-panel {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1050;
+  margin-top: 4px;
+  padding: 12px;
+  background: @panel-bg;
+  border-radius: 8px;
+  box-shadow: @panel-shadow;
+  animation: slideDown 0.2s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// ============ 饱和度面板 ============
+.@{prefix}-saturation {
+  position: relative;
+  width: 200px;
+  height: 150px;
+  border-radius: 4px;
+  cursor: crosshair;
+  user-select: none;
+}
+
+.@{prefix}-saturation-white {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(to right, #fff, transparent);
+  border-radius: 4px;
+}
+
+.@{prefix}-saturation-black {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(to bottom, transparent, #000);
+  border-radius: 4px;
+}
+
+.@{prefix}-saturation-cursor {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+// ============ 色相条 ============
+.@{prefix}-hue {
+  position: relative;
+  width: 100%;
+  height: 12px;
+  margin-top: 12px;
+  border-radius: 6px;
+  background: linear-gradient(
+    to right,
+    #ff0000 0%,
+    #ffff00 17%,
+    #00ff00 33%,
+    #00ffff 50%,
+    #0000ff 67%,
+    #ff00ff 83%,
+    #ff0000 100%
+  );
+  cursor: pointer;
+  user-select: none;
+}
+
+.@{prefix}-hue-cursor {
+  position: absolute;
+  top: 50%;
+  width: 14px;
+  height: 14px;
+  background: #fff;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+// ============ 输入框 ============
+.@{prefix}-input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.@{prefix}-preview {
+  width: 28px;
+  height: 28px;
+  border-radius: 4px;
+  border: 1px solid @border-color;
+  flex-shrink: 0;
+}
+
+.@{prefix}-input {
+  flex: 1;
+  height: 28px;
+  padding: 4px 8px;
+  font-size: 12px;
+  font-family: monospace;
+  color: @text-color;
+  background: @panel-bg;
+  border: 1px solid @border-color;
+  border-radius: 4px;
+  outline: none;
+  transition: all 0.2s ease;
+
+  &:focus {
+    border-color: @primary-color;
+    box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.1);
+  }
+}
+
+// ============ 预设颜色 ============
+.@{prefix}-presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.@{prefix}-preset {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.2);
+
+  &:hover {
+    transform: scale(1.15);
+  }
+}
+
+// ============ 暗色模式适配 ============
+[data-theme='dark'],
+[data-prefers-color-scheme='dark'],
+[data-prefers-color='dark'] {
+  .@{prefix}-trigger {
+    background: #1f1f1f;
+    border-color: #424242;
+
+    &:hover {
+      border-color: #818cf8;
+    }
+  }
+
+  .@{prefix}-open .@{prefix}-trigger {
+    border-color: #818cf8;
+    box-shadow: 0 0 0 2px rgba(129, 140, 248, 0.2);
+  }
+
+  .@{prefix}-panel {
+    background: #1f1f1f;
+    box-shadow: 0 6px 16px 0 rgba(0, 0, 0, 0.3);
+  }
+
+  .@{prefix}-preview {
+    border-color: #424242;
+  }
+
+  .@{prefix}-input {
+    background: #1f1f1f;
+    border-color: #424242;
+    color: rgba(255, 255, 255, 0.85);
+
+    &:focus {
+      border-color: #818cf8;
+      box-shadow: 0 0 0 2px rgba(129, 140, 248, 0.2);
+    }
+  }
+
+  .@{prefix}-presets {
+    border-top-color: rgba(255, 255, 255, 0.12);
+  }
+}
+
