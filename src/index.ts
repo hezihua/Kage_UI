@@ -40,3 +40,6 @@ export type { DropdownProps, DropdownButtonProps, DropdownMenuItem, DropdownMenu
 export { default as Menu } from './Menu';
 export type { MenuProps, MenuItemType } from './Menu';
 
+export { default as Pagination } from './Pagination';
+export type { PaginationProps } from './Pagination';
+
