@@ -24,7 +24,27 @@ export default defineConfig({
   // mountElementId: 'root',
   styles: [
     `.dumi-default-header-left {
-       width: 220px;
+       width: 320px;
+    }
+    .dumi-default-sidebar {
+      width: 320px !important;
+    }
+    .dumi-default-doc-layout-content {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+      max-width: 100% !important;
+    }
+    .dumi-default-doc-layout > main {
+      max-width: 100% !important;
+      padding: 0 !important;
+    }
+    .markdown {
+      max-width: 100% !important;
+      padding: 0 24px !important;
+    }
+    .dumi-default-previewer {
+      margin-left: 0 !important;
+      margin-right: 0 !important;
     }`,
   ],
 });
