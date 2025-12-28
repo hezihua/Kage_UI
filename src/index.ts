@@ -46,3 +46,6 @@ export type { PaginationProps } from './Pagination';
 export { default as Steps } from './Steps';
 export type { StepsProps, StepItem, StepStatus } from './Steps';
 
+export { default as Tabs } from './Tabs';
+export type { TabsProps, TabItem } from './Tabs';
+
