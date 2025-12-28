@@ -1,0 +1,99 @@
+// Splitter 分割面板组件样式
+
+@prefix: kage-splitter;
+
+// 颜色变量
+@splitter-bar-bg: #f0f0f0;
+@splitter-bar-hover-bg: #d9d9d9;
+@splitter-bar-active-bg: #6366f1;
+@splitter-bar-size: 8px;
+@splitter-dragger-size: 4px;
+
+.@{prefix} {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+
+  &-horizontal {
+    flex-direction: row;
+  }
+
+  &-vertical {
+    flex-direction: column;
+  }
+
+  &-dragging {
+    .@{prefix}-panel {
+      pointer-events: none;
+    }
+  }
+}
+
+// ============ Panel 面板 ============
+.@{prefix}-panel {
+  flex-shrink: 0;
+  overflow: auto;
+  box-sizing: border-box;
+}
+
+// ============ 分割条 ============
+.@{prefix}-bar {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: @splitter-bar-bg;
+  transition: background-color 0.2s;
+  z-index: 1;
+
+  &:hover {
+    background: @splitter-bar-hover-bg;
+
+    .@{prefix}-bar-dragger {
+      background: @splitter-bar-active-bg;
+    }
+  }
+
+  &-horizontal {
+    width: @splitter-bar-size;
+    cursor: col-resize;
+    flex-direction: column;
+
+    .@{prefix}-bar-dragger {
+      width: @splitter-dragger-size;
+      height: 40px;
+      border-radius: 2px;
+    }
+  }
+
+  &-vertical {
+    height: @splitter-bar-size;
+    cursor: row-resize;
+    flex-direction: row;
+
+    .@{prefix}-bar-dragger {
+      width: 40px;
+      height: @splitter-dragger-size;
+      border-radius: 2px;
+    }
+  }
+}
+
+// ============ 拖拽手柄 ============
+.@{prefix}-bar-dragger {
+  background: #bfbfbf;
+  transition: background-color 0.2s;
+}
+
+// ============ 拖拽中状态 ============
+.@{prefix}-dragging {
+  .@{prefix}-bar {
+    background: @splitter-bar-hover-bg;
+
+    .@{prefix}-bar-dragger {
+      background: @splitter-bar-active-bg;
+    }
+  }
+}
+

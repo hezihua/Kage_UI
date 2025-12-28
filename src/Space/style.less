@@ -1,0 +1,116 @@
+// Space 间距组件样式
+
+@prefix: kage-space;
+
+.@{prefix} {
+  display: inline-flex;
+  
+  &-horizontal {
+    flex-direction: row;
+  }
+
+  &-vertical {
+    flex-direction: column;
+  }
+
+  &-wrap {
+    flex-wrap: wrap;
+  }
+
+  &-align-start {
+    align-items: flex-start;
+  }
+
+  &-align-end {
+    align-items: flex-end;
+  }
+
+  &-align-center {
+    align-items: center;
+  }
+
+  &-align-baseline {
+    align-items: baseline;
+  }
+
+  &-item {
+    display: inline-flex;
+    
+    &:empty {
+      display: none;
+    }
+  }
+
+  &-split {
+    display: inline-flex;
+    align-items: center;
+    color: rgba(0, 0, 0, 0.45);
+  }
+}
+
+// ============ Compact 紧凑模式 ============
+.@{prefix}-compact {
+  display: inline-flex;
+
+  &-block {
+    display: flex;
+    width: 100%;
+  }
+
+  &-horizontal {
+    flex-direction: row;
+
+    > *:not(:last-child) {
+      margin-right: -1px;
+    }
+
+    > *:first-child:not(:last-child) {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    > *:last-child:not(:first-child) {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+
+    > *:not(:first-child):not(:last-child) {
+      border-radius: 0;
+    }
+
+    > *:hover,
+    > *:focus,
+    > *:active {
+      z-index: 2;
+    }
+  }
+
+  &-vertical {
+    flex-direction: column;
+
+    > *:not(:last-child) {
+      margin-bottom: -1px;
+    }
+
+    > *:first-child:not(:last-child) {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    > *:last-child:not(:first-child) {
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }
+
+    > *:not(:first-child):not(:last-child) {
+      border-radius: 0;
+    }
+
+    > *:hover,
+    > *:focus,
+    > *:active {
+      z-index: 2;
+    }
+  }
+}
+

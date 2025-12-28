@@ -22,3 +22,9 @@ export type { LayoutProps, HeaderProps, SiderProps, ContentProps, FooterProps } 
 export { Masonry } from './Masonry';
 export type { MasonryProps } from './Masonry';
 
+export { default as Space, Compact } from './Space';
+export type { SpaceProps, CompactProps } from './Space';
+
+export { default as Splitter, Panel } from './Splitter';
+export type { SplitterProps, PanelProps } from './Splitter';
+
