@@ -1,0 +1,145 @@
+// Layout 布局组件样式
+
+@prefix: kage-layout;
+
+// 颜色变量
+@layout-body-bg: #f5f5f5;
+@layout-header-bg: #001529;
+@layout-header-color: #fff;
+@layout-header-height: 64px;
+@layout-header-padding: 0 50px;
+@layout-footer-bg: #f5f5f5;
+@layout-footer-padding: 24px 50px;
+@layout-sider-bg-dark: #001529;
+@layout-sider-bg-light: #fff;
+@layout-trigger-height: 48px;
+@layout-trigger-bg: #002140;
+@layout-trigger-color: #fff;
+
+// ============ Layout 容器 ============
+.@{prefix} {
+  display: flex;
+  flex: auto;
+  flex-direction: column;
+  min-height: 0;
+  background: @layout-body-bg;
+  box-sizing: border-box;
+
+  &,
+  * {
+    box-sizing: border-box;
+  }
+
+  // 包含侧边栏时水平布局
+  &-has-sider {
+    flex-direction: row;
+
+    > .@{prefix},
+    > .@{prefix}-content {
+      width: 0;
+    }
+  }
+}
+
+// 嵌套 Layout
+.@{prefix} .@{prefix} {
+  background: transparent;
+}
+
+// ============ Header 头部 ============
+.@{prefix}-header {
+  flex: 0 0 auto;
+  height: @layout-header-height;
+  padding: @layout-header-padding;
+  color: @layout-header-color;
+  line-height: @layout-header-height;
+  background: @layout-header-bg;
+  display: flex;
+  align-items: center;
+}
+
+// ============ Sider 侧边栏 ============
+.@{prefix}-sider {
+  position: relative;
+  min-width: 0;
+  background: @layout-sider-bg-dark;
+  transition: all 0.2s ease;
+
+  &-dark {
+    background: @layout-sider-bg-dark;
+    color: rgba(255, 255, 255, 0.65);
+  }
+
+  &-light {
+    background: @layout-sider-bg-light;
+    color: rgba(0, 0, 0, 0.88);
+    border-inline-end: 1px solid rgba(5, 5, 5, 0.06);
+  }
+
+  &-children {
+    height: 100%;
+    padding-top: 0.1px;
+    margin-top: -0.1px;
+    overflow: auto;
+  }
+
+  &-collapsed {
+    .@{prefix}-sider-children {
+      overflow: visible;
+    }
+  }
+
+  // 触发器
+  &-trigger {
+    position: fixed;
+    bottom: 0;
+    z-index: 1;
+    height: @layout-trigger-height;
+    color: @layout-trigger-color;
+    line-height: @layout-trigger-height;
+    text-align: center;
+    background: @layout-trigger-bg;
+    cursor: pointer;
+    transition: all 0.2s;
+    
+    &:hover {
+      background: lighten(@layout-trigger-bg, 5%);
+    }
+
+    &-icon {
+      font-size: 12px;
+    }
+  }
+
+  &-dark &-trigger {
+    width: inherit;
+  }
+
+  &-light &-trigger {
+    width: inherit;
+    color: rgba(0, 0, 0, 0.88);
+    background: #fff;
+    border-top: 1px solid rgba(5, 5, 5, 0.06);
+    border-inline-end: 1px solid rgba(5, 5, 5, 0.06);
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.04);
+    }
+  }
+}
+
+// ============ Content 内容区 ============
+.@{prefix}-content {
+  flex: auto;
+  min-height: 0;
+}
+
+// ============ Footer 底部 ============
+.@{prefix}-footer {
+  flex: 0 0 auto;
+  padding: @layout-footer-padding;
+  color: rgba(0, 0, 0, 0.88);
+  font-size: 14px;
+  background: @layout-footer-bg;
+}
+

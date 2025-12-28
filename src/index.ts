@@ -16,3 +16,9 @@ export type { FlexProps } from './Flex';
 export { default as Grid, Row, Col } from './Grid';
 export type { RowProps, ColProps } from './Grid';
 
+export { default as Layout, Header, Sider, Content, Footer } from './Layout';
+export type { LayoutProps, HeaderProps, SiderProps, ContentProps, FooterProps } from './Layout';
+
+export { Masonry } from './Masonry';
+export type { MasonryProps } from './Masonry';
+
