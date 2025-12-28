@@ -1,0 +1,430 @@
+// Dropdown 下拉菜单组件样式
+
+@prefix: kage-dropdown;
+
+// 颜色变量 - 浅色模式
+@dropdown-bg: #fff;
+@dropdown-border-color: #e5e7eb;
+@dropdown-shadow: 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 9px 28px 8px rgba(0, 0, 0, 0.05);
+@dropdown-item-color: rgba(0, 0, 0, 0.88);
+@dropdown-item-hover-bg: #f5f5f5;
+@dropdown-item-active-bg: #e6f4ff;
+@dropdown-item-disabled-color: rgba(0, 0, 0, 0.25);
+@dropdown-item-danger-color: #ff4d4f;
+@dropdown-item-danger-hover-bg: #fff1f0;
+@dropdown-divider-color: #f0f0f0;
+@dropdown-arrow-color: #fff;
+@primary-color: #6366f1;
+
+.@{prefix} {
+  position: relative;
+  display: inline-block;
+
+  &-disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+
+    .@{prefix}-trigger {
+      pointer-events: none;
+    }
+  }
+}
+
+.@{prefix}-trigger {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+// ============ Overlay 样式 ============
+.@{prefix}-overlay {
+  position: absolute;
+  z-index: 1050;
+  min-width: 120px;
+  padding: 4px 0;
+  background: @dropdown-bg;
+  border-radius: 8px;
+  box-shadow: @dropdown-shadow;
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0.95);
+  transform-origin: top center;
+  transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+
+  &-open {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+  }
+
+  // 位置变体
+  &.@{prefix}-placement-bottom,
+  &.@{prefix}-placement-bottomLeft,
+  &.@{prefix}-placement-bottomRight {
+    top: 100%;
+    margin-top: 4px;
+    transform-origin: top center;
+  }
+
+  &.@{prefix}-placement-bottomLeft {
+    left: 0;
+  }
+
+  &.@{prefix}-placement-bottom {
+    left: 50%;
+    transform: translateX(-50%) scale(0.95);
+
+    &.@{prefix}-overlay-open {
+      transform: translateX(-50%) scale(1);
+    }
+  }
+
+  &.@{prefix}-placement-bottomRight {
+    right: 0;
+  }
+
+  &.@{prefix}-placement-top,
+  &.@{prefix}-placement-topLeft,
+  &.@{prefix}-placement-topRight {
+    bottom: 100%;
+    margin-bottom: 4px;
+    transform-origin: bottom center;
+  }
+
+  &.@{prefix}-placement-topLeft {
+    left: 0;
+  }
+
+  &.@{prefix}-placement-top {
+    left: 50%;
+    transform: translateX(-50%) scale(0.95);
+
+    &.@{prefix}-overlay-open {
+      transform: translateX(-50%) scale(1);
+    }
+  }
+
+  &.@{prefix}-placement-topRight {
+    right: 0;
+  }
+}
+
+// ============ Arrow 样式 ============
+.@{prefix}-arrow {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: @dropdown-arrow-color;
+  transform: rotate(45deg);
+  box-shadow: -2px -2px 5px rgba(0, 0, 0, 0.06);
+
+  .@{prefix}-placement-bottom &,
+  .@{prefix}-placement-bottomLeft &,
+  .@{prefix}-placement-bottomRight & {
+    top: -4px;
+  }
+
+  .@{prefix}-placement-bottomLeft & {
+    left: 16px;
+  }
+
+  .@{prefix}-placement-bottom & {
+    left: 50%;
+    margin-left: -4px;
+  }
+
+  .@{prefix}-placement-bottomRight & {
+    right: 16px;
+  }
+
+  .@{prefix}-placement-top &,
+  .@{prefix}-placement-topLeft &,
+  .@{prefix}-placement-topRight & {
+    bottom: -4px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.06);
+  }
+
+  .@{prefix}-placement-topLeft & {
+    left: 16px;
+  }
+
+  .@{prefix}-placement-top & {
+    left: 50%;
+    margin-left: -4px;
+  }
+
+  .@{prefix}-placement-topRight & {
+    right: 16px;
+  }
+}
+
+// ============ Menu 样式 ============
+.@{prefix}-menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.@{prefix}-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: @dropdown-item-color;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin: 0 4px;
+  border-radius: 4px;
+
+  &:hover {
+    background: @dropdown-item-hover-bg;
+  }
+
+  &-icon {
+    display: inline-flex;
+    align-items: center;
+    font-size: 14px;
+  }
+
+  &-label {
+    flex: 1;
+    white-space: nowrap;
+  }
+
+  &-arrow {
+    font-size: 10px;
+    opacity: 0.5;
+    margin-left: auto;
+  }
+
+  &-selected {
+    background: @dropdown-item-active-bg;
+    color: @primary-color;
+  }
+
+  &-disabled {
+    color: @dropdown-item-disabled-color;
+    cursor: not-allowed;
+
+    &:hover {
+      background: transparent;
+    }
+  }
+
+  &-danger {
+    color: @dropdown-item-danger-color;
+
+    &:hover {
+      background: @dropdown-item-danger-hover-bg;
+      color: @dropdown-item-danger-color;
+    }
+  }
+}
+
+.@{prefix}-menu-divider {
+  height: 1px;
+  margin: 4px 12px;
+  background: @dropdown-divider-color;
+}
+
+// ============ Dropdown Button 样式 ============
+.@{prefix}-button-group {
+  display: inline-flex;
+}
+
+.@{prefix}-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 6px 16px;
+  font-size: 14px;
+  line-height: 1.5;
+  border: 1px solid #d9d9d9;
+  border-radius: 6px;
+  background: #fff;
+  color: rgba(0, 0, 0, 0.88);
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    color: @primary-color;
+    border-color: @primary-color;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  &-left {
+    border-radius: 6px 0 0 6px;
+    border-right: none;
+  }
+
+  &-right {
+    border-radius: 0 6px 6px 0;
+    padding: 6px 10px;
+    border-left: 1px solid #d9d9d9;
+  }
+
+  &-primary {
+    background: @primary-color;
+    border-color: @primary-color;
+    color: #fff;
+
+    &:hover {
+      background: darken(@primary-color, 10%);
+      border-color: darken(@primary-color, 10%);
+      color: #fff;
+    }
+
+    .@{prefix}-button-right {
+      border-left-color: rgba(255, 255, 255, 0.3);
+    }
+  }
+
+  &-dashed {
+    border-style: dashed;
+  }
+
+  &-text {
+    border: none;
+    background: transparent;
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.04);
+    }
+  }
+
+  &-link {
+    border: none;
+    background: transparent;
+    color: @primary-color;
+
+    &:hover {
+      color: darken(@primary-color, 10%);
+    }
+  }
+
+  &-danger {
+    color: @dropdown-item-danger-color;
+    border-color: @dropdown-item-danger-color;
+
+    &:hover {
+      color: darken(@dropdown-item-danger-color, 10%);
+      border-color: darken(@dropdown-item-danger-color, 10%);
+    }
+
+    &.@{prefix}-button-primary {
+      background: @dropdown-item-danger-color;
+      color: #fff;
+
+      &:hover {
+        background: darken(@dropdown-item-danger-color, 10%);
+      }
+    }
+  }
+
+  &-small {
+    padding: 2px 8px;
+    font-size: 12px;
+  }
+
+  &-large {
+    padding: 8px 20px;
+    font-size: 16px;
+  }
+
+  &-icon,
+  &-loading-icon,
+  &-dropdown-icon {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  &-dropdown-icon {
+    font-size: 10px;
+  }
+
+  &-loading-icon {
+    animation: kage-spin 1s linear infinite;
+  }
+}
+
+@keyframes kage-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+// ============ 暗色模式适配 ============
+[data-theme='dark'],
+[data-prefers-color-scheme='dark'],
+[data-prefers-color='dark'] {
+  .@{prefix}-overlay {
+    background: #1f1f1f;
+    box-shadow: 0 6px 16px 0 rgba(0, 0, 0, 0.3), 0 3px 6px -4px rgba(0, 0, 0, 0.4);
+  }
+
+  .@{prefix}-arrow {
+    background: #1f1f1f;
+  }
+
+  .@{prefix}-menu-item {
+    color: rgba(255, 255, 255, 0.85);
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    &-selected {
+      background: rgba(99, 102, 241, 0.2);
+      color: #818cf8;
+    }
+
+    &-disabled {
+      color: rgba(255, 255, 255, 0.25);
+    }
+
+    &-danger {
+      color: #ff7875;
+
+      &:hover {
+        background: rgba(255, 77, 79, 0.15);
+      }
+    }
+  }
+
+  .@{prefix}-menu-divider {
+    background: rgba(255, 255, 255, 0.12);
+  }
+
+  .@{prefix}-button {
+    background: #1f1f1f;
+    border-color: #424242;
+    color: rgba(255, 255, 255, 0.85);
+
+    &:hover {
+      color: #818cf8;
+      border-color: #818cf8;
+    }
+
+    &-primary {
+      background: #6366f1;
+      border-color: #6366f1;
+      color: #fff;
+
+      &:hover {
+        background: #4f46e5;
+        border-color: #4f46e5;
+      }
+    }
+
+    &-right {
+      border-left-color: #424242;
+    }
+  }
+}
+

@@ -34,3 +34,6 @@ export type { AnchorProps, AnchorLinkProps, AnchorItem } from './Anchor';
 export { default as Breadcrumb, BreadcrumbItem, BreadcrumbSeparator } from './Breadcrumb';
 export type { BreadcrumbProps, BreadcrumbItemProps, BreadcrumbItemType } from './Breadcrumb';
 
+export { default as Dropdown, DropdownButton } from './Dropdown';
+export type { DropdownProps, DropdownButtonProps, DropdownMenuItem, DropdownMenuProps } from './Dropdown';
+
