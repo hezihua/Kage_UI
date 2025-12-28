@@ -49,3 +49,6 @@ export type { StepsProps, StepItem, StepStatus } from './Steps';
 export { default as Tabs } from './Tabs';
 export type { TabsProps, TabItem } from './Tabs';
 
+export { default as AutoComplete } from './AutoComplete';
+export type { AutoCompleteProps, AutoCompleteOption } from './AutoComplete';
+
