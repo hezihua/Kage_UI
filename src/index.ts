@@ -55,3 +55,6 @@ export type { AutoCompleteProps, AutoCompleteOption } from './AutoComplete';
 export { default as Cascader } from './Cascader';
 export type { CascaderProps, CascaderOption, CascaderValueType } from './Cascader';
 
+export { default as Checkbox, CheckboxGroup } from './Checkbox';
+export type { CheckboxProps, CheckboxGroupProps, CheckboxOptionType } from './Checkbox';
+
