@@ -52,3 +52,6 @@ export type { TabsProps, TabItem } from './Tabs';
 export { default as AutoComplete } from './AutoComplete';
 export type { AutoCompleteProps, AutoCompleteOption } from './AutoComplete';
 
+export { default as Cascader } from './Cascader';
+export type { CascaderProps, CascaderOption, CascaderValueType } from './Cascader';
+
