@@ -1,0 +1,140 @@
+// Anchor 锚点组件样式
+
+@prefix: kage-anchor;
+
+// 颜色变量
+@anchor-bg: transparent;
+@anchor-border-color: #f0f0f0;
+@anchor-link-color: rgba(0, 0, 0, 0.65);
+@anchor-link-hover-color: #1f1f1f;
+@anchor-link-active-color: #6366f1;
+@anchor-ink-color: #6366f1;
+
+.@{prefix} {
+  position: relative;
+  padding-left: 2px;
+  box-sizing: border-box;
+
+  // ============ 垂直方向 ============
+  &-vertical {
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: @anchor-border-color;
+    }
+
+    .@{prefix}-ink {
+      position: absolute;
+      left: 0;
+      width: 2px;
+      height: 8px;
+      background: @anchor-ink-color;
+      border-radius: 1px;
+      transition: top 0.2s ease, opacity 0.2s ease;
+      opacity: 0;
+
+      &-visible {
+        opacity: 1;
+      }
+    }
+
+    .@{prefix}-link {
+      display: block;
+      padding: 4px 0 4px 16px;
+    }
+  }
+
+  // ============ 水平方向 ============
+  &-horizontal {
+    position: relative;
+    padding-left: 0;
+    padding-bottom: 2px;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 2px;
+      background: @anchor-border-color;
+    }
+
+    .@{prefix}-ink {
+      position: absolute;
+      bottom: 0;
+      width: 20px;
+      height: 2px;
+      background: @anchor-ink-color;
+      border-radius: 1px;
+      transition: left 0.2s ease, opacity 0.2s ease;
+      opacity: 0;
+
+      &-visible {
+        opacity: 1;
+      }
+    }
+
+    .@{prefix}-content {
+      display: flex;
+      gap: 0;
+    }
+
+    .@{prefix}-link-wrapper {
+      display: inline-flex;
+    }
+
+    .@{prefix}-link {
+      display: inline-block;
+      padding: 8px 16px;
+    }
+
+    .@{prefix}-link-children {
+      display: none;
+    }
+  }
+
+  // ============ 固定模式 ============
+  &-fixed {
+    background: #fff;
+    padding: 8px 12px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+}
+
+// ============ 链接样式 ============
+.@{prefix}-link-wrapper {
+  position: relative;
+}
+
+.@{prefix}-link {
+  color: @anchor-link-color;
+  text-decoration: none;
+  font-size: 14px;
+  line-height: 1.5;
+  transition: color 0.2s ease;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  &:hover {
+    color: @anchor-link-hover-color;
+  }
+
+  &-active {
+    color: @anchor-link-active-color;
+    font-weight: 500;
+  }
+}
+
+.@{prefix}-link-children {
+  .@{prefix}-link {
+    font-size: 13px;
+  }
+}
+

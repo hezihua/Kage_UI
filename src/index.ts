@@ -28,3 +28,6 @@ export type { SpaceProps, CompactProps } from './Space';
 export { default as Splitter, Panel } from './Splitter';
 export type { SplitterProps, PanelProps } from './Splitter';
 
+export { default as Anchor, AnchorLink } from './Anchor';
+export type { AnchorProps, AnchorLinkProps, AnchorItem } from './Anchor';
+
