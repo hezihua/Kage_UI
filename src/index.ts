@@ -64,3 +64,6 @@ export type { ColorPickerProps } from './ColorPicker';
 export { default as DatePicker } from './DatePicker';
 export type { DatePickerProps } from './DatePicker';
 
+export { default as Form, FormItem } from './Form';
+export type { FormProps, FormItemProps, Rule, FormInstance } from './Form';
+

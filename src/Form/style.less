@@ -1,0 +1,203 @@
+// Form 表单组件样式
+
+@prefix: kage-form;
+
+// 颜色变量
+@text-color: rgba(0, 0, 0, 0.88);
+@text-secondary: rgba(0, 0, 0, 0.45);
+@error-color: #ff4d4f;
+@required-color: #ff4d4f;
+@help-color: rgba(0, 0, 0, 0.45);
+
+// ============ 基础样式 ============
+.@{prefix} {
+  font-size: 14px;
+  color: @text-color;
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+// ============ 水平布局 ============
+.@{prefix}-horizontal {
+  .@{prefix}-item {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+  }
+
+  .@{prefix}-item-label {
+    flex: 0 0 auto;
+    width: 100px;
+    padding-right: 12px;
+    text-align: right;
+    line-height: 40px;
+  }
+
+  .@{prefix}-item-control {
+    flex: 1;
+    min-width: 0;
+  }
+}
+
+// ============ 垂直布局 ============
+.@{prefix}-vertical {
+  .@{prefix}-item {
+    margin-bottom: 24px;
+  }
+
+  .@{prefix}-item-label {
+    padding-bottom: 8px;
+    line-height: 1.5;
+  }
+}
+
+// ============ 内联布局 ============
+.@{prefix}-inline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+
+  .@{prefix}-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 0;
+  }
+
+  .@{prefix}-item-label {
+    padding-right: 8px;
+    line-height: 40px;
+  }
+}
+
+// ============ 表单项 ============
+.@{prefix}-item {
+  position: relative;
+}
+
+.@{prefix}-item-label {
+  display: flex;
+  align-items: baseline;
+  font-weight: 400;
+  color: @text-color;
+
+  label {
+    display: inline-block;
+  }
+}
+
+.@{prefix}-item-required {
+  color: @required-color;
+  margin-right: 4px;
+  font-family: SimSun, sans-serif;
+}
+
+.@{prefix}-item-control {
+  position: relative;
+}
+
+.@{prefix}-item-control-input {
+  position: relative;
+
+  input,
+  textarea,
+  select {
+    width: 100%;
+  }
+}
+
+// ============ 错误状态 ============
+.@{prefix}-item-has-error {
+  .@{prefix}-item-control-input {
+    input,
+    textarea,
+    select {
+      border-color: @error-color !important;
+
+      &:focus {
+        border-color: @error-color !important;
+        box-shadow: 0 0 0 2px rgba(255, 77, 79, 0.1) !important;
+      }
+    }
+  }
+}
+
+.@{prefix}-item-error {
+  color: @error-color;
+  font-size: 12px;
+  line-height: 1.5;
+  margin-top: 4px;
+  animation: errorSlideIn 0.3s ease;
+}
+
+@keyframes errorSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// ============ 帮助信息 ============
+.@{prefix}-item-help {
+  color: @help-color;
+  font-size: 12px;
+  line-height: 1.5;
+  margin-top: 4px;
+}
+
+// ============ 额外信息 ============
+.@{prefix}-item-extra {
+  color: @text-secondary;
+  font-size: 12px;
+  line-height: 1.5;
+  margin-top: 4px;
+}
+
+// ============ 暗色模式适配 ============
+[data-theme='dark'],
+[data-prefers-color-scheme='dark'],
+[data-prefers-color='dark'] {
+  .@{prefix} {
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .@{prefix}-item-label {
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .@{prefix}-item-required {
+    color: #ff7875;
+  }
+
+  .@{prefix}-item-error {
+    color: #ff7875;
+  }
+
+  .@{prefix}-item-help {
+    color: rgba(255, 255, 255, 0.45);
+  }
+
+  .@{prefix}-item-extra {
+    color: rgba(255, 255, 255, 0.45);
+  }
+
+  .@{prefix}-item-has-error {
+    .@{prefix}-item-control-input {
+      input,
+      textarea,
+      select {
+        border-color: #ff7875 !important;
+
+        &:focus {
+          box-shadow: 0 0 0 2px rgba(255, 120, 117, 0.2) !important;
+        }
+      }
+    }
+  }
+}
+
