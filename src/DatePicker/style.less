@@ -1,0 +1,498 @@
+// DatePicker 日期选择器组件样式
+
+@prefix: kage-datepicker;
+
+// 颜色变量
+@input-bg: #fff;
+@input-border: #d9d9d9;
+@input-border-hover: #6366f1;
+@text-color: rgba(0, 0, 0, 0.88);
+@text-secondary: rgba(0, 0, 0, 0.45);
+@placeholder-color: rgba(0, 0, 0, 0.25);
+@disabled-bg: #f5f5f5;
+@disabled-color: rgba(0, 0, 0, 0.25);
+@panel-bg: #fff;
+@panel-shadow: 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 3px 6px -4px rgba(0, 0, 0, 0.12);
+@primary-color: #6366f1;
+@error-color: #ff4d4f;
+@warning-color: #faad14;
+
+// ============ 基础样式 ============
+.@{prefix} {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+// ============ 输入框 ============
+.@{prefix}-input {
+  display: flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 4px 12px;
+  background: @input-bg;
+  border: 1px solid @input-border;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-color: @input-border-hover;
+  }
+}
+
+.@{prefix}-open .@{prefix}-input {
+  border-color: @primary-color;
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.1);
+}
+
+.@{prefix}-value {
+  flex: 1;
+  color: @text-color;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.@{prefix}-placeholder {
+  color: @placeholder-color;
+}
+
+.@{prefix}-clear {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  margin-left: 4px;
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+
+  &:hover {
+    color: rgba(0, 0, 0, 0.45);
+    background: rgba(0, 0, 0, 0.06);
+  }
+}
+
+.@{prefix}-icon {
+  margin-left: 4px;
+  font-size: 14px;
+}
+
+// ============ 禁用状态 ============
+.@{prefix}-disabled {
+  .@{prefix}-input {
+    background: @disabled-bg;
+    cursor: not-allowed;
+
+    &:hover {
+      border-color: @input-border;
+    }
+  }
+
+  .@{prefix}-value {
+    color: @disabled-color;
+  }
+}
+
+// ============ 状态 ============
+.@{prefix}-status-error .@{prefix}-input {
+  border-color: @error-color;
+
+  &:hover {
+    border-color: @error-color;
+  }
+}
+
+.@{prefix}-status-warning .@{prefix}-input {
+  border-color: @warning-color;
+
+  &:hover {
+    border-color: @warning-color;
+  }
+}
+
+// ============ 尺寸 ============
+.@{prefix}-large .@{prefix}-input {
+  min-height: 48px;
+  padding: 6px 14px;
+  font-size: 16px;
+}
+
+.@{prefix}-small .@{prefix}-input {
+  min-height: 32px;
+  padding: 2px 8px;
+  font-size: 12px;
+}
+
+// ============ 面板 ============
+.@{prefix}-panel {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1050;
+  margin-top: 4px;
+  padding: 8px;
+  min-width: 280px;
+  background: @panel-bg;
+  border-radius: 8px;
+  box-shadow: @panel-shadow;
+  animation: slideDown 0.2s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// ============ 头部 ============
+.@{prefix}-header {
+  display: flex;
+  align-items: center;
+  padding: 0 8px 8px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.@{prefix}-header-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  font-size: 14px;
+  color: @text-secondary;
+  background: transparent;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    color: @text-color;
+    background: rgba(0, 0, 0, 0.04);
+  }
+}
+
+.@{prefix}-header-title {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  font-weight: 500;
+  color: @text-color;
+
+  span {
+    cursor: pointer;
+    padding: 2px 8px;
+    border-radius: 4px;
+    transition: background 0.2s ease;
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.04);
+    }
+  }
+}
+
+// ============ 日期网格 ============
+.@{prefix}-body {
+  padding: 8px 0;
+}
+
+.@{prefix}-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  margin-bottom: 4px;
+}
+
+.@{prefix}-weekday {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  font-size: 12px;
+  color: @text-secondary;
+}
+
+.@{prefix}-dates {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+
+.@{prefix}-date {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  font-size: 14px;
+  color: @text-color;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.04);
+  }
+
+  &-other {
+    color: @text-secondary;
+  }
+
+  &-today {
+    border: 1px solid @primary-color;
+  }
+
+  &-selected {
+    background: @primary-color;
+    color: #fff;
+
+    &:hover {
+      background: darken(@primary-color, 10%);
+    }
+  }
+
+  &-disabled {
+    color: @disabled-color;
+    cursor: not-allowed;
+
+    &:hover {
+      background: transparent;
+    }
+  }
+}
+
+// ============ 月份网格 ============
+.@{prefix}-months {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  padding: 8px 0;
+}
+
+.@{prefix}-month {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  font-size: 14px;
+  color: @text-color;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.04);
+  }
+
+  &-selected {
+    background: @primary-color;
+    color: #fff;
+
+    &:hover {
+      background: darken(@primary-color, 10%);
+    }
+  }
+}
+
+// ============ 年份网格 ============
+.@{prefix}-years {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  padding: 8px 0;
+}
+
+.@{prefix}-year {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  font-size: 14px;
+  color: @text-color;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.04);
+  }
+
+  &-selected {
+    background: @primary-color;
+    color: #fff;
+
+    &:hover {
+      background: darken(@primary-color, 10%);
+    }
+  }
+}
+
+// ============ 底部 ============
+.@{prefix}-footer {
+  display: flex;
+  justify-content: center;
+  padding-top: 8px;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.@{prefix}-today {
+  padding: 4px 12px;
+  font-size: 14px;
+  color: @primary-color;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    color: darken(@primary-color, 10%);
+  }
+}
+
+// ============ 暗色模式适配 ============
+[data-theme='dark'],
+[data-prefers-color-scheme='dark'],
+[data-prefers-color='dark'] {
+  .@{prefix}-input {
+    background: #1f1f1f;
+    border-color: #424242;
+
+    &:hover {
+      border-color: #818cf8;
+    }
+  }
+
+  .@{prefix}-open .@{prefix}-input {
+    border-color: #818cf8;
+    box-shadow: 0 0 0 2px rgba(129, 140, 248, 0.2);
+  }
+
+  .@{prefix}-value {
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .@{prefix}-placeholder {
+    color: rgba(255, 255, 255, 0.25);
+  }
+
+  .@{prefix}-clear {
+    color: rgba(255, 255, 255, 0.25);
+
+    &:hover {
+      color: rgba(255, 255, 255, 0.45);
+      background: rgba(255, 255, 255, 0.08);
+    }
+  }
+
+  .@{prefix}-disabled {
+    .@{prefix}-input {
+      background: #2d2d2d;
+    }
+
+    .@{prefix}-value {
+      color: rgba(255, 255, 255, 0.25);
+    }
+  }
+
+  .@{prefix}-panel {
+    background: #1f1f1f;
+    box-shadow: 0 6px 16px 0 rgba(0, 0, 0, 0.3);
+  }
+
+  .@{prefix}-header {
+    border-bottom-color: rgba(255, 255, 255, 0.12);
+  }
+
+  .@{prefix}-header-btn {
+    color: rgba(255, 255, 255, 0.45);
+
+    &:hover {
+      color: rgba(255, 255, 255, 0.85);
+      background: rgba(255, 255, 255, 0.08);
+    }
+  }
+
+  .@{prefix}-header-title {
+    color: rgba(255, 255, 255, 0.85);
+
+    span:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+  }
+
+  .@{prefix}-weekday {
+    color: rgba(255, 255, 255, 0.45);
+  }
+
+  .@{prefix}-date {
+    color: rgba(255, 255, 255, 0.85);
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    &-other {
+      color: rgba(255, 255, 255, 0.45);
+    }
+
+    &-today {
+      border-color: #818cf8;
+    }
+
+    &-selected {
+      background: #6366f1;
+
+      &:hover {
+        background: #4f46e5;
+      }
+    }
+
+    &-disabled {
+      color: rgba(255, 255, 255, 0.25);
+    }
+  }
+
+  .@{prefix}-month,
+  .@{prefix}-year {
+    color: rgba(255, 255, 255, 0.85);
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    &-selected {
+      background: #6366f1;
+
+      &:hover {
+        background: #4f46e5;
+      }
+    }
+  }
+
+  .@{prefix}-footer {
+    border-top-color: rgba(255, 255, 255, 0.12);
+  }
+
+  .@{prefix}-today {
+    color: #818cf8;
+
+    &:hover {
+      color: #a5b4fc;
+    }
+  }
+}
+

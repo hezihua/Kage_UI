@@ -61,3 +61,6 @@ export type { CheckboxProps, CheckboxGroupProps, CheckboxOptionType } from './Ch
 export { default as ColorPicker } from './ColorPicker';
 export type { ColorPickerProps } from './ColorPicker';
 
+export { default as DatePicker } from './DatePicker';
+export type { DatePickerProps } from './DatePicker';
+
