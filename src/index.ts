@@ -100,4 +100,7 @@ export type { TransferProps, TransferItem, TransferDirection } from './Transfer'
 export { default as TreeSelect } from './TreeSelect';
 export type { TreeSelectProps, TreeNode } from './TreeSelect';
 
+export { default as Upload } from './Upload';
+export type { UploadProps, UploadFile, UploadListType } from './Upload';
+
 

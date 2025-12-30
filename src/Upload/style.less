@@ -1,0 +1,424 @@
+// Upload 上传组件样式
+
+@prefix: kage-upload;
+
+// 颜色变量
+@upload-border: #d9d9d9;
+@upload-hover-border: #6366f1;
+@upload-drag-bg: #fafafa;
+@upload-drag-over-bg: #e0e7ff;
+@upload-drag-over-border: #6366f1;
+@upload-disabled-bg: #f5f5f5;
+@upload-disabled-color: rgba(0, 0, 0, 0.25);
+@upload-primary-color: #6366f1;
+@upload-success-color: #52c41a;
+@upload-error-color: #ff4d4f;
+
+// ============ 容器 ============
+.@{prefix} {
+  * {
+    box-sizing: border-box;
+  }
+}
+
+.@{prefix}-disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+// ============ 上传触发器 ============
+.@{prefix}-trigger {
+  display: inline-block;
+  cursor: pointer;
+}
+
+.@{prefix}-disabled .@{prefix}-trigger {
+  cursor: not-allowed;
+}
+
+// ============ 默认上传样式 ============
+.@{prefix}-default {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  border: 2px dashed @upload-border;
+  border-radius: 8px;
+  background: #fafafa;
+  transition: all 0.3s ease;
+
+  &:hover {
+    border-color: @upload-hover-border;
+    background: #f5f5ff;
+  }
+}
+
+.@{prefix}-icon {
+  font-size: 48px;
+  margin-bottom: 8px;
+}
+
+.@{prefix}-text {
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.65);
+}
+
+// ============ 拖拽上传 ============
+.@{prefix}-drag {
+  .@{prefix}-default {
+    min-height: 180px;
+    background: @upload-drag-bg;
+  }
+}
+
+.@{prefix}-drag-over {
+  .@{prefix}-default {
+    border-color: @upload-drag-over-border;
+    background: @upload-drag-over-bg;
+  }
+}
+
+// ============ 文件列表 - 文本模式 ============
+.@{prefix}-list-text {
+  margin-top: 8px;
+}
+
+.@{prefix}-list-text .@{prefix}-list-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border: 1px solid #f0f0f0;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  background: #fafafa;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: #f5f5f5;
+  }
+
+  &.uploading {
+    border-color: @upload-primary-color;
+  }
+
+  &.error {
+    border-color: @upload-error-color;
+    background: #fff2f0;
+  }
+}
+
+.@{prefix}-list-item-icon {
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.@{prefix}-list-item-name {
+  flex: 1;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.88);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.@{prefix}-list-item-size {
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.45);
+  flex-shrink: 0;
+}
+
+.@{prefix}-list-item-percent {
+  font-size: 12px;
+  color: @upload-primary-color;
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+.@{prefix}-list-item-remove {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  font-size: 18px;
+  color: rgba(0, 0, 0, 0.45);
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+  line-height: 1;
+
+  &:hover {
+    color: @upload-error-color;
+    background: rgba(255, 77, 79, 0.1);
+  }
+}
+
+// ============ 文件列表 - 图片模式 ============
+.@{prefix}-list-picture {
+  margin-top: 8px;
+}
+
+.@{prefix}-list-picture .@{prefix}-list-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px;
+  border: 1px solid #f0f0f0;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  background: #fff;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: #fafafa;
+  }
+
+  &.uploading {
+    border-color: @upload-primary-color;
+  }
+
+  &.error {
+    border-color: @upload-error-color;
+  }
+}
+
+.@{prefix}-list-item-thumbnail {
+  width: 48px;
+  height: 48px;
+  border-radius: 4px;
+  overflow: hidden;
+  background: #f5f5f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.@{prefix}-list-item-info {
+  flex: 1;
+  overflow: hidden;
+}
+
+.@{prefix}-list-item-progress {
+  height: 4px;
+  background: #f0f0f0;
+  border-radius: 2px;
+  overflow: hidden;
+  margin-top: 4px;
+}
+
+.@{prefix}-list-item-progress-bar {
+  height: 100%;
+  background: @upload-primary-color;
+  transition: width 0.3s ease;
+}
+
+// ============ 文件列表 - 卡片模式 ============
+.@{prefix}-picture-card {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.@{prefix}-picture-card .@{prefix}-trigger {
+  width: 104px;
+  height: 104px;
+  border: 2px dashed @upload-border;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fafafa;
+  transition: all 0.3s ease;
+
+  &:hover {
+    border-color: @upload-hover-border;
+    background: #f5f5ff;
+  }
+
+  .@{prefix}-icon {
+    font-size: 32px;
+    margin: 0;
+  }
+
+  .@{prefix}-text {
+    display: none;
+  }
+}
+
+.@{prefix}-list-picture-card {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.@{prefix}-list-picture-card .@{prefix}-list-item {
+  position: relative;
+  width: 104px;
+  height: 104px;
+  border: 1px solid #f0f0f0;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fafafa;
+
+  .@{prefix}-list-item-thumbnail {
+    width: 100%;
+    height: 100%;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &.uploading {
+    .@{prefix}-list-item-progress {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      margin: 0;
+    }
+  }
+
+  .@{prefix}-list-item-actions {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  &:hover .@{prefix}-list-item-actions {
+    opacity: 1;
+  }
+
+  .@{prefix}-list-item-action {
+    font-size: 20px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
+}
+
+// ============ 暗色模式适配 ============
+[data-theme='dark'],
+[data-prefers-color-scheme='dark'],
+[data-prefers-color='dark'] {
+  .@{prefix}-default {
+    background: #141414;
+    border-color: #434343;
+
+    &:hover {
+      border-color: @upload-hover-border;
+      background: #1a1a2e;
+    }
+  }
+
+  .@{prefix}-text {
+    color: rgba(255, 255, 255, 0.65);
+  }
+
+  .@{prefix}-drag {
+    .@{prefix}-default {
+      background: #141414;
+    }
+  }
+
+  .@{prefix}-drag-over {
+    .@{prefix}-default {
+      border-color: @upload-drag-over-border;
+      background: rgba(99, 102, 241, 0.2);
+    }
+  }
+
+  .@{prefix}-list-text .@{prefix}-list-item {
+    background: #1f1f1f;
+    border-color: #434343;
+
+    &:hover {
+      background: #262626;
+    }
+
+    &.error {
+      border-color: @upload-error-color;
+      background: rgba(255, 77, 79, 0.1);
+    }
+  }
+
+  .@{prefix}-list-item-name {
+    color: rgba(255, 255, 255, 0.88);
+  }
+
+  .@{prefix}-list-item-size {
+    color: rgba(255, 255, 255, 0.45);
+  }
+
+  .@{prefix}-list-item-remove {
+    color: rgba(255, 255, 255, 0.45);
+
+    &:hover {
+      color: @upload-error-color;
+      background: rgba(255, 77, 79, 0.2);
+    }
+  }
+
+  .@{prefix}-list-picture .@{prefix}-list-item {
+    background: #1f1f1f;
+    border-color: #434343;
+
+    &:hover {
+      background: #262626;
+    }
+  }
+
+  .@{prefix}-list-item-thumbnail {
+    background: #262626;
+  }
+
+  .@{prefix}-list-item-progress {
+    background: #434343;
+  }
+
+  .@{prefix}-picture-card .@{prefix}-trigger {
+    background: #1f1f1f;
+    border-color: #434343;
+
+    &:hover {
+      border-color: @upload-hover-border;
+      background: #1a1a2e;
+    }
+  }
+
+  .@{prefix}-list-picture-card .@{prefix}-list-item {
+    background: #1f1f1f;
+    border-color: #434343;
+
+    .@{prefix}-list-item-thumbnail {
+      background: #262626;
+    }
+  }
+}
+
