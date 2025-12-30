@@ -94,4 +94,7 @@ export type { SwitchProps } from './Switch';
 export { default as TimePicker } from './TimePicker';
 export type { TimePickerProps, TimeValue } from './TimePicker';
 
+export { default as Transfer } from './Transfer';
+export type { TransferProps, TransferItem, TransferDirection } from './Transfer';
+
 

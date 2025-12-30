@@ -1,0 +1,331 @@
+// Transfer 穿梭框样式
+
+@prefix: kage-transfer;
+
+// 颜色变量
+@transfer-border: #d9d9d9;
+@transfer-bg: #fff;
+@transfer-header-bg: #fafafa;
+@transfer-hover-bg: rgba(0, 0, 0, 0.04);
+@transfer-disabled-bg: #f5f5f5;
+@transfer-disabled-color: rgba(0, 0, 0, 0.25);
+@transfer-primary-color: #6366f1;
+
+// ============ 容器 ============
+.@{prefix} {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 14px;
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+.@{prefix}-disabled {
+  opacity: 0.6;
+}
+
+// ============ 列表容器 ============
+.@{prefix}-list {
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+  height: 300px;
+  border: 1px solid @transfer-border;
+  border-radius: 6px;
+  overflow: hidden;
+  background: @transfer-bg;
+}
+
+// ============ 头部 ============
+.@{prefix}-list-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background: @transfer-header-bg;
+  border-bottom: 1px solid @transfer-border;
+}
+
+.@{prefix}-list-header-title {
+  flex: 1;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.88);
+  margin-left: 8px;
+  user-select: none;
+}
+
+.@{prefix}-list-header-count {
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.45);
+}
+
+// ============ 搜索框 ============
+.@{prefix}-list-search {
+  padding: 8px 12px;
+  border-bottom: 1px solid @transfer-border;
+}
+
+.@{prefix}-search-input {
+  width: 100%;
+  padding: 4px 8px;
+  font-size: 14px;
+  border: 1px solid @transfer-border;
+  border-radius: 4px;
+  outline: none;
+  transition: all 0.2s ease;
+
+  &:focus {
+    border-color: @transfer-primary-color;
+    box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.1);
+  }
+
+  &:disabled {
+    background: @transfer-disabled-bg;
+    color: @transfer-disabled-color;
+    cursor: not-allowed;
+  }
+}
+
+// ============ 列表主体 ============
+.@{prefix}-list-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 4px 0;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.2);
+    }
+  }
+}
+
+.@{prefix}-list-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: rgba(0, 0, 0, 0.35);
+  font-size: 13px;
+}
+
+// ============ 列表项 ============
+.@{prefix}-list-item {
+  display: flex;
+  align-items: flex-start;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  user-select: none;
+
+  &:hover {
+    background: @transfer-hover-bg;
+  }
+}
+
+.@{prefix}-list-item-disabled {
+  color: @transfer-disabled-color;
+  cursor: not-allowed;
+
+  &:hover {
+    background: transparent;
+  }
+}
+
+.@{prefix}-list-item-content {
+  flex: 1;
+  margin-left: 8px;
+  overflow: hidden;
+}
+
+.@{prefix}-list-item-title {
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.88);
+  line-height: 1.5;
+  word-break: break-word;
+}
+
+.@{prefix}-list-item-disabled .@{prefix}-list-item-title {
+  color: @transfer-disabled-color;
+}
+
+.@{prefix}-list-item-description {
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.45);
+  line-height: 1.5;
+  margin-top: 4px;
+  word-break: break-word;
+}
+
+// ============ Checkbox ============
+.@{prefix}-checkbox {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  cursor: pointer;
+  flex-shrink: 0;
+  margin-top: 2px;
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
+
+.@{prefix}-checkbox-label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+// ============ 操作按钮 ============
+.@{prefix}-operations {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.@{prefix}-operation-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.88);
+  background: @transfer-bg;
+  border: 1px solid @transfer-border;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover:not(:disabled) {
+    color: @transfer-primary-color;
+    border-color: @transfer-primary-color;
+  }
+
+  &:active:not(:disabled) {
+    transform: scale(0.95);
+  }
+
+  &:disabled {
+    color: @transfer-disabled-color;
+    border-color: @transfer-border;
+    background: @transfer-disabled-bg;
+    cursor: not-allowed;
+  }
+}
+
+// ============ 暗色模式适配 ============
+[data-theme='dark'],
+[data-prefers-color-scheme='dark'],
+[data-prefers-color='dark'] {
+  .@{prefix}-list {
+    background: #1f1f1f;
+    border-color: #434343;
+  }
+
+  .@{prefix}-list-header {
+    background: #141414;
+    border-bottom-color: #434343;
+  }
+
+  .@{prefix}-list-header-title {
+    color: rgba(255, 255, 255, 0.88);
+  }
+
+  .@{prefix}-list-header-count {
+    color: rgba(255, 255, 255, 0.45);
+  }
+
+  .@{prefix}-list-search {
+    border-bottom-color: #434343;
+  }
+
+  .@{prefix}-search-input {
+    background: #141414;
+    border-color: #434343;
+    color: rgba(255, 255, 255, 0.88);
+
+    &:focus {
+      border-color: @transfer-primary-color;
+      box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+    }
+
+    &:disabled {
+      background: rgba(255, 255, 255, 0.04);
+      color: rgba(255, 255, 255, 0.25);
+    }
+
+    &::placeholder {
+      color: rgba(255, 255, 255, 0.35);
+    }
+  }
+
+  .@{prefix}-list-body {
+    &::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.2);
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.3);
+      }
+    }
+  }
+
+  .@{prefix}-list-empty {
+    color: rgba(255, 255, 255, 0.35);
+  }
+
+  .@{prefix}-list-item {
+    &:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+  }
+
+  .@{prefix}-list-item-disabled {
+    color: rgba(255, 255, 255, 0.25);
+
+    &:hover {
+      background: transparent;
+    }
+  }
+
+  .@{prefix}-list-item-title {
+    color: rgba(255, 255, 255, 0.88);
+  }
+
+  .@{prefix}-list-item-disabled .@{prefix}-list-item-title {
+    color: rgba(255, 255, 255, 0.25);
+  }
+
+  .@{prefix}-list-item-description {
+    color: rgba(255, 255, 255, 0.45);
+  }
+
+  .@{prefix}-operation-btn {
+    background: #1f1f1f;
+    border-color: #434343;
+    color: rgba(255, 255, 255, 0.88);
+
+    &:hover:not(:disabled) {
+      color: #a5b4fc;
+      border-color: #6366f1;
+    }
+
+    &:disabled {
+      color: rgba(255, 255, 255, 0.25);
+      background: rgba(255, 255, 255, 0.04);
+      border-color: #434343;
+    }
+  }
+}
+
