@@ -1,0 +1,326 @@
+// Radio 单选框组件样式
+
+@prefix: kage-radio;
+
+// 颜色变量
+@radio-size: 16px;
+@radio-dot-size: 8px;
+@radio-border-color: #d9d9d9;
+@radio-checked-color: #6366f1;
+@radio-hover-color: #818cf8;
+@radio-disabled-color: rgba(0, 0, 0, 0.25);
+@radio-disabled-bg: #f5f5f5;
+@button-border-color: #d9d9d9;
+@button-checked-bg: #6366f1;
+@button-checked-color: #fff;
+
+// ============ Radio 基础样式 ============
+.@{prefix}-wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+  font-size: 14px;
+  line-height: 1;
+  margin-right: 8px;
+
+  &:hover:not(.@{prefix}-wrapper-disabled) {
+    .@{prefix} {
+      border-color: @radio-hover-color;
+    }
+  }
+
+  &-checked {
+    .@{prefix} {
+      border-color: @radio-checked-color;
+      background: @radio-checked-color;
+    }
+  }
+
+  &-disabled {
+    cursor: not-allowed;
+    color: @radio-disabled-color;
+  }
+}
+
+.@{prefix} {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: @radio-size;
+  height: @radio-size;
+  border: 1px solid @radio-border-color;
+  border-radius: 50%;
+  background: #fff;
+  transition: all 0.2s ease;
+
+  &-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+
+    &:disabled {
+      cursor: not-allowed;
+    }
+  }
+
+  &-inner {
+    width: @radio-dot-size;
+    height: @radio-dot-size;
+    border-radius: 50%;
+    background: transparent;
+    transition: all 0.2s ease;
+    transform: scale(0);
+  }
+
+  &-checked {
+    .@{prefix}-inner {
+      background: #fff;
+      transform: scale(1);
+    }
+  }
+
+  &-disabled {
+    background: @radio-disabled-bg;
+    border-color: @radio-border-color;
+    cursor: not-allowed;
+
+    &.@{prefix}-checked {
+      background: @radio-disabled-bg;
+      border-color: @radio-border-color;
+
+      .@{prefix}-inner {
+        background: @radio-disabled-color;
+      }
+    }
+  }
+}
+
+.@{prefix}-label {
+  padding: 0 8px 0 0;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+// ============ Radio Group ============
+.@{prefix}-group {
+  display: inline-flex;
+  gap: 16px;
+  font-size: 14px;
+
+  &-horizontal {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  &-vertical {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+}
+
+// ============ Radio Button 样式 ============
+.@{prefix}-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  padding: 0 15px;
+  font-size: 14px;
+  line-height: 30px;
+  color: rgba(0, 0, 0, 0.88);
+  background: #fff;
+  border: 1px solid @button-border-color;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+
+  &:first-child {
+    border-radius: 6px 0 0 6px;
+  }
+
+  &:last-child {
+    border-radius: 0 6px 6px 0;
+  }
+
+  &:only-child {
+    border-radius: 6px;
+  }
+
+  &:not(:first-child) {
+    margin-left: -1px;
+  }
+
+  &:hover:not(.@{prefix}-button-disabled) {
+    color: @radio-checked-color;
+    border-color: @radio-checked-color;
+    z-index: 1;
+  }
+
+  &-input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  &-label {
+    display: inline-block;
+  }
+
+  &-checked {
+    color: @radio-checked-color;
+    border-color: @radio-checked-color;
+    background: #fff;
+    z-index: 2;
+
+    &::before {
+      background: @radio-checked-color;
+    }
+  }
+
+  &-disabled {
+    color: @radio-disabled-color;
+    background: @radio-disabled-bg;
+    border-color: @button-border-color;
+    cursor: not-allowed;
+
+    &:hover {
+      color: @radio-disabled-color;
+      border-color: @button-border-color;
+    }
+  }
+}
+
+// ============ Radio Group Button 样式 ============
+.@{prefix}-group-button {
+  display: inline-flex;
+  gap: 0;
+
+  .@{prefix}-wrapper {
+    margin-right: 0;
+  }
+
+  // Solid 样式
+  &.@{prefix}-group-button-solid {
+    .@{prefix}-button-checked {
+      color: @button-checked-color;
+      background: @button-checked-bg;
+      border-color: @button-checked-bg;
+
+      &:hover:not(.@{prefix}-button-disabled) {
+        background: @radio-hover-color;
+        border-color: @radio-hover-color;
+      }
+    }
+  }
+
+  // 尺寸
+  &.@{prefix}-group-large {
+    .@{prefix}-button {
+      height: 40px;
+      padding: 0 20px;
+      font-size: 16px;
+      line-height: 38px;
+    }
+  }
+
+  &.@{prefix}-group-small {
+    .@{prefix}-button {
+      height: 24px;
+      padding: 0 8px;
+      font-size: 12px;
+      line-height: 22px;
+    }
+  }
+}
+
+// ============ 暗色模式适配 ============
+[data-theme='dark'],
+[data-prefers-color-scheme='dark'],
+[data-prefers-color='dark'] {
+  .@{prefix}-wrapper {
+    color: rgba(255, 255, 255, 0.85);
+
+    &:hover:not(.@{prefix}-wrapper-disabled) {
+      .@{prefix} {
+        border-color: #818cf8;
+      }
+    }
+
+    &-disabled {
+      color: rgba(255, 255, 255, 0.25);
+    }
+  }
+
+  .@{prefix} {
+    background: #1f1f1f;
+    border-color: #424242;
+
+    &-checked {
+      background: #6366f1;
+      border-color: #6366f1;
+    }
+
+    &-disabled {
+      background: #2d2d2d;
+      border-color: #424242;
+
+      &.@{prefix}-checked {
+        background: #2d2d2d;
+
+        .@{prefix}-inner {
+          background: rgba(255, 255, 255, 0.25);
+        }
+      }
+    }
+  }
+
+  .@{prefix}-button {
+    color: rgba(255, 255, 255, 0.85);
+    background: #1f1f1f;
+    border-color: #424242;
+
+    &:hover:not(.@{prefix}-button-disabled) {
+      color: #818cf8;
+      border-color: #818cf8;
+    }
+
+    &-checked {
+      color: #818cf8;
+      border-color: #818cf8;
+      background: #1f1f1f;
+    }
+
+    &-disabled {
+      color: rgba(255, 255, 255, 0.25);
+      background: #2d2d2d;
+      border-color: #424242;
+    }
+  }
+
+  .@{prefix}-group-button {
+    &.@{prefix}-group-button-solid {
+      .@{prefix}-button-checked {
+        color: #fff;
+        background: #6366f1;
+        border-color: #6366f1;
+
+        &:hover:not(.@{prefix}-button-disabled) {
+          background: #818cf8;
+          border-color: #818cf8;
+        }
+      }
+    }
+  }
+}
+

@@ -76,4 +76,7 @@ export type { InputNumberProps } from './InputNumber';
 export { default as Mentions } from './Mentions';
 export type { MentionsProps, MentionOption } from './Mentions';
 
+export { default as Radio, RadioGroup, RadioButton } from './Radio';
+export type { RadioProps, RadioGroupProps, RadioButtonProps, RadioOptionType } from './Radio';
+
 
