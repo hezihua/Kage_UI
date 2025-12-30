@@ -118,4 +118,9 @@ export type { CardProps, CardMetaProps, CardGridProps, CardSize } from './Card';
 export { default as Carousel } from './Carousel';
 export type { CarouselProps, DotPosition } from './Carousel';
 
+export { default as Collapse } from './Collapse';
+export type { CollapseProps, CollapseItemProps } from './Collapse';
+
+export { default as Descriptions } from './Descriptions';
+export type { DescriptionsProps, DescriptionsItemProps } from './Descriptions';
 

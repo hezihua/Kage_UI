@@ -1,0 +1,217 @@
+// Collapse 折叠面板组件样式
+
+@prefix: kage-collapse;
+
+// 颜色变量
+@collapse-border-color: #d9d9d9;
+@collapse-header-bg: #fafafa;
+@collapse-header-hover-bg: #f5f5f5;
+@collapse-content-bg: #fff;
+@collapse-content-padding: 16px;
+@collapse-arrow-color: rgba(0, 0, 0, 0.45);
+
+// ============ 容器 ============
+.@{prefix} {
+  background-color: @collapse-content-bg;
+  font-size: 14px;
+  line-height: 1.5715;
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+// 有边框样式
+.@{prefix}-bordered {
+  border: 1px solid @collapse-border-color;
+  border-radius: 4px;
+  overflow: hidden;
+
+  .@{prefix}-item {
+    border-bottom: 1px solid @collapse-border-color;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+}
+
+// 无边框样式
+.@{prefix}-borderless {
+  background-color: transparent;
+
+  .@{prefix}-item {
+    border: none;
+    border-bottom: 1px solid @collapse-border-color;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  .@{prefix}-header {
+    background-color: transparent;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+// ============ 面板项 ============
+.@{prefix}-item {
+  position: relative;
+  background-color: @collapse-content-bg;
+}
+
+.@{prefix}-item-disabled {
+  .@{prefix}-header {
+    cursor: not-allowed;
+    color: rgba(0, 0, 0, 0.25);
+  }
+
+  .@{prefix}-arrow {
+    color: rgba(0, 0, 0, 0.25);
+  }
+}
+
+// ============ 头部 ============
+.@{prefix}-header {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  background-color: @collapse-header-bg;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  gap: 8px;
+
+  &:hover {
+    background-color: @collapse-header-hover-bg;
+  }
+}
+
+.@{prefix}-header-text {
+  flex: 1;
+  font-weight: 500;
+}
+
+// 图标在末尾
+.@{prefix}-header-icon-end {
+  .@{prefix}-arrow {
+    order: 2;
+  }
+
+  .@{prefix}-header-text {
+    order: 0;
+  }
+
+  .@{prefix}-extra {
+    order: 1;
+  }
+}
+
+// ============ 展开箭头 ============
+.@{prefix}-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  color: @collapse-arrow-color;
+  font-size: 12px;
+  transform: rotate(0deg);
+  transition: transform 0.3s ease;
+}
+
+.@{prefix}-arrow-active {
+  transform: rotate(90deg);
+}
+
+// ============ 额外内容 ============
+.@{prefix}-extra {
+  margin-left: auto;
+  color: rgba(0, 0, 0, 0.65);
+  font-size: 14px;
+}
+
+// ============ 内容区域 ============
+.@{prefix}-content {
+  max-height: 0;
+  overflow: hidden;
+  background-color: @collapse-content-bg;
+  transition: max-height 0.3s ease, padding 0.3s ease;
+}
+
+.@{prefix}-content-active {
+  max-height: 2000px;
+}
+
+.@{prefix}-content-box {
+  padding: 0 @collapse-content-padding @collapse-content-padding @collapse-content-padding;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.@{prefix}-content-active .@{prefix}-content-box {
+  opacity: 1;
+  transform: translateY(0);
+  padding-top: @collapse-content-padding;
+}
+
+// ============ 暗色模式适配 ============
+[data-theme='dark'],
+[data-prefers-color-scheme='dark'],
+[data-prefers-color='dark'] {
+  .@{prefix} {
+    background-color: #141414;
+  }
+
+  .@{prefix}-bordered {
+    border-color: #434343;
+
+    .@{prefix}-item {
+      border-color: #434343;
+    }
+  }
+
+  .@{prefix}-borderless {
+    .@{prefix}-item {
+      border-color: #434343;
+    }
+  }
+
+  .@{prefix}-item {
+    background-color: #1f1f1f;
+  }
+
+  .@{prefix}-header {
+    background-color: #262626;
+    color: rgba(255, 255, 255, 0.85);
+
+    &:hover {
+      background-color: #303030;
+    }
+  }
+
+  .@{prefix}-content {
+    background-color: #1f1f1f;
+  }
+
+  .@{prefix}-arrow {
+    color: rgba(255, 255, 255, 0.45);
+  }
+
+  .@{prefix}-extra {
+    color: rgba(255, 255, 255, 0.65);
+  }
+
+  .@{prefix}-item-disabled {
+    .@{prefix}-header {
+      color: rgba(255, 255, 255, 0.3);
+    }
+
+    .@{prefix}-arrow {
+      color: rgba(255, 255, 255, 0.3);
+    }
+  }
+}
+

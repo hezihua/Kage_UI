@@ -1,0 +1,259 @@
+// Descriptions 描述列表组件样式
+
+@prefix: kage-descriptions;
+
+// 颜色变量
+@descriptions-bg: #fafafa;
+@descriptions-content-bg: #fff;
+@descriptions-border-color: #f0f0f0;
+@descriptions-label-color: rgba(0, 0, 0, 0.85);
+@descriptions-content-color: rgba(0, 0, 0, 0.65);
+@descriptions-title-color: rgba(0, 0, 0, 0.85);
+
+// 尺寸变量
+@descriptions-padding-default: 16px;
+@descriptions-padding-middle: 12px;
+@descriptions-padding-small: 8px;
+
+// ============ 容器 ============
+.@{prefix} {
+  font-size: 14px;
+  line-height: 1.5715;
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+// ============ 头部 ============
+.@{prefix}-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.@{prefix}-title {
+  flex: 1;
+  color: @descriptions-title-color;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.@{prefix}-extra {
+  margin-left: auto;
+  color: @descriptions-content-color;
+  font-size: 14px;
+}
+
+// ============ 无边框样式 ============
+.@{prefix}-view {
+  width: 100%;
+}
+
+.@{prefix}-row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.@{prefix}-item {
+  display: flex;
+  align-items: center;
+  line-height: 1.5715;
+  padding-bottom: 16px;
+}
+
+.@{prefix}-item-label {
+  display: inline-block;
+  color: @descriptions-label-color;
+  font-weight: 500;
+  margin-right: 8px;
+  white-space: nowrap;
+
+  &::after {
+    position: relative;
+    top: -0.5px;
+    margin: 0 8px 0 2px;
+  }
+}
+
+.@{prefix}-item-content {
+  display: inline-block;
+  color: @descriptions-content-color;
+  flex: 1;
+  word-break: break-word;
+}
+
+// ============ 有边框样式 ============
+.@{prefix}-bordered {
+  .@{prefix}-view {
+    border: 1px solid @descriptions-border-color;
+    border-radius: 4px;
+    overflow: hidden;
+
+    table {
+      width: 100%;
+      table-layout: auto;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      border-right: 1px solid @descriptions-border-color;
+      border-bottom: 1px solid @descriptions-border-color;
+
+      &:last-child {
+        border-right: none;
+      }
+    }
+
+    tr:last-child {
+      th,
+      td {
+        border-bottom: none;
+      }
+    }
+
+    th {
+      background-color: @descriptions-bg;
+      color: @descriptions-label-color;
+      font-weight: 500;
+      text-align: start;
+      width: 15%;
+      white-space: nowrap;
+
+      &:empty {
+        background-color: transparent;
+        border-right: none;
+      }
+    }
+
+    td {
+      background-color: @descriptions-content-bg;
+      color: @descriptions-content-color;
+      width: auto;
+
+      &:empty {
+        background-color: transparent;
+        border-right: none;
+      }
+    }
+  }
+
+  .@{prefix}-row {
+    margin-bottom: 0;
+  }
+
+  .@{prefix}-item {
+    padding-bottom: 0;
+  }
+}
+
+
+// ============ 尺寸变体 ============
+.@{prefix}-bordered {
+  &.@{prefix}-default {
+    th,
+    td {
+      padding: @descriptions-padding-default;
+    }
+  }
+
+  &.@{prefix}-middle {
+    th,
+    td {
+      padding: @descriptions-padding-middle;
+    }
+  }
+
+  &.@{prefix}-small {
+    th,
+    td {
+      padding: @descriptions-padding-small;
+    }
+  }
+}
+
+.@{prefix}-middle {
+  .@{prefix}-item {
+    padding-bottom: 12px;
+  }
+}
+
+.@{prefix}-small {
+  .@{prefix}-item {
+    padding-bottom: 8px;
+  }
+
+  .@{prefix}-item-label {
+    margin-right: 4px;
+  }
+
+  .@{prefix}-header {
+    margin-bottom: 12px;
+  }
+}
+
+// ============ 暗色模式适配 ============
+[data-theme='dark'],
+[data-prefers-color-scheme='dark'],
+[data-prefers-color='dark'] {
+  .@{prefix} {
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .@{prefix}-title {
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .@{prefix}-extra {
+    color: rgba(255, 255, 255, 0.65);
+  }
+
+  .@{prefix}-item-label {
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .@{prefix}-item-content {
+    color: rgba(255, 255, 255, 0.65);
+  }
+
+  .@{prefix}-bordered {
+    .@{prefix}-view {
+      border-color: #434343;
+      background-color: #141414;
+
+      th,
+      td {
+        border-color: #434343;
+      }
+
+      th {
+        background-color: #1f1f1f;
+        color: rgba(255, 255, 255, 0.85);
+
+        &:empty {
+          background-color: transparent;
+          border-right: none;
+        }
+      }
+
+      td {
+        background-color: #141414;
+        color: rgba(255, 255, 255, 0.65);
+
+        &:empty {
+          background-color: transparent;
+          border-right: none;
+        }
+      }
+    }
+  }
+}
+
