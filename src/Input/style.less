@@ -1,0 +1,276 @@
+// Input 输入框组件样式
+
+@prefix: kage-input;
+
+// 颜色变量
+@input-bg: #fff;
+@input-border: #d9d9d9;
+@input-border-hover: #6366f1;
+@input-border-focus: #6366f1;
+@input-text-color: rgba(0, 0, 0, 0.88);
+@input-placeholder-color: rgba(0, 0, 0, 0.25);
+@input-disabled-bg: #f5f5f5;
+@input-disabled-color: rgba(0, 0, 0, 0.25);
+@addon-bg: #f7f7f7;
+@primary-shadow: 0 0 0 2px rgba(99, 102, 241, 0.1);
+@error-color: #ff4d4f;
+@warning-color: #faad14;
+
+// ============ 输入框组 ============
+.@{prefix}-group {
+  display: inline-flex;
+  align-items: stretch;
+  width: 100%;
+  font-size: 14px;
+  color: @input-text-color;
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+// ============ 组合前后缀 ============
+.@{prefix}-addon {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 12px;
+  background: @addon-bg;
+  border: 1px solid @input-border;
+  color: @input-text-color;
+  white-space: nowrap;
+}
+
+.@{prefix}-group-addon-before {
+  .@{prefix}-addon:first-child {
+    border-radius: 6px 0 0 6px;
+    border-right: 0;
+  }
+
+  .@{prefix}-wrapper {
+    border-radius: 0 6px 6px 0;
+  }
+}
+
+.@{prefix}-group-addon-after {
+  .@{prefix}-addon:last-child {
+    border-radius: 0 6px 6px 0;
+    border-left: 0;
+  }
+
+  .@{prefix}-wrapper {
+    border-radius: 6px 0 0 6px;
+  }
+}
+
+.@{prefix}-group-addon-before.@{prefix}-group-addon-after {
+  .@{prefix}-wrapper {
+    border-radius: 0;
+  }
+}
+
+// ============ 输入框外层 ============
+.@{prefix}-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  width: 100%;
+  padding: 8px 12px;
+  background: @input-bg;
+  border: 1px solid @input-border;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+
+  &:hover:not(.@{prefix}-disabled) {
+    border-color: @input-border-hover;
+  }
+
+  &.@{prefix}-focused {
+    border-color: @input-border-focus;
+    box-shadow: @primary-shadow;
+  }
+}
+
+// ============ 输入框本体 ============
+.@{prefix}-element {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 14px;
+  line-height: 1.5;
+  color: @input-text-color;
+
+  &::placeholder {
+    color: @input-placeholder-color;
+  }
+}
+
+// ============ 前后缀 ============
+.@{prefix}-prefix,
+.@{prefix}-suffix {
+  display: inline-flex;
+  align-items: center;
+  color: rgba(0, 0, 0, 0.45);
+}
+
+// ============ 清除按钮 ============
+.@{prefix}-clear {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+
+  &:hover {
+    color: rgba(0, 0, 0, 0.45);
+    background: rgba(0, 0, 0, 0.06);
+  }
+}
+
+// ============ 计数器 ============
+.@{prefix}-count {
+  margin-left: 4px;
+  color: rgba(0, 0, 0, 0.45);
+  font-size: 12px;
+}
+
+// ============ 禁用状态 ============
+.@{prefix}-disabled {
+  background: @input-disabled-bg;
+  border-color: @input-border;
+  color: @input-disabled-color;
+  cursor: not-allowed;
+
+  .@{prefix}-element {
+    color: @input-disabled-color;
+    cursor: not-allowed;
+  }
+
+  .@{prefix}-clear {
+    display: none;
+  }
+}
+
+// ============ 状态样式 ============
+.@{prefix}-status-error {
+  border-color: @error-color;
+
+  &:hover:not(.@{prefix}-disabled) {
+    border-color: @error-color;
+  }
+
+  &.@{prefix}-focused {
+    border-color: @error-color;
+    box-shadow: 0 0 0 2px rgba(255, 77, 79, 0.1);
+  }
+}
+
+.@{prefix}-status-warning {
+  border-color: @warning-color;
+
+  &:hover:not(.@{prefix}-disabled) {
+    border-color: @warning-color;
+  }
+
+  &.@{prefix}-focused {
+    border-color: @warning-color;
+    box-shadow: 0 0 0 2px rgba(250, 173, 20, 0.1);
+  }
+}
+
+// ============ 尺寸 ============
+.@{prefix}-large {
+  padding: 10px 14px;
+
+  .@{prefix}-element {
+    font-size: 16px;
+  }
+}
+
+.@{prefix}-small {
+  padding: 4px 8px;
+
+  .@{prefix}-element {
+    font-size: 12px;
+  }
+}
+
+// ============ 暗色模式适配 ============
+[data-theme='dark'],
+[data-prefers-color-scheme='dark'],
+[data-prefers-color='dark'] {
+  .@{prefix}-wrapper {
+    background: #1f1f1f;
+    border-color: #424242;
+    color: rgba(255, 255, 255, 0.85);
+
+    &:hover:not(.@{prefix}-disabled) {
+      border-color: #818cf8;
+    }
+
+    &.@{prefix}-focused {
+      border-color: #818cf8;
+      box-shadow: 0 0 0 2px rgba(129, 140, 248, 0.2);
+    }
+  }
+
+  .@{prefix}-element {
+    color: rgba(255, 255, 255, 0.85);
+
+    &::placeholder {
+      color: rgba(255, 255, 255, 0.25);
+    }
+  }
+
+  .@{prefix}-prefix,
+  .@{prefix}-suffix,
+  .@{prefix}-count {
+    color: rgba(255, 255, 255, 0.45);
+  }
+
+  .@{prefix}-clear {
+    color: rgba(255, 255, 255, 0.25);
+
+    &:hover {
+      color: rgba(255, 255, 255, 0.45);
+      background: rgba(255, 255, 255, 0.08);
+    }
+  }
+
+  .@{prefix}-addon {
+    background: #262626;
+    border-color: #424242;
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .@{prefix}-disabled {
+    background: #2d2d2d;
+    border-color: #424242;
+    color: rgba(255, 255, 255, 0.25);
+  }
+
+  .@{prefix}-status-error {
+    border-color: #ff7875;
+
+    &.@{prefix}-focused {
+      box-shadow: 0 0 0 2px rgba(255, 120, 117, 0.2);
+    }
+  }
+
+  .@{prefix}-status-warning {
+    border-color: #ffc53d;
+
+    &.@{prefix}-focused {
+      box-shadow: 0 0 0 2px rgba(255, 197, 61, 0.2);
+    }
+  }
+}
+

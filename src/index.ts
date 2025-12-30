@@ -67,3 +67,6 @@ export type { DatePickerProps } from './DatePicker';
 export { default as Form, FormItem } from './Form';
 export type { FormProps, FormItemProps, Rule, FormInstance } from './Form';
 
+export { default as Input } from './Input';
+export type { InputProps } from './Input';
+
