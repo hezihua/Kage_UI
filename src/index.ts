@@ -106,4 +106,7 @@ export type { UploadProps, UploadFile, UploadListType } from './Upload';
 export { default as Avatar } from './Avatar';
 export type { AvatarProps, AvatarGroupProps, AvatarSize, AvatarShape } from './Avatar';
 
+export { default as Badge } from './Badge';
+export type { BadgeProps, BadgeRibbonProps, BadgeStatus } from './Badge';
+
 

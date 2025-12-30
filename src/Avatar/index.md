@@ -86,6 +86,28 @@ export default () => (
 );
 ```
 
+### 带徽标的头像
+
+通常用于消息提示。
+
+```tsx
+import { Avatar, Badge, Space } from 'wssf-kage-ui';
+
+export default () => (
+  <Space size="large">
+    <Badge count={1}>
+      <Avatar shape="square" icon="👤" />
+    </Badge>
+    <Badge dot>
+      <Avatar shape="square" icon="👤" />
+    </Badge>
+    <Badge count={99}>
+      <Avatar icon="👤" />
+    </Badge>
+  </Space>
+);
+```
+
 ### 自定义尺寸
 
 对于大于或小于默认尺寸的头像，可以使用数字来自定义大小。

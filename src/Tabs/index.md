@@ -3,8 +3,8 @@ nav:
   title: 组件
   order: 2
 group:
-  title: 数据展示
-  order: 4
+  title: 导航
+  order: 3
 title: Tabs 标签页
 ---
 
