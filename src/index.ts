@@ -109,4 +109,13 @@ export type { AvatarProps, AvatarGroupProps, AvatarSize, AvatarShape } from './A
 export { default as Badge } from './Badge';
 export type { BadgeProps, BadgeRibbonProps, BadgeStatus } from './Badge';
 
+export { default as Calendar } from './Calendar';
+export type { CalendarProps, CalendarMode } from './Calendar';
+
+export { default as Card } from './Card';
+export type { CardProps, CardMetaProps, CardGridProps, CardSize } from './Card';
+
+export { default as Carousel } from './Carousel';
+export type { CarouselProps, DotPosition } from './Carousel';
+
 

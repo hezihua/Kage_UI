@@ -1,0 +1,356 @@
+// Card 卡片组件样式
+
+@prefix: kage-card;
+
+// 颜色变量
+@card-bg: #fff;
+@card-border: #f0f0f0;
+@card-radius: 8px;
+@card-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+@card-hover-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+@card-head-bg: transparent;
+@card-head-padding: 16px 24px;
+@card-body-padding: 24px;
+@card-small-head-padding: 8px 12px;
+@card-small-body-padding: 12px;
+@card-skeleton-bg: #f0f0f0;
+
+// ============ 基础样式 ============
+.@{prefix} {
+  position: relative;
+  background: @card-bg;
+  border-radius: @card-radius;
+  box-shadow: @card-shadow;
+  transition: all 0.3s ease;
+  overflow: hidden;
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+.@{prefix}-bordered {
+  border: 1px solid @card-border;
+}
+
+.@{prefix}-borderless {
+  border: none;
+  box-shadow: none;
+}
+
+// ============ 悬浮效果 ============
+.@{prefix}-hoverable {
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: @card-hover-shadow;
+    transform: translateY(-2px);
+  }
+}
+
+// ============ 封面 ============
+.@{prefix}-cover {
+  img {
+    width: 100%;
+    display: block;
+    border-radius: @card-radius @card-radius 0 0;
+  }
+}
+
+// ============ 头部 ============
+.@{prefix}-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: @card-head-padding;
+  background: @card-head-bg;
+  border-bottom: 1px solid @card-border;
+  min-height: 56px;
+}
+
+.@{prefix}-head-title {
+  flex: 1;
+  font-size: 16px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.88);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.@{prefix}-head-extra {
+  margin-left: auto;
+  padding-left: 16px;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.65);
+}
+
+// ============ 内容 ============
+.@{prefix}-body {
+  padding: @card-body-padding;
+  font-size: 14px;
+  line-height: 1.5;
+  color: rgba(0, 0, 0, 0.88);
+}
+
+// ============ 操作区 ============
+.@{prefix}-actions {
+  display: flex;
+  border-top: 1px solid @card-border;
+  background: @card-bg;
+}
+
+.@{prefix}-actions-item {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 0;
+  color: rgba(0, 0, 0, 0.65);
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-right: 1px solid @card-border;
+
+  &:last-child {
+    border-right: none;
+  }
+
+  &:hover {
+    color: #6366f1;
+    background: rgba(0, 0, 0, 0.02);
+  }
+}
+
+// ============ 尺寸变体 ============
+.@{prefix}-small {
+  .@{prefix}-head {
+    padding: @card-small-head-padding;
+    min-height: 40px;
+  }
+
+  .@{prefix}-head-title {
+    font-size: 14px;
+  }
+
+  .@{prefix}-body {
+    padding: @card-small-body-padding;
+    font-size: 13px;
+  }
+
+  .@{prefix}-actions-item {
+    padding: 8px 0;
+  }
+}
+
+// ============ 内置卡片 ============
+.@{prefix}-inner {
+  background: #fafafa;
+
+  .@{prefix}-head {
+    padding: 12px 16px;
+    min-height: auto;
+    background: transparent;
+  }
+
+  .@{prefix}-body {
+    padding: 16px;
+  }
+}
+
+// ============ Card.Meta ============
+.@{prefix}-meta {
+  display: flex;
+  gap: 16px;
+}
+
+.@{prefix}-meta-avatar {
+  flex-shrink: 0;
+}
+
+.@{prefix}-meta-detail {
+  flex: 1;
+  overflow: hidden;
+}
+
+.@{prefix}-meta-title {
+  font-size: 16px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.88);
+  margin-bottom: 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.@{prefix}-meta-description {
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.65);
+  line-height: 1.5;
+}
+
+// ============ Card.Grid ============
+.@{prefix}-grid {
+  width: 33.33%;
+  padding: 24px;
+  border: 1px solid @card-border;
+  border-right: 0;
+  border-bottom: 0;
+  text-align: center;
+  float: left;
+  transition: all 0.3s ease;
+
+  &:nth-child(3n) {
+    border-right: 1px solid @card-border;
+  }
+}
+
+.@{prefix}-grid-hoverable {
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: @card-shadow;
+    position: relative;
+    z-index: 1;
+  }
+}
+
+// 清除浮动
+.@{prefix}-body::after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+// ============ 加载状态 ============
+.@{prefix}-loading {
+  .@{prefix}-body {
+    user-select: none;
+  }
+}
+
+.@{prefix}-skeleton-title {
+  height: 22px;
+  background: linear-gradient(
+    90deg,
+    @card-skeleton-bg 25%,
+    #e8e8e8 37%,
+    @card-skeleton-bg 63%
+  );
+  background-size: 400% 100%;
+  animation: cardSkeletonLoading 1.4s ease infinite;
+  border-radius: 4px;
+}
+
+.@{prefix}-skeleton-paragraph {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.@{prefix}-skeleton-line {
+  height: 16px;
+  background: linear-gradient(
+    90deg,
+    @card-skeleton-bg 25%,
+    #e8e8e8 37%,
+    @card-skeleton-bg 63%
+  );
+  background-size: 400% 100%;
+  animation: cardSkeletonLoading 1.4s ease infinite;
+  border-radius: 4px;
+}
+
+@keyframes cardSkeletonLoading {
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
+}
+
+// ============ 暗色模式适配 ============
+[data-theme='dark'],
+[data-prefers-color-scheme='dark'],
+[data-prefers-color='dark'] {
+  .@{prefix} {
+    background: #1f1f1f;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  }
+
+  .@{prefix}-bordered {
+    border-color: #434343;
+  }
+
+  .@{prefix}-hoverable:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  }
+
+  .@{prefix}-head {
+    border-bottom-color: #434343;
+  }
+
+  .@{prefix}-head-title {
+    color: rgba(255, 255, 255, 0.88);
+  }
+
+  .@{prefix}-head-extra {
+    color: rgba(255, 255, 255, 0.65);
+  }
+
+  .@{prefix}-body {
+    color: rgba(255, 255, 255, 0.88);
+  }
+
+  .@{prefix}-actions {
+    border-top-color: #434343;
+    background: #1f1f1f;
+  }
+
+  .@{prefix}-actions-item {
+    color: rgba(255, 255, 255, 0.65);
+    border-right-color: #434343;
+
+    &:hover {
+      color: #a5b4fc;
+      background: rgba(255, 255, 255, 0.08);
+    }
+  }
+
+  .@{prefix}-inner {
+    background: #141414;
+  }
+
+  .@{prefix}-meta-title {
+    color: rgba(255, 255, 255, 0.88);
+  }
+
+  .@{prefix}-meta-description {
+    color: rgba(255, 255, 255, 0.65);
+  }
+
+  .@{prefix}-grid {
+    border-color: #434343;
+
+    &:nth-child(3n) {
+      border-right-color: #434343;
+    }
+  }
+
+  .@{prefix}-grid-hoverable:hover {
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+  }
+
+  .@{prefix}-skeleton-title,
+  .@{prefix}-skeleton-line {
+    background: linear-gradient(
+      90deg,
+      #262626 25%,
+      #303030 37%,
+      #262626 63%
+    );
+    background-size: 400% 100%;
+  }
+}
+

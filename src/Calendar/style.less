@@ -1,0 +1,384 @@
+// Calendar 日历组件样式
+
+@prefix: kage-calendar;
+
+// 颜色变量
+@calendar-bg: #fff;
+@calendar-border: #f0f0f0;
+@calendar-header-bg: #fafafa;
+@calendar-selected-bg: #6366f1;
+@calendar-selected-color: #fff;
+@calendar-today-border: #6366f1;
+@calendar-hover-bg: rgba(0, 0, 0, 0.04);
+@calendar-disabled-color: rgba(0, 0, 0, 0.25);
+@calendar-other-month-color: rgba(0, 0, 0, 0.35);
+
+// ============ 容器 ============
+.@{prefix} {
+  background: @calendar-bg;
+  border: 1px solid @calendar-border;
+  border-radius: 8px;
+  overflow: hidden;
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+.@{prefix}-fullscreen {
+  width: 100%;
+}
+
+.@{prefix}-card {
+  width: fit-content;
+}
+
+// ============ 头部 ============
+.@{prefix}-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: @calendar-header-bg;
+  border-bottom: 1px solid @calendar-border;
+}
+
+.@{prefix}-header-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.@{prefix}-header-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.@{prefix}-header-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  font-size: 18px;
+  color: rgba(0, 0, 0, 0.65);
+  background: transparent;
+  border: 1px solid @calendar-border;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    color: #6366f1;
+    border-color: #6366f1;
+    background: rgba(99, 102, 241, 0.05);
+  }
+}
+
+.@{prefix}-header-title {
+  font-size: 16px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.88);
+  cursor: pointer;
+  user-select: none;
+
+  span {
+    margin-left: 8px;
+  }
+
+  &:hover {
+    color: #6366f1;
+  }
+}
+
+.@{prefix}-today-btn {
+  padding: 4px 12px;
+  font-size: 14px;
+  color: #6366f1;
+  background: transparent;
+  border: 1px solid #6366f1;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    color: #fff;
+    background: #6366f1;
+  }
+}
+
+.@{prefix}-mode-select {
+  padding: 4px 8px;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.88);
+  background: @calendar-bg;
+  border: 1px solid @calendar-border;
+  border-radius: 4px;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-color: #6366f1;
+  }
+
+  &:focus {
+    border-color: #6366f1;
+    box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.1);
+  }
+}
+
+// ============ 日历主体 ============
+.@{prefix}-body {
+  padding: 16px;
+}
+
+// ============ 星期标题 ============
+.@{prefix}-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.@{prefix}-weekday {
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.65);
+  padding: 8px 0;
+}
+
+// ============ 日期网格 ============
+.@{prefix}-dates {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+}
+
+.@{prefix}-date {
+  position: relative;
+  min-height: 80px;
+  padding: 8px;
+  border: 1px solid @calendar-border;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover:not(.@{prefix}-date-disabled) {
+    background: @calendar-hover-bg;
+  }
+}
+
+.@{prefix}-date-value {
+  font-size: 16px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.88);
+  margin-bottom: 4px;
+}
+
+.@{prefix}-date-content {
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.65);
+}
+
+.@{prefix}-date-other {
+  .@{prefix}-date-value {
+    color: @calendar-other-month-color;
+  }
+}
+
+.@{prefix}-date-selected {
+  background: @calendar-selected-bg;
+  border-color: @calendar-selected-bg;
+
+  .@{prefix}-date-value,
+  .@{prefix}-date-content {
+    color: @calendar-selected-color;
+  }
+
+  &:hover {
+    background: #818cf8;
+    border-color: #818cf8;
+  }
+}
+
+.@{prefix}-date-today {
+  border-color: @calendar-today-border;
+  border-width: 2px;
+}
+
+.@{prefix}-date-disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+
+  &:hover {
+    background: transparent;
+  }
+}
+
+// ============ 月份网格 ============
+.@{prefix}-months {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  padding: 16px;
+}
+
+.@{prefix}-month {
+  position: relative;
+  min-height: 100px;
+  padding: 16px;
+  border: 1px solid @calendar-border;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+
+  &:hover {
+    background: @calendar-hover-bg;
+  }
+}
+
+.@{prefix}-month-value {
+  font-size: 18px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.88);
+  margin-bottom: 8px;
+}
+
+.@{prefix}-month-content {
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.65);
+}
+
+.@{prefix}-month-selected {
+  background: @calendar-selected-bg;
+  border-color: @calendar-selected-bg;
+
+  .@{prefix}-month-value,
+  .@{prefix}-month-content {
+    color: @calendar-selected-color;
+  }
+
+  &:hover {
+    background: #818cf8;
+    border-color: #818cf8;
+  }
+}
+
+.@{prefix}-month-current {
+  border-color: @calendar-today-border;
+  border-width: 2px;
+}
+
+// ============ 卡片模式 ============
+.@{prefix}-card {
+  .@{prefix}-date {
+    min-height: 60px;
+  }
+
+  .@{prefix}-month {
+    min-height: 80px;
+  }
+}
+
+// ============ 暗色模式适配 ============
+[data-theme='dark'],
+[data-prefers-color-scheme='dark'],
+[data-prefers-color='dark'] {
+  .@{prefix} {
+    background: #1f1f1f;
+    border-color: #434343;
+  }
+
+  .@{prefix}-header {
+    background: #141414;
+    border-bottom-color: #434343;
+  }
+
+  .@{prefix}-header-btn {
+    color: rgba(255, 255, 255, 0.65);
+    border-color: #434343;
+
+    &:hover {
+      color: #a5b4fc;
+      border-color: #6366f1;
+      background: rgba(99, 102, 241, 0.2);
+    }
+  }
+
+  .@{prefix}-header-title {
+    color: rgba(255, 255, 255, 0.88);
+
+    &:hover {
+      color: #a5b4fc;
+    }
+  }
+
+  .@{prefix}-today-btn {
+    color: #a5b4fc;
+    border-color: #6366f1;
+
+    &:hover {
+      color: #fff;
+      background: #6366f1;
+    }
+  }
+
+  .@{prefix}-mode-select {
+    color: rgba(255, 255, 255, 0.88);
+    background: #1f1f1f;
+    border-color: #434343;
+
+    &:hover,
+    &:focus {
+      border-color: #6366f1;
+    }
+  }
+
+  .@{prefix}-weekday {
+    color: rgba(255, 255, 255, 0.65);
+  }
+
+  .@{prefix}-date {
+    border-color: #434343;
+
+    &:hover:not(.@{prefix}-date-disabled) {
+      background: rgba(255, 255, 255, 0.08);
+    }
+  }
+
+  .@{prefix}-date-value {
+    color: rgba(255, 255, 255, 0.88);
+  }
+
+  .@{prefix}-date-content {
+    color: rgba(255, 255, 255, 0.65);
+  }
+
+  .@{prefix}-date-other {
+    .@{prefix}-date-value {
+      color: rgba(255, 255, 255, 0.35);
+    }
+  }
+
+  .@{prefix}-month {
+    border-color: #434343;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+  }
+
+  .@{prefix}-month-value {
+    color: rgba(255, 255, 255, 0.88);
+  }
+
+  .@{prefix}-month-content {
+    color: rgba(255, 255, 255, 0.65);
+  }
+}
+

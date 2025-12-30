@@ -1,0 +1,232 @@
+// Carousel 走马灯组件样式
+
+@prefix: kage-carousel;
+
+// 颜色变量
+@carousel-arrow-bg: rgba(0, 0, 0, 0.3);
+@carousel-arrow-hover-bg: rgba(0, 0, 0, 0.5);
+@carousel-arrow-color: #fff;
+@carousel-dot-bg: rgba(255, 255, 255, 0.5);
+@carousel-dot-active-bg: #fff;
+@carousel-dot-border: rgba(0, 0, 0, 0.2);
+
+// ============ 容器 ============
+.@{prefix} {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+// ============ 轮播容器 ============
+.@{prefix}-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.@{prefix}-track {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+// ============ 轮播项 ============
+.@{prefix}-item {
+  flex: 0 0 100%;
+  width: 100%;
+  height: 100%;
+  position: relative;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+}
+
+// ============ 滚动效果 ============
+.@{prefix}-scrollx {
+  .@{prefix}-track {
+    transition: transform 0.5s ease;
+  }
+}
+
+// ============ 渐变效果 ============
+.@{prefix}-fade {
+  .@{prefix}-container {
+    position: relative;
+    height: 100%;
+  }
+
+  .@{prefix}-track {
+    position: relative;
+    height: 100%;
+  }
+
+  .@{prefix}-item {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+  }
+
+  .@{prefix}-item-active {
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 1;
+  }
+}
+
+// ============ 切换箭头 ============
+.@{prefix}-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: @carousel-arrow-bg;
+  color: @carousel-arrow-color;
+  border: none;
+  border-radius: 50%;
+  font-size: 24px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  opacity: 0;
+
+  &:hover:not(:disabled) {
+    background: @carousel-arrow-hover-bg;
+  }
+
+  &:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+}
+
+.@{prefix}:hover .@{prefix}-arrow {
+  opacity: 1;
+}
+
+.@{prefix}-arrow-left {
+  left: 16px;
+}
+
+.@{prefix}-arrow-right {
+  right: 16px;
+}
+
+// ============ 指示器 ============
+.@{prefix}-dots {
+  position: absolute;
+  z-index: 100;
+  display: flex;
+  gap: 8px;
+  padding: 4px;
+  pointer-events: none;
+
+  button {
+    pointer-events: auto;
+  }
+}
+
+.@{prefix}.@{prefix}-dots-bottom .@{prefix}-dots {
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.@{prefix}.@{prefix}-dots-top .@{prefix}-dots {
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.@{prefix}.@{prefix}-dots-left .@{prefix}-dots {
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  flex-direction: column;
+}
+
+.@{prefix}.@{prefix}-dots-right .@{prefix}-dots {
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  flex-direction: column;
+}
+
+.@{prefix}-dot {
+  width: 10px;
+  height: 10px;
+  background: @carousel-dot-bg;
+  border: 2px solid @carousel-dot-border;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.8);
+    transform: scale(1.2);
+  }
+}
+
+.@{prefix}-dot-active {
+  width: 28px;
+  border-radius: 5px;
+  background: @carousel-dot-active-bg;
+  border-color: @carousel-dot-active-bg;
+}
+
+.@{prefix}-dots-left .@{prefix}-dot-active,
+.@{prefix}-dots-right .@{prefix}-dot-active,
+.@{prefix}.@{prefix}-dots-left .@{prefix}-dot-active,
+.@{prefix}.@{prefix}-dots-right .@{prefix}-dot-active {
+  width: 10px;
+  height: 28px;
+}
+
+// ============ 暗色模式适配 ============
+[data-theme='dark'],
+[data-prefers-color-scheme='dark'],
+[data-prefers-color='dark'] {
+  .@{prefix}-arrow {
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+
+    &:hover:not(:disabled) {
+      background: rgba(255, 255, 255, 0.3);
+    }
+  }
+
+  .@{prefix}-dot {
+    background: rgba(255, 255, 255, 0.5);
+    border-color: rgba(255, 255, 255, 0.3);
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.7);
+    }
+  }
+
+  .@{prefix}-dot-active {
+    background: #a5b4fc;
+    border-color: #a5b4fc;
+  }
+}
+
