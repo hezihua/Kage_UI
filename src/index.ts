@@ -124,3 +124,12 @@ export type { CollapseProps, CollapseItemProps } from './Collapse';
 export { default as Descriptions } from './Descriptions';
 export type { DescriptionsProps, DescriptionsItemProps } from './Descriptions';
 
+export { default as Empty } from './Empty';
+export type { EmptyProps } from './Empty';
+
+export { default as Image } from './Image';
+export type { ImageProps } from './Image';
+
+export { default as Popover } from './Popover';
+export type { PopoverProps, PopoverPlacement, PopoverTrigger } from './Popover';
+

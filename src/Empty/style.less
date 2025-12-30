@@ -1,0 +1,103 @@
+// Empty 空状态组件样式
+
+@prefix: kage-empty;
+
+// 颜色变量
+@empty-description-color: rgba(0, 0, 0, 0.45);
+
+// ============ 容器 ============
+.@{prefix} {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 16px;
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.5715;
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+// ============ 图片 ============
+.@{prefix}-image {
+  display: inline-block;
+  height: 100px;
+  margin-bottom: 8px;
+
+  img {
+    height: 100%;
+    width: auto;
+    display: block;
+  }
+
+  svg {
+    height: 100%;
+    width: auto;
+    display: block;
+  }
+}
+
+// ============ 描述文字 ============
+.@{prefix}-description {
+  color: @empty-description-color;
+  font-size: 14px;
+  line-height: 1.5715;
+  margin-top: 8px;
+  margin-bottom: 0;
+}
+
+// ============ 底部操作 ============
+.@{prefix}-footer {
+  margin-top: 16px;
+}
+
+// ============ 小尺寸 ============
+.@{prefix}-small {
+  padding: 24px 8px;
+
+  .@{prefix}-image {
+    height: 40px;
+    margin-bottom: 8px;
+  }
+
+  .@{prefix}-description {
+    font-size: 12px;
+  }
+
+  .@{prefix}-footer {
+    margin-top: 12px;
+  }
+}
+
+// ============ 暗色模式适配 ============
+[data-theme='dark'],
+[data-prefers-color-scheme='dark'],
+[data-prefers-color='dark'] {
+  .@{prefix}-description {
+    color: rgba(255, 255, 255, 0.45);
+  }
+
+  .@{prefix}-image {
+    svg {
+      ellipse {
+        fill: #2c2c2c;
+      }
+
+      path[stroke] {
+        stroke: #434343;
+      }
+
+      path[fill='#fafafa'] {
+        fill: #1f1f1f;
+      }
+
+      path[fill='#f5f5f5'] {
+        fill: #2c2c2c;
+      }
+    }
+  }
+}
+

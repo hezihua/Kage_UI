@@ -1,0 +1,279 @@
+// Popover 气泡卡片组件样式
+
+@prefix: kage-popover;
+
+// 颜色变量
+@popover-bg: #fff;
+@popover-border-color: rgba(0, 0, 0, 0.06);
+@popover-title-color: rgba(0, 0, 0, 0.85);
+@popover-content-color: rgba(0, 0, 0, 0.65);
+@popover-shadow: 0 3px 6px -4px rgba(0, 0, 0, 0.12),
+  0 6px 16px 0 rgba(0, 0, 0, 0.08),
+  0 9px 28px 8px rgba(0, 0, 0, 0.05);
+
+// 尺寸变量
+@popover-arrow-size: 8px;
+@popover-distance: 12px;
+
+// ============ 容器 ============
+.@{prefix}-wrapper {
+  position: relative;
+  display: inline-block;
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+.@{prefix}-trigger {
+  display: inline-block;
+  cursor: pointer;
+}
+
+// ============ 气泡卡片 ============
+.@{prefix} {
+  position: absolute;
+  z-index: 1050;
+  background-color: @popover-bg;
+  border: 1px solid @popover-border-color;
+  border-radius: 8px;
+  box-shadow: @popover-shadow;
+  min-width: 150px;
+  max-width: 350px;
+  font-size: 14px;
+  line-height: 1.5715;
+  animation: popoverFadeIn 0.2s ease forwards;
+  word-wrap: break-word;
+  word-break: break-word;
+}
+
+.@{prefix}-open {
+  opacity: 1;
+}
+
+// ============ 内容 ============
+.@{prefix}-inner {
+  padding: 12px 16px;
+}
+
+.@{prefix}-title {
+  color: @popover-title-color;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.@{prefix}-content {
+  color: @popover-content-color;
+}
+
+// ============ 箭头 ============
+.@{prefix}-arrow {
+  position: absolute;
+  width: @popover-arrow-size * 2;
+  height: @popover-arrow-size * 2;
+  background-color: @popover-bg;
+  border: 1px solid @popover-border-color;
+  transform: rotate(45deg);
+  pointer-events: none;
+}
+
+// ============ 位置 - 上方 ============
+.@{prefix}-placement-top,
+.@{prefix}-placement-topLeft,
+.@{prefix}-placement-topRight {
+  bottom: 100%;
+  margin-bottom: @popover-distance;
+  transform-origin: center bottom;
+
+  .@{prefix}-arrow {
+    bottom: -(@popover-arrow-size + 1px);
+    border-top: none;
+    border-left: none;
+  }
+}
+
+.@{prefix}-placement-top {
+  left: 50%;
+  transform: translateX(-50%);
+
+  .@{prefix}-arrow {
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+  }
+}
+
+.@{prefix}-placement-topLeft {
+  left: 0;
+
+  .@{prefix}-arrow {
+    left: 16px;
+  }
+}
+
+.@{prefix}-placement-topRight {
+  right: 0;
+
+  .@{prefix}-arrow {
+    right: 16px;
+  }
+}
+
+// ============ 位置 - 下方 ============
+.@{prefix}-placement-bottom,
+.@{prefix}-placement-bottomLeft,
+.@{prefix}-placement-bottomRight {
+  top: 100%;
+  margin-top: @popover-distance;
+  transform-origin: center top;
+
+  .@{prefix}-arrow {
+    top: -(@popover-arrow-size + 1px);
+    border-bottom: none;
+    border-right: none;
+  }
+}
+
+.@{prefix}-placement-bottom {
+  left: 50%;
+  transform: translateX(-50%);
+
+  .@{prefix}-arrow {
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+  }
+}
+
+.@{prefix}-placement-bottomLeft {
+  left: 0;
+
+  .@{prefix}-arrow {
+    left: 16px;
+  }
+}
+
+.@{prefix}-placement-bottomRight {
+  right: 0;
+
+  .@{prefix}-arrow {
+    right: 16px;
+  }
+}
+
+// ============ 位置 - 左侧 ============
+.@{prefix}-placement-left,
+.@{prefix}-placement-leftTop,
+.@{prefix}-placement-leftBottom {
+  right: 100%;
+  margin-right: @popover-distance;
+  transform-origin: right center;
+
+  .@{prefix}-arrow {
+    right: -(@popover-arrow-size + 1px);
+    border-left: none;
+    border-bottom: none;
+  }
+}
+
+.@{prefix}-placement-left {
+  top: 50%;
+  transform: translateY(-50%);
+
+  .@{prefix}-arrow {
+    top: 50%;
+    transform: translateY(-50%) rotate(45deg);
+  }
+}
+
+.@{prefix}-placement-leftTop {
+  top: 0;
+
+  .@{prefix}-arrow {
+    top: 16px;
+  }
+}
+
+.@{prefix}-placement-leftBottom {
+  bottom: 0;
+
+  .@{prefix}-arrow {
+    bottom: 16px;
+  }
+}
+
+// ============ 位置 - 右侧 ============
+.@{prefix}-placement-right,
+.@{prefix}-placement-rightTop,
+.@{prefix}-placement-rightBottom {
+  left: 100%;
+  margin-left: @popover-distance;
+  transform-origin: left center;
+
+  .@{prefix}-arrow {
+    left: -(@popover-arrow-size + 1px);
+    border-right: none;
+    border-top: none;
+  }
+}
+
+.@{prefix}-placement-right {
+  top: 50%;
+  transform: translateY(-50%);
+
+  .@{prefix}-arrow {
+    top: 50%;
+    transform: translateY(-50%) rotate(45deg);
+  }
+}
+
+.@{prefix}-placement-rightTop {
+  top: 0;
+
+  .@{prefix}-arrow {
+    top: 16px;
+  }
+}
+
+.@{prefix}-placement-rightBottom {
+  bottom: 0;
+
+  .@{prefix}-arrow {
+    bottom: 16px;
+  }
+}
+
+// ============ 动画 ============
+@keyframes popoverFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+// ============ 暗色模式适配 ============
+[data-theme='dark'],
+[data-prefers-color-scheme='dark'],
+[data-prefers-color='dark'] {
+  .@{prefix} {
+    background-color: #1f1f1f;
+    border-color: #434343;
+    box-shadow: 0 3px 6px -4px rgba(0, 0, 0, 0.48),
+      0 6px 16px 0 rgba(0, 0, 0, 0.32),
+      0 9px 28px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .@{prefix}-arrow {
+    background-color: #1f1f1f;
+    border-color: #434343;
+  }
+
+  .@{prefix}-title {
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .@{prefix}-content {
+    color: rgba(255, 255, 255, 0.65);
+  }
+}
+
