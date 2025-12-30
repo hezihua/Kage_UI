@@ -82,4 +82,7 @@ export type { RadioProps, RadioGroupProps, RadioButtonProps, RadioOptionType } f
 export { default as Rate } from './Rate';
 export type { RateProps } from './Rate';
 
+export { default as Select } from './Select';
+export type { SelectProps, SelectOption, SelectValue } from './Select';
+
 
