@@ -1,0 +1,170 @@
+// Rate 评分组件样式
+
+@prefix: kage-rate;
+
+// 颜色变量
+@rate-star-color: #fadb14;
+@rate-star-bg: rgba(0, 0, 0, 0.06);
+@rate-star-size: 20px;
+@rate-star-hover-scale: 1.1;
+
+// ============ 基础样式 ============
+.@{prefix} {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: @rate-star-size;
+  line-height: 1;
+  color: @rate-star-bg;
+  outline: none;
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+// ============ 星星 ============
+.@{prefix}-star {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  user-select: none;
+
+  &:hover {
+    transform: scale(@rate-star-hover-scale);
+  }
+
+  // 字符
+  &-character {
+    font-size: @rate-star-size;
+    line-height: 1;
+    transition: color 0.2s ease;
+  }
+
+  // 零星（未选中）
+  &-zero {
+    .@{prefix}-star-character {
+      color: @rate-star-bg;
+    }
+  }
+
+  // 半星
+  &-half {
+    .@{prefix}-star-character {
+      background: linear-gradient(
+        to right,
+        @rate-star-color 0%,
+        @rate-star-color 50%,
+        @rate-star-bg 50%,
+        @rate-star-bg 100%
+      );
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+  }
+
+  // 满星
+  &-full {
+    .@{prefix}-star-character {
+      color: @rate-star-color;
+    }
+  }
+
+  // 半星交互区域
+  &-first,
+  &-second {
+    position: absolute;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    cursor: pointer;
+    z-index: 1;
+  }
+
+  &-first {
+    left: 0;
+  }
+
+  &-second {
+    right: 0;
+  }
+}
+
+// ============ 辅助文字 ============
+.@{prefix}-text {
+  display: inline-block;
+  margin-left: 8px;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.45);
+  line-height: 1;
+}
+
+// ============ 禁用状态 ============
+.@{prefix}-disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+
+  .@{prefix}-star {
+    cursor: not-allowed;
+
+    &:hover {
+      transform: none;
+    }
+  }
+}
+
+// ============ 只读状态 ============
+.@{prefix}-readonly {
+  .@{prefix}-star {
+    cursor: default;
+
+    &:hover {
+      transform: none;
+    }
+  }
+}
+
+// ============ 暗色模式适配 ============
+[data-theme='dark'],
+[data-prefers-color-scheme='dark'],
+[data-prefers-color='dark'] {
+  .@{prefix} {
+    color: rgba(255, 255, 255, 0.15);
+  }
+
+  .@{prefix}-star {
+    &-zero {
+      .@{prefix}-star-character {
+        color: rgba(255, 255, 255, 0.15);
+      }
+    }
+
+    &-half {
+      .@{prefix}-star-character {
+        background: linear-gradient(
+          to right,
+          @rate-star-color 0%,
+          @rate-star-color 50%,
+          rgba(255, 255, 255, 0.15) 50%,
+          rgba(255, 255, 255, 0.15) 100%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+    }
+
+    &-full {
+      .@{prefix}-star-character {
+        color: @rate-star-color;
+      }
+    }
+  }
+
+  .@{prefix}-text {
+    color: rgba(255, 255, 255, 0.45);
+  }
+}
+

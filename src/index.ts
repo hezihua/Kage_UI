@@ -79,4 +79,7 @@ export type { MentionsProps, MentionOption } from './Mentions';
 export { default as Radio, RadioGroup, RadioButton } from './Radio';
 export type { RadioProps, RadioGroupProps, RadioButtonProps, RadioOptionType } from './Radio';
 
+export { default as Rate } from './Rate';
+export type { RateProps } from './Rate';
+
 
