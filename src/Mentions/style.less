@@ -1,0 +1,297 @@
+// Mentions 提及组件样式
+
+@prefix: kage-mentions;
+
+// 颜色变量
+@textarea-bg: #fff;
+@textarea-border: #d9d9d9;
+@textarea-border-hover: #6366f1;
+@textarea-border-focus: #6366f1;
+@textarea-text-color: rgba(0, 0, 0, 0.88);
+@textarea-placeholder-color: rgba(0, 0, 0, 0.25);
+@textarea-disabled-bg: #f5f5f5;
+@textarea-disabled-color: rgba(0, 0, 0, 0.25);
+@dropdown-bg: #fff;
+@dropdown-shadow: 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 3px 6px -4px rgba(0, 0, 0, 0.12);
+@option-hover-bg: #f5f5f5;
+@option-active-bg: #f5f5f5;
+@option-disabled-color: rgba(0, 0, 0, 0.25);
+@primary-shadow: 0 0 0 2px rgba(99, 102, 241, 0.1);
+@error-color: #ff4d4f;
+@warning-color: #faad14;
+
+// ============ 基础样式 ============
+.@{prefix} {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  font-size: 14px;
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+// ============ 文本域 ============
+.@{prefix}-textarea {
+  width: 100%;
+  min-height: 80px;
+  padding: 8px 12px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: @textarea-text-color;
+  background: @textarea-bg;
+  border: 1px solid @textarea-border;
+  border-radius: 6px;
+  outline: none;
+  transition: all 0.2s ease;
+  resize: vertical;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+
+  &::placeholder {
+    color: @textarea-placeholder-color;
+  }
+
+  &:hover:not(:disabled) {
+    border-color: @textarea-border-hover;
+  }
+
+  &:focus {
+    border-color: @textarea-border-focus;
+    box-shadow: @primary-shadow;
+  }
+
+  &:disabled {
+    background: @textarea-disabled-bg;
+    color: @textarea-disabled-color;
+    cursor: not-allowed;
+  }
+}
+
+// ============ 测量元素（隐藏） ============
+.@{prefix}-measure {
+  position: absolute;
+  top: 0;
+  left: 0;
+  visibility: hidden;
+  height: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  pointer-events: none;
+  z-index: -1;
+}
+
+// ============ 下拉菜单 ============
+.@{prefix}-dropdown {
+  position: absolute;
+  z-index: 1050;
+  min-width: 120px;
+  max-width: 300px;
+  max-height: 256px;
+  margin-top: 4px;
+  padding: 4px;
+  overflow-y: auto;
+  background: @dropdown-bg;
+  border-radius: 8px;
+  box-shadow: @dropdown-shadow;
+  animation: slideDown 0.2s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// ============ 选项 ============
+.@{prefix}-option {
+  padding: 8px 12px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: @textarea-text-color;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.2s ease;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  &:hover {
+    background: @option-hover-bg;
+  }
+
+  &-active {
+    background: @option-active-bg;
+  }
+
+  &-disabled {
+    color: @option-disabled-color;
+    cursor: not-allowed;
+
+    &:hover {
+      background: transparent;
+    }
+  }
+}
+
+// ============ 空状态 ============
+.@{prefix}-empty {
+  padding: 16px;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.25);
+  font-size: 14px;
+}
+
+// ============ 加载状态 ============
+.@{prefix}-loading {
+  padding: 16px;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.45);
+  font-size: 14px;
+}
+
+// ============ 禁用状态 ============
+.@{prefix}-disabled {
+  .@{prefix}-textarea {
+    background: @textarea-disabled-bg;
+    color: @textarea-disabled-color;
+    cursor: not-allowed;
+
+    &:hover {
+      border-color: @textarea-border;
+    }
+  }
+}
+
+// ============ 状态样式 ============
+.@{prefix}-status-error {
+  .@{prefix}-textarea {
+    border-color: @error-color;
+
+    &:hover,
+    &:focus {
+      border-color: @error-color;
+    }
+
+    &:focus {
+      box-shadow: 0 0 0 2px rgba(255, 77, 79, 0.1);
+    }
+  }
+}
+
+.@{prefix}-status-warning {
+  .@{prefix}-textarea {
+    border-color: @warning-color;
+
+    &:hover,
+    &:focus {
+      border-color: @warning-color;
+    }
+
+    &:focus {
+      box-shadow: 0 0 0 2px rgba(250, 173, 20, 0.1);
+    }
+  }
+}
+
+// ============ 尺寸 ============
+.@{prefix}-large {
+  .@{prefix}-textarea {
+    padding: 10px 14px;
+    font-size: 16px;
+  }
+}
+
+.@{prefix}-small {
+  .@{prefix}-textarea {
+    padding: 4px 8px;
+    font-size: 12px;
+  }
+
+  .@{prefix}-option {
+    padding: 4px 8px;
+    font-size: 12px;
+  }
+}
+
+// ============ 暗色模式适配 ============
+[data-theme='dark'],
+[data-prefers-color-scheme='dark'],
+[data-prefers-color='dark'] {
+  .@{prefix}-textarea {
+    background: #1f1f1f;
+    border-color: #424242;
+    color: rgba(255, 255, 255, 0.85);
+
+    &::placeholder {
+      color: rgba(255, 255, 255, 0.25);
+    }
+
+    &:hover:not(:disabled) {
+      border-color: #818cf8;
+    }
+
+    &:focus {
+      border-color: #818cf8;
+      box-shadow: 0 0 0 2px rgba(129, 140, 248, 0.2);
+    }
+
+    &:disabled {
+      background: #2d2d2d;
+      color: rgba(255, 255, 255, 0.25);
+    }
+  }
+
+  .@{prefix}-dropdown {
+    background: #1f1f1f;
+    box-shadow: 0 6px 16px 0 rgba(0, 0, 0, 0.3);
+  }
+
+  .@{prefix}-option {
+    color: rgba(255, 255, 255, 0.85);
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    &-active {
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    &-disabled {
+      color: rgba(255, 255, 255, 0.25);
+    }
+  }
+
+  .@{prefix}-empty,
+  .@{prefix}-loading {
+    color: rgba(255, 255, 255, 0.45);
+  }
+
+  .@{prefix}-status-error {
+    .@{prefix}-textarea {
+      border-color: #ff7875;
+
+      &:focus {
+        box-shadow: 0 0 0 2px rgba(255, 120, 117, 0.2);
+      }
+    }
+  }
+
+  .@{prefix}-status-warning {
+    .@{prefix}-textarea {
+      border-color: #ffc53d;
+
+      &:focus {
+        box-shadow: 0 0 0 2px rgba(255, 197, 61, 0.2);
+      }
+    }
+  }
+}
+

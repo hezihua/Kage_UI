@@ -73,4 +73,7 @@ export type { InputProps } from './Input';
 export { default as InputNumber } from './InputNumber';
 export type { InputNumberProps } from './InputNumber';
 
+export { default as Mentions } from './Mentions';
+export type { MentionsProps, MentionOption } from './Mentions';
+
 
