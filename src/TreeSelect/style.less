@@ -1,0 +1,471 @@
+// TreeSelect 树选择器样式
+
+@prefix: kage-treeselect;
+
+// 颜色变量
+@treeselect-bg: #fff;
+@treeselect-border: #d9d9d9;
+@treeselect-hover-border: #6366f1;
+@treeselect-focus-border: #6366f1;
+@treeselect-focus-shadow: 0 0 0 2px rgba(99, 102, 241, 0.1);
+@treeselect-disabled-bg: #f5f5f5;
+@treeselect-disabled-color: rgba(0, 0, 0, 0.25);
+@treeselect-placeholder-color: rgba(0, 0, 0, 0.35);
+@treeselect-dropdown-bg: #fff;
+@treeselect-dropdown-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+@treeselect-hover-bg: rgba(0, 0, 0, 0.04);
+@treeselect-selected-bg: #e0e7ff;
+@treeselect-selected-color: #4f46e5;
+
+// ============ 容器 ============
+.@{prefix} {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+// ============ 选择框 ============
+.@{prefix}-selector {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 8px 12px;
+  background: @treeselect-bg;
+  border: 1px solid @treeselect-border;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-color: @treeselect-hover-border;
+  }
+}
+
+.@{prefix}-open .@{prefix}-selector {
+  border-color: @treeselect-focus-border;
+  box-shadow: @treeselect-focus-shadow;
+}
+
+.@{prefix}-selection {
+  flex: 1;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.88);
+  line-height: 1.5;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.@{prefix}-placeholder {
+  color: @treeselect-placeholder-color;
+}
+
+.@{prefix}-clear {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  margin-right: 4px;
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.35);
+  background: rgba(0, 0, 0, 0.06);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  line-height: 1;
+  flex-shrink: 0;
+
+  &:hover {
+    color: rgba(0, 0, 0, 0.65);
+    background: rgba(0, 0, 0, 0.12);
+  }
+}
+
+.@{prefix}-arrow {
+  display: flex;
+  align-items: center;
+  font-size: 10px;
+  color: rgba(0, 0, 0, 0.35);
+  pointer-events: none;
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+}
+
+.@{prefix}-arrow-open {
+  transform: rotate(180deg);
+}
+
+// ============ 尺寸变体 ============
+.@{prefix}-large .@{prefix}-selector {
+  padding: 10px 14px;
+  font-size: 16px;
+}
+
+.@{prefix}-small .@{prefix}-selector {
+  padding: 4px 8px;
+  font-size: 12px;
+}
+
+// ============ 状态变体 ============
+.@{prefix}-status-error .@{prefix}-selector {
+  border-color: #ff4d4f;
+
+  &:hover {
+    border-color: #ff7875;
+  }
+}
+
+.@{prefix}-status-warning .@{prefix}-selector {
+  border-color: #faad14;
+
+  &:hover {
+    border-color: #ffc53d;
+  }
+}
+
+.@{prefix}-disabled {
+  .@{prefix}-selector {
+    background: @treeselect-disabled-bg;
+    border-color: @treeselect-border;
+    cursor: not-allowed;
+
+    &:hover {
+      border-color: @treeselect-border;
+    }
+  }
+
+  .@{prefix}-selection {
+    color: @treeselect-disabled-color;
+  }
+
+  .@{prefix}-arrow {
+    color: @treeselect-disabled-color;
+  }
+}
+
+// ============ 下拉面板 ============
+.@{prefix}-dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  z-index: 1050;
+  width: 100%;
+  max-height: 300px;
+  background: @treeselect-dropdown-bg;
+  border-radius: 8px;
+  box-shadow: @treeselect-dropdown-shadow;
+  overflow: hidden;
+  animation: treeSelectSlideDown 0.2s ease;
+}
+
+@keyframes treeSelectSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// ============ 搜索框 ============
+.@{prefix}-search {
+  padding: 8px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.@{prefix}-search-input {
+  width: 100%;
+  padding: 4px 8px;
+  font-size: 14px;
+  border: 1px solid @treeselect-border;
+  border-radius: 4px;
+  outline: none;
+  transition: all 0.2s ease;
+
+  &:focus {
+    border-color: @treeselect-focus-border;
+    box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.1);
+  }
+}
+
+// ============ 树形结构 ============
+.@{prefix}-tree {
+  max-height: 250px;
+  overflow-y: auto;
+  padding: 4px 0;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.2);
+    }
+  }
+}
+
+.@{prefix}-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
+  color: rgba(0, 0, 0, 0.35);
+  font-size: 13px;
+}
+
+// ============ 树节点 ============
+.@{prefix}-node {
+  &:last-child {
+    .@{prefix}-node-children {
+      border-left: none;
+    }
+  }
+}
+
+.@{prefix}-node-content {
+  display: flex;
+  align-items: center;
+  padding: 4px 8px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  user-select: none;
+
+  &:hover {
+    background: @treeselect-hover-bg;
+  }
+}
+
+.@{prefix}-node-selected {
+  background: @treeselect-selected-bg;
+  color: @treeselect-selected-color;
+
+  &:hover {
+    background: @treeselect-selected-bg;
+  }
+}
+
+.@{prefix}-node-disabled {
+  color: @treeselect-disabled-color;
+  cursor: not-allowed;
+
+  &:hover {
+    background: transparent;
+  }
+}
+
+.@{prefix}-node-children {
+  position: relative;
+}
+
+// ============ 展开/收起图标 ============
+.@{prefix}-switcher {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  margin-right: 4px;
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.45);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+
+  &:hover {
+    color: rgba(0, 0, 0, 0.65);
+  }
+}
+
+.@{prefix}-switcher-open {
+  transform: rotate(90deg);
+}
+
+.@{prefix}-switcher-noop {
+  display: inline-block;
+  width: 20px;
+  margin-right: 4px;
+  flex-shrink: 0;
+}
+
+// ============ Checkbox ============
+.@{prefix}-checkbox {
+  width: 16px;
+  height: 16px;
+  margin: 0 8px 0 0;
+  cursor: pointer;
+  flex-shrink: 0;
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
+
+// ============ 节点标题 ============
+.@{prefix}-node-title {
+  flex: 1;
+  font-size: 14px;
+  line-height: 1.5;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// ============ 暗色模式适配 ============
+[data-theme='dark'],
+[data-prefers-color-scheme='dark'],
+[data-prefers-color='dark'] {
+  .@{prefix}-selector {
+    background: #1f1f1f;
+    border-color: #434343;
+    color: rgba(255, 255, 255, 0.88);
+
+    &:hover {
+      border-color: #6366f1;
+    }
+  }
+
+  .@{prefix}-open .@{prefix}-selector {
+    border-color: #6366f1;
+    box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+  }
+
+  .@{prefix}-selection {
+    color: rgba(255, 255, 255, 0.88);
+  }
+
+  .@{prefix}-placeholder {
+    color: rgba(255, 255, 255, 0.35);
+  }
+
+  .@{prefix}-clear {
+    color: rgba(255, 255, 255, 0.35);
+    background: rgba(255, 255, 255, 0.08);
+
+    &:hover {
+      color: rgba(255, 255, 255, 0.65);
+      background: rgba(255, 255, 255, 0.15);
+    }
+  }
+
+  .@{prefix}-arrow {
+    color: rgba(255, 255, 255, 0.35);
+  }
+
+  .@{prefix}-disabled {
+    .@{prefix}-selector {
+      background: rgba(255, 255, 255, 0.04);
+      border-color: #434343;
+    }
+
+    .@{prefix}-selection,
+    .@{prefix}-arrow {
+      color: rgba(255, 255, 255, 0.25);
+    }
+  }
+
+  .@{prefix}-dropdown {
+    background: #1f1f1f;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+  }
+
+  .@{prefix}-search {
+    border-bottom-color: #434343;
+  }
+
+  .@{prefix}-search-input {
+    background: #141414;
+    border-color: #434343;
+    color: rgba(255, 255, 255, 0.88);
+
+    &:focus {
+      border-color: #6366f1;
+      box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+    }
+
+    &::placeholder {
+      color: rgba(255, 255, 255, 0.35);
+    }
+  }
+
+  .@{prefix}-tree {
+    &::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.2);
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.3);
+      }
+    }
+  }
+
+  .@{prefix}-empty {
+    color: rgba(255, 255, 255, 0.35);
+  }
+
+  .@{prefix}-node-content {
+    &:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+  }
+
+  .@{prefix}-node-selected {
+    background: rgba(99, 102, 241, 0.3);
+    color: #a5b4fc;
+
+    &:hover {
+      background: rgba(99, 102, 241, 0.3);
+    }
+  }
+
+  .@{prefix}-node-disabled {
+    color: rgba(255, 255, 255, 0.25);
+
+    &:hover {
+      background: transparent;
+    }
+  }
+
+  .@{prefix}-node-title {
+    color: rgba(255, 255, 255, 0.88);
+  }
+
+  .@{prefix}-node-disabled .@{prefix}-node-title {
+    color: rgba(255, 255, 255, 0.25);
+  }
+
+  .@{prefix}-switcher {
+    color: rgba(255, 255, 255, 0.45);
+
+    &:hover {
+      color: rgba(255, 255, 255, 0.65);
+    }
+  }
+
+  .@{prefix}-status-error .@{prefix}-selector {
+    border-color: #a61d24;
+
+    &:hover {
+      border-color: #cf1322;
+    }
+  }
+
+  .@{prefix}-status-warning .@{prefix}-selector {
+    border-color: #ad6800;
+
+    &:hover {
+      border-color: #d48806;
+    }
+  }
+}
+

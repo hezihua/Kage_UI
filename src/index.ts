@@ -97,4 +97,7 @@ export type { TimePickerProps, TimeValue } from './TimePicker';
 export { default as Transfer } from './Transfer';
 export type { TransferProps, TransferItem, TransferDirection } from './Transfer';
 
+export { default as TreeSelect } from './TreeSelect';
+export type { TreeSelectProps, TreeNode } from './TreeSelect';
+
 
