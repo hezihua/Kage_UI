@@ -70,3 +70,7 @@ export type { FormProps, FormItemProps, Rule, FormInstance } from './Form';
 export { default as Input } from './Input';
 export type { InputProps } from './Input';
 
+export { default as InputNumber } from './InputNumber';
+export type { InputNumberProps } from './InputNumber';
+
+
