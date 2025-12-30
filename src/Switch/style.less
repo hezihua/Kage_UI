@@ -1,0 +1,212 @@
+// Switch 开关组件样式
+
+@prefix: kage-switch;
+
+// 颜色变量
+@switch-height: 22px;
+@switch-width: 44px;
+@switch-small-height: 16px;
+@switch-small-width: 28px;
+@switch-bg: rgba(0, 0, 0, 0.25);
+@switch-checked-bg: #6366f1;
+@switch-disabled-opacity: 0.4;
+@switch-handle-size: 18px;
+@switch-small-handle-size: 12px;
+@switch-handle-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+
+// ============ 基础样式 ============
+.@{prefix} {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-width: @switch-width;
+  height: @switch-height;
+  padding: 0 5px;
+  background: @switch-bg;
+  border: none;
+  border-radius: @switch-height;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  outline: none;
+  user-select: none;
+  vertical-align: middle;
+
+  &:hover:not(.@{prefix}-disabled) {
+    background: rgba(0, 0, 0, 0.35);
+  }
+
+  &:focus-visible {
+    box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+  }
+}
+
+// ============ 选中状态 ============
+.@{prefix}-checked {
+  background: @switch-checked-bg;
+
+  &:hover:not(.@{prefix}-disabled) {
+    background: #818cf8;
+  }
+
+  .@{prefix}-handle {
+    left: calc(100% - @switch-handle-size - 2px);
+  }
+
+  .@{prefix}-inner {
+    padding-left: 6px;
+    padding-right: 22px;
+  }
+}
+
+// ============ 内容区域 ============
+.@{prefix}-inner {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding-left: 22px;
+  padding-right: 6px;
+  color: #fff;
+  font-size: 12px;
+  line-height: 1;
+  transition: padding 0.2s ease;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+// ============ 滑块手柄 ============
+.@{prefix}-handle {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: @switch-handle-size;
+  height: @switch-handle-size;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: @switch-handle-shadow;
+  transition: all 0.2s ease;
+  pointer-events: none;
+}
+
+// ============ 禁用状态 ============
+.@{prefix}-disabled {
+  opacity: @switch-disabled-opacity;
+  cursor: not-allowed;
+
+  &:hover {
+    background: @switch-bg;
+  }
+
+  &.@{prefix}-checked:hover {
+    background: @switch-checked-bg;
+  }
+}
+
+// ============ 加载状态 ============
+.@{prefix}-loading {
+  cursor: wait;
+
+  &:hover {
+    background: @switch-bg;
+  }
+
+  &.@{prefix}-checked:hover {
+    background: @switch-checked-bg;
+  }
+}
+
+.@{prefix}-loading-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 10px;
+  animation: switchSpin 1s linear infinite;
+  z-index: 1;
+}
+
+@keyframes switchSpin {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+// ============ 小尺寸 ============
+.@{prefix}-small {
+  min-width: @switch-small-width;
+  height: @switch-small-height;
+  border-radius: @switch-small-height;
+  padding: 0 3px;
+
+  .@{prefix}-handle {
+    width: @switch-small-handle-size;
+    height: @switch-small-handle-size;
+  }
+
+  &.@{prefix}-checked .@{prefix}-handle {
+    left: calc(100% - @switch-small-handle-size - 2px);
+  }
+
+  .@{prefix}-inner {
+    font-size: 10px;
+    padding-left: 16px;
+    padding-right: 4px;
+  }
+
+  &.@{prefix}-checked .@{prefix}-inner {
+    padding-left: 4px;
+    padding-right: 16px;
+  }
+
+  .@{prefix}-loading-icon {
+    font-size: 8px;
+  }
+}
+
+// ============ 暗色模式适配 ============
+[data-theme='dark'],
+[data-prefers-color-scheme='dark'],
+[data-prefers-color='dark'] {
+  .@{prefix} {
+    background: rgba(255, 255, 255, 0.25);
+
+    &:hover:not(.@{prefix}-disabled) {
+      background: rgba(255, 255, 255, 0.35);
+    }
+
+    &:focus-visible {
+      box-shadow: 0 0 0 2px rgba(129, 140, 248, 0.3);
+    }
+  }
+
+  .@{prefix}-checked {
+    background: #6366f1;
+
+    &:hover:not(.@{prefix}-disabled) {
+      background: #818cf8;
+    }
+  }
+
+  .@{prefix}-disabled {
+    &:hover {
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    &.@{prefix}-checked:hover {
+      background: #6366f1;
+    }
+  }
+
+  .@{prefix}-loading {
+    &:hover {
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    &.@{prefix}-checked:hover {
+      background: #6366f1;
+    }
+  }
+}
+

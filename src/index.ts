@@ -88,4 +88,7 @@ export type { SelectProps, SelectOption, SelectValue } from './Select';
 export { default as Slider } from './Slider';
 export type { SliderProps, SliderValue } from './Slider';
 
+export { default as Switch } from './Switch';
+export type { SwitchProps } from './Switch';
+
 
