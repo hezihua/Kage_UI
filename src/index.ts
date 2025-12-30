@@ -103,4 +103,7 @@ export type { TreeSelectProps, TreeNode } from './TreeSelect';
 export { default as Upload } from './Upload';
 export type { UploadProps, UploadFile, UploadListType } from './Upload';
 
+export { default as Avatar } from './Avatar';
+export type { AvatarProps, AvatarGroupProps, AvatarSize, AvatarShape } from './Avatar';
+
 

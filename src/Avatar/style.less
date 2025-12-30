@@ -1,0 +1,193 @@
+// Avatar 头像组件样式
+
+@prefix: kage-avatar;
+
+// 颜色变量
+@avatar-bg: #f5f5f5;
+@avatar-color: rgba(0, 0, 0, 0.88);
+@avatar-border: transparent;
+@avatar-size-default: 40px;
+@avatar-size-large: 48px;
+@avatar-size-small: 32px;
+
+// ============ 基础样式 ============
+.@{prefix} {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: @avatar-size-default;
+  height: @avatar-size-default;
+  font-size: 18px;
+  line-height: @avatar-size-default;
+  background: @avatar-bg;
+  color: @avatar-color;
+  border-radius: 50%;
+  overflow: hidden;
+  user-select: none;
+  vertical-align: middle;
+  flex-shrink: 0;
+
+  * {
+    box-sizing: border-box;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+}
+
+// ============ 尺寸变体 ============
+.@{prefix}-large {
+  width: @avatar-size-large;
+  height: @avatar-size-large;
+  font-size: 24px;
+  line-height: @avatar-size-large;
+}
+
+.@{prefix}-small {
+  width: @avatar-size-small;
+  height: @avatar-size-small;
+  font-size: 14px;
+  line-height: @avatar-size-small;
+}
+
+// ============ 形状变体 ============
+.@{prefix}-square {
+  border-radius: 6px;
+}
+
+// ============ 内容类型 ============
+.@{prefix}-icon-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1em;
+}
+
+.@{prefix}-text-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.@{prefix}-image {
+  background: transparent;
+}
+
+// ============ Avatar Group ============
+.@{prefix}-group {
+  display: inline-flex;
+  align-items: center;
+
+  .@{prefix} {
+    margin-left: -8px;
+    border: 2px solid #fff;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    &:hover {
+      z-index: 1;
+      transform: translateY(-2px);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    }
+  }
+}
+
+.@{prefix}-group-excess {
+  background: #fafafa;
+  color: rgba(0, 0, 0, 0.45);
+  font-size: 14px;
+  cursor: default;
+
+  &:hover {
+    transform: none;
+    box-shadow: none;
+  }
+}
+
+// ============ 颜色变体（可选） ============
+.@{prefix}[data-color='primary'] {
+  background: #6366f1;
+  color: #fff;
+}
+
+.@{prefix}[data-color='success'] {
+  background: #52c41a;
+  color: #fff;
+}
+
+.@{prefix}[data-color='warning'] {
+  background: #faad14;
+  color: #fff;
+}
+
+.@{prefix}[data-color='error'] {
+  background: #ff4d4f;
+  color: #fff;
+}
+
+.@{prefix}[data-color='info'] {
+  background: #1890ff;
+  color: #fff;
+}
+
+// ============ 暗色模式适配 ============
+[data-theme='dark'],
+[data-prefers-color-scheme='dark'],
+[data-prefers-color='dark'] {
+  .@{prefix} {
+    background: #262626;
+    color: rgba(255, 255, 255, 0.88);
+  }
+
+  .@{prefix}-group {
+    .@{prefix} {
+      border-color: #1f1f1f;
+
+      &:hover {
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+      }
+    }
+  }
+
+  .@{prefix}-group-excess {
+    background: #141414;
+    color: rgba(255, 255, 255, 0.45);
+  }
+
+  .@{prefix}[data-color='primary'] {
+    background: #6366f1;
+    color: #fff;
+  }
+
+  .@{prefix}[data-color='success'] {
+    background: #52c41a;
+    color: #fff;
+  }
+
+  .@{prefix}[data-color='warning'] {
+    background: #faad14;
+    color: #fff;
+  }
+
+  .@{prefix}[data-color='error'] {
+    background: #ff4d4f;
+    color: #fff;
+  }
+
+  .@{prefix}[data-color='info'] {
+    background: #1890ff;
+    color: #fff;
+  }
+}
+
