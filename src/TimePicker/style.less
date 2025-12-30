@@ -1,0 +1,384 @@
+// TimePicker 时间选择器样式
+
+@prefix: kage-timepicker;
+
+// 颜色变量
+@timepicker-bg: #fff;
+@timepicker-border: #d9d9d9;
+@timepicker-hover-border: #6366f1;
+@timepicker-focus-border: #6366f1;
+@timepicker-focus-shadow: 0 0 0 2px rgba(99, 102, 241, 0.1);
+@timepicker-disabled-bg: #f5f5f5;
+@timepicker-disabled-color: rgba(0, 0, 0, 0.25);
+@timepicker-placeholder-color: rgba(0, 0, 0, 0.35);
+@timepicker-panel-bg: #fff;
+@timepicker-panel-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+@timepicker-cell-hover-bg: rgba(0, 0, 0, 0.04);
+@timepicker-cell-selected-bg: #e0e7ff;
+@timepicker-cell-selected-color: #4f46e5;
+
+// ============ 容器 ============
+.@{prefix} {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+// ============ 输入框 ============
+.@{prefix}-input {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 8px 12px;
+  background: @timepicker-bg;
+  border: 1px solid @timepicker-border;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-color: @timepicker-hover-border;
+  }
+}
+
+.@{prefix}-open .@{prefix}-input {
+  border-color: @timepicker-focus-border;
+  box-shadow: @timepicker-focus-shadow;
+}
+
+.@{prefix}-value {
+  flex: 1;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.88);
+  line-height: 1.5;
+}
+
+.@{prefix}-placeholder {
+  color: @timepicker-placeholder-color;
+}
+
+.@{prefix}-clear {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  margin-right: 4px;
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.35);
+  background: rgba(0, 0, 0, 0.06);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  line-height: 1;
+
+  &:hover {
+    color: rgba(0, 0, 0, 0.65);
+    background: rgba(0, 0, 0, 0.12);
+  }
+}
+
+.@{prefix}-icon {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.35);
+  pointer-events: none;
+}
+
+// ============ 尺寸变体 ============
+.@{prefix}-large .@{prefix}-input {
+  padding: 10px 14px;
+  font-size: 16px;
+}
+
+.@{prefix}-small .@{prefix}-input {
+  padding: 4px 8px;
+  font-size: 12px;
+}
+
+// ============ 状态变体 ============
+.@{prefix}-status-error .@{prefix}-input {
+  border-color: #ff4d4f;
+
+  &:hover {
+    border-color: #ff7875;
+  }
+}
+
+.@{prefix}-status-warning .@{prefix}-input {
+  border-color: #faad14;
+
+  &:hover {
+    border-color: #ffc53d;
+  }
+}
+
+.@{prefix}-disabled {
+  .@{prefix}-input {
+    background: @timepicker-disabled-bg;
+    border-color: @timepicker-border;
+    cursor: not-allowed;
+
+    &:hover {
+      border-color: @timepicker-border;
+    }
+  }
+
+  .@{prefix}-value {
+    color: @timepicker-disabled-color;
+  }
+
+  .@{prefix}-icon {
+    color: @timepicker-disabled-color;
+  }
+}
+
+// ============ 面板 ============
+.@{prefix}-panel {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  z-index: 1050;
+  width: auto;
+  background: @timepicker-panel-bg;
+  border-radius: 8px;
+  box-shadow: @timepicker-panel-shadow;
+  overflow: hidden;
+  animation: timepickerSlideDown 0.2s ease;
+}
+
+@keyframes timepickerSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.@{prefix}-panel-inner {
+  display: flex;
+  gap: 0;
+}
+
+// ============ 时间列 ============
+.@{prefix}-column {
+  flex: 1;
+  width: 64px;
+  max-height: 224px;
+  overflow-y: auto;
+  border-right: 1px solid #f0f0f0;
+
+  &:last-child {
+    border-right: none;
+  }
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.2);
+    }
+  }
+}
+
+.@{prefix}-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  padding: 0 8px;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.88);
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: @timepicker-cell-hover-bg;
+  }
+}
+
+.@{prefix}-cell-selected {
+  background: @timepicker-cell-selected-bg;
+  color: @timepicker-cell-selected-color;
+  font-weight: 600;
+
+  &:hover {
+    background: @timepicker-cell-selected-bg;
+  }
+}
+
+.@{prefix}-cell-disabled {
+  color: @timepicker-disabled-color;
+  cursor: not-allowed;
+
+  &:hover {
+    background: transparent;
+  }
+}
+
+// ============ 底部 ============
+.@{prefix}-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 8px 12px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.@{prefix}-now {
+  padding: 4px 12px;
+  font-size: 13px;
+  color: #6366f1;
+  background: transparent;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: rgba(99, 102, 241, 0.08);
+  }
+
+  &:active {
+    background: rgba(99, 102, 241, 0.15);
+  }
+}
+
+// ============ 暗色模式适配 ============
+[data-theme='dark'],
+[data-prefers-color-scheme='dark'],
+[data-prefers-color='dark'] {
+  .@{prefix}-input {
+    background: #1f1f1f;
+    border-color: #434343;
+    color: rgba(255, 255, 255, 0.88);
+
+    &:hover {
+      border-color: #6366f1;
+    }
+  }
+
+  .@{prefix}-open .@{prefix}-input {
+    border-color: #6366f1;
+    box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+  }
+
+  .@{prefix}-value {
+    color: rgba(255, 255, 255, 0.88);
+  }
+
+  .@{prefix}-placeholder {
+    color: rgba(255, 255, 255, 0.35);
+  }
+
+  .@{prefix}-clear {
+    color: rgba(255, 255, 255, 0.35);
+    background: rgba(255, 255, 255, 0.08);
+
+    &:hover {
+      color: rgba(255, 255, 255, 0.65);
+      background: rgba(255, 255, 255, 0.15);
+    }
+  }
+
+  .@{prefix}-icon {
+    color: rgba(255, 255, 255, 0.35);
+  }
+
+  .@{prefix}-disabled {
+    .@{prefix}-input {
+      background: rgba(255, 255, 255, 0.04);
+      border-color: #434343;
+    }
+
+    .@{prefix}-value,
+    .@{prefix}-icon {
+      color: rgba(255, 255, 255, 0.25);
+    }
+  }
+
+  .@{prefix}-panel {
+    background: #1f1f1f;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+  }
+
+  .@{prefix}-column {
+    border-right-color: #434343;
+
+    &::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.2);
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.3);
+      }
+    }
+  }
+
+  .@{prefix}-cell {
+    color: rgba(255, 255, 255, 0.88);
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+  }
+
+  .@{prefix}-cell-selected {
+    background: rgba(99, 102, 241, 0.3);
+    color: #a5b4fc;
+
+    &:hover {
+      background: rgba(99, 102, 241, 0.3);
+    }
+  }
+
+  .@{prefix}-cell-disabled {
+    color: rgba(255, 255, 255, 0.25);
+  }
+
+  .@{prefix}-footer {
+    border-top-color: #434343;
+  }
+
+  .@{prefix}-now {
+    color: #a5b4fc;
+
+    &:hover {
+      background: rgba(99, 102, 241, 0.2);
+    }
+
+    &:active {
+      background: rgba(99, 102, 241, 0.3);
+    }
+  }
+
+  .@{prefix}-status-error .@{prefix}-input {
+    border-color: #a61d24;
+
+    &:hover {
+      border-color: #cf1322;
+    }
+  }
+
+  .@{prefix}-status-warning .@{prefix}-input {
+    border-color: #ad6800;
+
+    &:hover {
+      border-color: #d48806;
+    }
+  }
+}
+
