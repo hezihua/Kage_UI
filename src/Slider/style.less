@@ -1,0 +1,287 @@
+// Slider 滑动输入条组件样式
+
+@prefix: kage-slider;
+
+// 颜色变量
+@slider-rail-bg: rgba(0, 0, 0, 0.06);
+@slider-track-bg: #6366f1;
+@slider-handle-color: #6366f1;
+@slider-handle-hover-color: #818cf8;
+@slider-disabled-bg: rgba(0, 0, 0, 0.06);
+@slider-disabled-color: rgba(0, 0, 0, 0.25);
+@slider-dot-border: #d9d9d9;
+@slider-dot-active-border: #6366f1;
+
+// ============ 基础样式 ============
+.@{prefix} {
+  position: relative;
+  padding: 12px 0;
+  cursor: pointer;
+  user-select: none;
+
+  * {
+    box-sizing: border-box;
+  }
+
+  &-vertical {
+    width: 12px;
+    height: 200px;
+    padding: 0 12px;
+  }
+}
+
+// ============ 轨道 ============
+.@{prefix}-rail {
+  position: relative;
+  width: 100%;
+  height: 4px;
+  background: @slider-rail-bg;
+  border-radius: 2px;
+  transition: background 0.2s ease;
+
+  .@{prefix}-vertical & {
+    width: 4px;
+    height: 100%;
+  }
+}
+
+// ============ 已选择轨道 ============
+.@{prefix}-track {
+  position: absolute;
+  height: 100%;
+  background: @slider-track-bg;
+  border-radius: 2px;
+  transition: all 0.2s ease;
+  pointer-events: none;
+
+  .@{prefix}-vertical & {
+    width: 100%;
+    height: auto;
+  }
+}
+
+// ============ 句柄 ============
+.@{prefix}-handle {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  margin-top: -5px;
+  margin-left: -7px;
+  background: #fff;
+  border: 2px solid @slider-handle-color;
+  border-radius: 50%;
+  cursor: grab;
+  transition: all 0.2s ease;
+  z-index: 2;
+
+  &:hover,
+  &.active {
+    border-color: @slider-handle-hover-color;
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+    transform: scale(1.2);
+  }
+
+  &.active {
+    cursor: grabbing;
+  }
+
+  &.disabled {
+    border-color: @slider-disabled-color;
+    cursor: not-allowed;
+
+    &:hover {
+      transform: none;
+      box-shadow: none;
+    }
+  }
+
+  .@{prefix}-vertical & {
+    margin-top: -7px;
+    margin-left: -5px;
+  }
+}
+
+// ============ 工具提示 ============
+.@{prefix}-tooltip {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-8px);
+  padding: 4px 8px;
+  background: rgba(0, 0, 0, 0.85);
+  color: #fff;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 4px;
+  white-space: nowrap;
+  pointer-events: none;
+  animation: tooltipFadeIn 0.2s ease;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 4px solid transparent;
+    border-top-color: rgba(0, 0, 0, 0.85);
+  }
+
+  .@{prefix}-vertical & {
+    bottom: auto;
+    left: 100%;
+    top: 50%;
+    transform: translateY(-50%) translateX(8px);
+
+    &::after {
+      top: 50%;
+      left: 0;
+      transform: translateX(-8px) translateY(-50%);
+      border: 4px solid transparent;
+      border-right-color: rgba(0, 0, 0, 0.85);
+      border-top-color: transparent;
+    }
+  }
+}
+
+@keyframes tooltipFadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-8px);
+  }
+}
+
+// ============ 刻度点 ============
+.@{prefix}-dot {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  margin-top: -2px;
+  margin-left: -4px;
+  background: #fff;
+  border: 2px solid @slider-dot-border;
+  border-radius: 50%;
+  pointer-events: none;
+  transition: border-color 0.2s ease;
+
+  .@{prefix}-vertical & {
+    margin-top: -4px;
+    margin-left: -2px;
+  }
+}
+
+// ============ 刻度标记 ============
+.@{prefix}-marks {
+  position: absolute;
+  width: 100%;
+  top: 100%;
+
+  .@{prefix}-vertical & {
+    width: auto;
+    height: 100%;
+    top: 0;
+    left: 100%;
+  }
+}
+
+.@{prefix}-mark {
+  position: absolute;
+  transform: translateX(-50%);
+  cursor: pointer;
+
+  .@{prefix}-vertical & {
+    transform: translateY(50%);
+  }
+}
+
+.@{prefix}-mark-text {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.45);
+  white-space: nowrap;
+  user-select: none;
+
+  .@{prefix}-vertical & {
+    margin-top: 0;
+    margin-left: 8px;
+  }
+}
+
+// ============ 禁用状态 ============
+.@{prefix}-disabled {
+  cursor: not-allowed;
+
+  .@{prefix}-rail {
+    background: @slider-disabled-bg;
+  }
+
+  .@{prefix}-track {
+    background: @slider-disabled-color;
+  }
+
+  .@{prefix}-handle {
+    border-color: @slider-disabled-color;
+    cursor: not-allowed;
+  }
+
+  .@{prefix}-mark-text {
+    color: @slider-disabled-color;
+  }
+}
+
+// ============ 暗色模式适配 ============
+[data-theme='dark'],
+[data-prefers-color-scheme='dark'],
+[data-prefers-color='dark'] {
+  .@{prefix}-rail {
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .@{prefix}-track {
+    background: #6366f1;
+  }
+
+  .@{prefix}-handle {
+    background: #1f1f1f;
+    border-color: #6366f1;
+
+    &:hover,
+    &.active {
+      border-color: #818cf8;
+      box-shadow: 0 0 0 4px rgba(129, 140, 248, 0.2);
+    }
+
+    &.disabled {
+      border-color: rgba(255, 255, 255, 0.25);
+    }
+  }
+
+  .@{prefix}-dot {
+    background: #1f1f1f;
+    border-color: #424242;
+  }
+
+  .@{prefix}-mark-text {
+    color: rgba(255, 255, 255, 0.45);
+  }
+
+  .@{prefix}-disabled {
+    .@{prefix}-rail {
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .@{prefix}-track {
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    .@{prefix}-mark-text {
+      color: rgba(255, 255, 255, 0.25);
+    }
+  }
+}
+
