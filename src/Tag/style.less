@@ -1,0 +1,356 @@
+// Tag 标签组件样式
+
+@prefix: kage-tag;
+
+// 基础变量
+@tag-font-size: 12px;
+@tag-line-height: 20px;
+@tag-padding: 0 7px;
+@tag-border-radius: 4px;
+@tag-default-bg: #fafafa;
+@tag-default-color: rgba(0, 0, 0, 0.88);
+@tag-default-border: #d9d9d9;
+@tag-primary-color: #1890ff;
+
+// ============ 基础样式 ============
+.@{prefix} {
+  display: inline-flex;
+  align-items: center;
+  box-sizing: border-box;
+  margin: 0 8px 0 0;
+  padding: @tag-padding;
+  color: @tag-default-color;
+  font-size: @tag-font-size;
+  line-height: @tag-line-height;
+  white-space: nowrap;
+  background: @tag-default-bg;
+  border: 1px solid @tag-default-border;
+  border-radius: @tag-border-radius;
+  cursor: default;
+  transition: all 0.2s;
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+// ============ 文本和图标 ============
+.@{prefix}-text {
+  display: inline-block;
+}
+
+.@{prefix}-icon {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 4px;
+  font-size: 12px;
+}
+
+// ============ 关闭按钮 ============
+.@{prefix}-close-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 4px;
+  padding: 0 2px;
+  color: rgba(0, 0, 0, 0.45);
+  font-size: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.2s;
+
+  &:hover {
+    color: rgba(0, 0, 0, 0.88);
+  }
+}
+
+// ============ 无边框 ============
+.@{prefix}-borderless {
+  border-color: transparent;
+  background: transparent;
+}
+
+// ============ 自定义颜色 ============
+.@{prefix}-has-color {
+  border-color: transparent;
+
+  .@{prefix}-close-icon {
+    color: rgba(255, 255, 255, 0.65);
+
+    &:hover {
+      color: #fff;
+    }
+  }
+}
+
+// ============ 预设状态颜色 ============
+.@{prefix}-success {
+  color: #52c41a;
+  background: #f6ffed;
+  border-color: #b7eb8f;
+}
+
+.@{prefix}-processing {
+  color: #1890ff;
+  background: #e6f7ff;
+  border-color: #91d5ff;
+}
+
+.@{prefix}-error {
+  color: #ff4d4f;
+  background: #fff2f0;
+  border-color: #ffccc7;
+}
+
+.@{prefix}-warning {
+  color: #faad14;
+  background: #fffbe6;
+  border-color: #ffe58f;
+}
+
+.@{prefix}-default {
+  color: @tag-default-color;
+  background: @tag-default-bg;
+  border-color: @tag-default-border;
+}
+
+// ============ 预设颜色 ============
+.@{prefix}-magenta {
+  color: #c41d7f;
+  background: #fff0f6;
+  border-color: #ffadd2;
+}
+
+.@{prefix}-red {
+  color: #cf1322;
+  background: #fff1f0;
+  border-color: #ffa39e;
+}
+
+.@{prefix}-volcano {
+  color: #d4380d;
+  background: #fff2e8;
+  border-color: #ffbb96;
+}
+
+.@{prefix}-orange {
+  color: #d46b08;
+  background: #fff7e6;
+  border-color: #ffd591;
+}
+
+.@{prefix}-gold {
+  color: #d48806;
+  background: #fffbe6;
+  border-color: #ffe58f;
+}
+
+.@{prefix}-lime {
+  color: #7cb305;
+  background: #fcffe6;
+  border-color: #eaff8f;
+}
+
+.@{prefix}-green {
+  color: #389e0d;
+  background: #f6ffed;
+  border-color: #b7eb8f;
+}
+
+.@{prefix}-cyan {
+  color: #08979c;
+  background: #e6fffb;
+  border-color: #87e8de;
+}
+
+.@{prefix}-blue {
+  color: #096dd9;
+  background: #e6f7ff;
+  border-color: #91d5ff;
+}
+
+.@{prefix}-geekblue {
+  color: #1d39c4;
+  background: #f0f5ff;
+  border-color: #adc6ff;
+}
+
+.@{prefix}-purple {
+  color: #531dab;
+  background: #f9f0ff;
+  border-color: #d3adf7;
+}
+
+.@{prefix}-pink {
+  color: #c41d7f;
+  background: #fff0f6;
+  border-color: #ffadd2;
+}
+
+// ============ 可选择标签 ============
+.@{prefix}-checkable {
+  background: transparent;
+  border-color: transparent;
+  cursor: pointer;
+
+  &:hover {
+    color: @tag-primary-color;
+  }
+
+  &-checked {
+    color: #fff;
+    background: @tag-primary-color;
+    border-color: @tag-primary-color;
+
+    &:hover {
+      color: #fff;
+      background: lighten(@tag-primary-color, 10%);
+      border-color: lighten(@tag-primary-color, 10%);
+    }
+  }
+}
+
+// ============ 暗色模式适配 ============
+[data-theme='dark'],
+[data-prefers-color-scheme='dark'],
+[data-prefers-color='dark'] {
+  .@{prefix} {
+    color: rgba(255, 255, 255, 0.85);
+    background: rgba(255, 255, 255, 0.08);
+    border-color: #434343;
+  }
+
+  .@{prefix}-close-icon {
+    color: rgba(255, 255, 255, 0.45);
+
+    &:hover {
+      color: rgba(255, 255, 255, 0.85);
+    }
+  }
+
+  .@{prefix}-borderless {
+    background: transparent;
+    border-color: transparent;
+  }
+
+  // 暗色模式下的预设状态颜色
+  .@{prefix}-success {
+    color: #95de64;
+    background: rgba(82, 196, 26, 0.15);
+    border-color: rgba(82, 196, 26, 0.35);
+  }
+
+  .@{prefix}-processing {
+    color: #69c0ff;
+    background: rgba(24, 144, 255, 0.15);
+    border-color: rgba(24, 144, 255, 0.35);
+  }
+
+  .@{prefix}-error {
+    color: #ff7875;
+    background: rgba(255, 77, 79, 0.15);
+    border-color: rgba(255, 77, 79, 0.35);
+  }
+
+  .@{prefix}-warning {
+    color: #ffc53d;
+    background: rgba(250, 173, 20, 0.15);
+    border-color: rgba(250, 173, 20, 0.35);
+  }
+
+  .@{prefix}-default {
+    color: rgba(255, 255, 255, 0.85);
+    background: rgba(255, 255, 255, 0.08);
+    border-color: #434343;
+  }
+
+  // 暗色模式下的预设颜色
+  .@{prefix}-magenta {
+    color: #f759ab;
+    background: rgba(196, 29, 127, 0.15);
+    border-color: rgba(196, 29, 127, 0.35);
+  }
+
+  .@{prefix}-red {
+    color: #ff7875;
+    background: rgba(207, 19, 34, 0.15);
+    border-color: rgba(207, 19, 34, 0.35);
+  }
+
+  .@{prefix}-volcano {
+    color: #ff9c6e;
+    background: rgba(212, 56, 13, 0.15);
+    border-color: rgba(212, 56, 13, 0.35);
+  }
+
+  .@{prefix}-orange {
+    color: #ffc069;
+    background: rgba(212, 107, 8, 0.15);
+    border-color: rgba(212, 107, 8, 0.35);
+  }
+
+  .@{prefix}-gold {
+    color: #ffd666;
+    background: rgba(212, 136, 6, 0.15);
+    border-color: rgba(212, 136, 6, 0.35);
+  }
+
+  .@{prefix}-lime {
+    color: #d3f261;
+    background: rgba(124, 179, 5, 0.15);
+    border-color: rgba(124, 179, 5, 0.35);
+  }
+
+  .@{prefix}-green {
+    color: #95de64;
+    background: rgba(56, 158, 13, 0.15);
+    border-color: rgba(56, 158, 13, 0.35);
+  }
+
+  .@{prefix}-cyan {
+    color: #5cdbd3;
+    background: rgba(8, 151, 156, 0.15);
+    border-color: rgba(8, 151, 156, 0.35);
+  }
+
+  .@{prefix}-blue {
+    color: #69c0ff;
+    background: rgba(9, 109, 217, 0.15);
+    border-color: rgba(9, 109, 217, 0.35);
+  }
+
+  .@{prefix}-geekblue {
+    color: #85a5ff;
+    background: rgba(29, 57, 196, 0.15);
+    border-color: rgba(29, 57, 196, 0.35);
+  }
+
+  .@{prefix}-purple {
+    color: #b37feb;
+    background: rgba(83, 29, 171, 0.15);
+    border-color: rgba(83, 29, 171, 0.35);
+  }
+
+  .@{prefix}-pink {
+    color: #f759ab;
+    background: rgba(196, 29, 127, 0.15);
+    border-color: rgba(196, 29, 127, 0.35);
+  }
+
+  // 暗色模式下的可选择标签
+  .@{prefix}-checkable {
+    background: transparent;
+    border-color: transparent;
+
+    &:hover {
+      color: @tag-primary-color;
+    }
+
+    &-checked {
+      color: #fff;
+      background: @tag-primary-color;
+      border-color: @tag-primary-color;
+    }
+  }
+}
+

@@ -1,0 +1,237 @@
+// Tooltip 文字提示组件样式
+
+@prefix: kage-tooltip;
+
+// 颜色变量
+@tooltip-bg: rgba(0, 0, 0, 0.85);
+@tooltip-color: #fff;
+@tooltip-max-width: 250px;
+@tooltip-arrow-size: 8px;
+@tooltip-border-radius: 6px;
+@tooltip-padding: 6px 8px;
+
+// 预设颜色
+@tooltip-primary: #1890ff;
+@tooltip-success: #52c41a;
+@tooltip-warning: #faad14;
+@tooltip-error: #ff4d4f;
+
+// ============ 主容器 ============
+.@{prefix} {
+  position: absolute;
+  z-index: 1070;
+  display: block;
+  max-width: @tooltip-max-width;
+  word-wrap: break-word;
+  pointer-events: none;
+  transition: opacity 0.2s, visibility 0.2s;
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+// ============ 内容区域 ============
+.@{prefix}-inner {
+  min-width: 32px;
+  min-height: 32px;
+  padding: @tooltip-padding;
+  color: @tooltip-color;
+  text-align: left;
+  text-decoration: none;
+  word-wrap: break-word;
+  background-color: @tooltip-bg;
+  border-radius: @tooltip-border-radius;
+  box-shadow: 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 3px 6px -4px rgba(0, 0, 0, 0.12),
+    0 9px 28px 8px rgba(0, 0, 0, 0.05);
+  font-size: 14px;
+  line-height: 1.5715;
+}
+
+// ============ 箭头 ============
+.@{prefix}-arrow {
+  position: absolute;
+  z-index: 1;
+  display: block;
+  pointer-events: none;
+  width: 16px;
+  height: 16px;
+  overflow: hidden;
+
+  &::before {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: @tooltip-arrow-size;
+    height: @tooltip-arrow-size;
+    background: var(--arrow-color, @tooltip-bg);
+    transform: translateX(-50%) translateY(50%) rotate(45deg);
+    box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.07);
+    content: '';
+    border-radius: 0 0 2px 0;
+  }
+}
+
+// ============ 无箭头 ============
+.@{prefix}-no-arrow {
+  .@{prefix}-arrow {
+    display: none;
+  }
+}
+
+// ============ 位置 - 上方 ============
+.@{prefix}-placement-top,
+.@{prefix}-placement-topLeft,
+.@{prefix}-placement-topRight {
+  .@{prefix}-arrow {
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+.@{prefix}-placement-topLeft .@{prefix}-arrow {
+  left: 16px;
+  transform: none;
+}
+
+.@{prefix}-placement-topRight .@{prefix}-arrow {
+  right: 16px;
+  left: auto;
+  transform: none;
+}
+
+// ============ 位置 - 下方 ============
+.@{prefix}-placement-bottom,
+.@{prefix}-placement-bottomLeft,
+.@{prefix}-placement-bottomRight {
+  .@{prefix}-arrow {
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%) rotate(180deg);
+  }
+}
+
+.@{prefix}-placement-bottomLeft .@{prefix}-arrow {
+  left: 16px;
+  transform: rotate(180deg);
+}
+
+.@{prefix}-placement-bottomRight .@{prefix}-arrow {
+  right: 16px;
+  left: auto;
+  transform: rotate(180deg);
+}
+
+// ============ 位置 - 左侧 ============
+.@{prefix}-placement-left,
+.@{prefix}-placement-leftTop,
+.@{prefix}-placement-leftBottom {
+  .@{prefix}-arrow {
+    right: -8px;
+    top: 50%;
+    transform: translateY(-50%) rotate(90deg);
+  }
+}
+
+.@{prefix}-placement-leftTop .@{prefix}-arrow {
+  top: 8px;
+  transform: rotate(90deg);
+}
+
+.@{prefix}-placement-leftBottom .@{prefix}-arrow {
+  bottom: 8px;
+  top: auto;
+  transform: rotate(90deg);
+}
+
+// ============ 位置 - 右侧 ============
+.@{prefix}-placement-right,
+.@{prefix}-placement-rightTop,
+.@{prefix}-placement-rightBottom {
+  .@{prefix}-arrow {
+    left: -8px;
+    top: 50%;
+    transform: translateY(-50%) rotate(-90deg);
+  }
+}
+
+.@{prefix}-placement-rightTop .@{prefix}-arrow {
+  top: 8px;
+  transform: rotate(-90deg);
+}
+
+.@{prefix}-placement-rightBottom .@{prefix}-arrow {
+  bottom: 8px;
+  top: auto;
+  transform: rotate(-90deg);
+}
+
+// ============ 预设颜色 ============
+.@{prefix}-default {
+  .@{prefix}-inner {
+    background-color: @tooltip-bg;
+  }
+  .@{prefix}-arrow::before {
+    background: @tooltip-bg;
+  }
+}
+
+.@{prefix}-primary {
+  .@{prefix}-inner {
+    background-color: @tooltip-primary;
+  }
+  .@{prefix}-arrow::before {
+    background: @tooltip-primary;
+  }
+}
+
+.@{prefix}-success {
+  .@{prefix}-inner {
+    background-color: @tooltip-success;
+  }
+  .@{prefix}-arrow::before {
+    background: @tooltip-success;
+  }
+}
+
+.@{prefix}-warning {
+  .@{prefix}-inner {
+    background-color: @tooltip-warning;
+  }
+  .@{prefix}-arrow::before {
+    background: @tooltip-warning;
+  }
+}
+
+.@{prefix}-error {
+  .@{prefix}-inner {
+    background-color: @tooltip-error;
+  }
+  .@{prefix}-arrow::before {
+    background: @tooltip-error;
+  }
+}
+
+// ============ 自定义颜色 ============
+.@{prefix}-custom-color {
+  .@{prefix}-arrow::before {
+    background: var(--arrow-color, @tooltip-bg);
+  }
+}
+
+// ============ 暗色模式适配 ============
+[data-theme='dark'],
+[data-prefers-color-scheme='dark'],
+[data-prefers-color='dark'] {
+  .@{prefix}-default {
+    .@{prefix}-inner {
+      background-color: #434343;
+      color: rgba(255, 255, 255, 0.85);
+    }
+    .@{prefix}-arrow::before {
+      background: #434343;
+    }
+  }
+}
+

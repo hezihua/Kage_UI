@@ -1,0 +1,265 @@
+// Timeline 时间轴组件样式
+
+@prefix: kage-timeline;
+
+// 颜色变量
+@timeline-color: rgba(0, 0, 0, 0.88);
+@timeline-color-secondary: rgba(0, 0, 0, 0.45);
+@timeline-tail-color: #e8e8e8;
+@timeline-dot-size: 10px;
+@timeline-dot-border-width: 2px;
+@timeline-dot-blue: #1890ff;
+@timeline-dot-green: #52c41a;
+@timeline-dot-red: #ff4d4f;
+@timeline-dot-gray: rgba(0, 0, 0, 0.25);
+
+// ============ 容器 ============
+.@{prefix} {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 14px;
+  line-height: 1.5715;
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+// ============ 时间轴节点 ============
+.@{prefix}-item {
+  position: relative;
+  margin: 0;
+  padding-bottom: 20px;
+  list-style: none;
+}
+
+// ============ 节点连接线 ============
+.@{prefix}-item-tail {
+  position: absolute;
+  top: 10px;
+  left: 4px;
+  height: calc(100% - 10px);
+  border-left: 2px solid @timeline-tail-color;
+}
+
+.@{prefix}-item-last > .@{prefix}-item-tail {
+  display: none;
+}
+
+// ============ 节点圆点 ============
+.@{prefix}-item-head {
+  position: absolute;
+  width: @timeline-dot-size;
+  height: @timeline-dot-size;
+  background-color: #fff;
+  border: @timeline-dot-border-width solid transparent;
+  border-radius: 50%;
+
+  &-blue {
+    border-color: @timeline-dot-blue;
+    color: @timeline-dot-blue;
+  }
+
+  &-green {
+    border-color: @timeline-dot-green;
+    color: @timeline-dot-green;
+  }
+
+  &-red {
+    border-color: @timeline-dot-red;
+    color: @timeline-dot-red;
+  }
+
+  &-gray {
+    border-color: @timeline-dot-gray;
+    color: @timeline-dot-gray;
+  }
+}
+
+// ============ 自定义圆点 ============
+.@{prefix}-item-head-custom {
+  width: auto;
+  height: auto;
+  margin-top: 0;
+  padding: 3px 1px;
+  line-height: 1;
+  text-align: center;
+  border: 0;
+  border-radius: 0;
+  transform: translate(-50%, -50%);
+  top: 5px;
+  left: 5px;
+  background: transparent;
+}
+
+// ============ 节点内容 ============
+.@{prefix}-item-content {
+  position: relative;
+  top: -6px;
+  margin: 0 0 0 26px;
+  word-break: break-word;
+  color: @timeline-color;
+}
+
+// ============ 节点标签 ============
+.@{prefix}-item-label {
+  position: absolute;
+  top: -6px;
+  width: calc(50% - 12px);
+  text-align: right;
+  color: @timeline-color-secondary;
+}
+
+// ============ Pending 节点 ============
+.@{prefix}-item-pending {
+  .@{prefix}-item-head {
+    font-size: 12px;
+    background-color: transparent;
+  }
+
+  .@{prefix}-item-tail {
+    display: none;
+  }
+}
+
+.@{prefix}-item-pending-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border: 2px solid @timeline-dot-blue;
+  border-radius: 50%;
+  animation: kage-timeline-pending 1.2s ease-in-out infinite;
+}
+
+@keyframes kage-timeline-pending {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+// ============ 左侧模式 (默认) ============
+.@{prefix}-left {
+  .@{prefix}-item-head {
+    left: 0;
+  }
+
+  .@{prefix}-item-content {
+    left: 0;
+  }
+
+  .@{prefix}-item-label {
+    display: none;
+  }
+}
+
+// ============ 右侧模式 ============
+.@{prefix}-right {
+  .@{prefix}-item-head {
+    right: 0;
+    left: auto;
+  }
+
+  .@{prefix}-item-tail {
+    right: 4px;
+    left: auto;
+    border-left: 0;
+    border-right: 2px solid @timeline-tail-color;
+  }
+
+  .@{prefix}-item-content {
+    margin: 0 26px 0 0;
+    text-align: right;
+  }
+
+  .@{prefix}-item-label {
+    display: none;
+  }
+}
+
+// ============ 交替模式 ============
+.@{prefix}-alternate {
+  .@{prefix}-item-head {
+    left: 50%;
+    margin-left: -5px;
+  }
+
+  .@{prefix}-item-tail {
+    left: 50%;
+    margin-left: -1px;
+  }
+
+  .@{prefix}-item-head-custom {
+    left: 50%;
+    margin-left: 0;
+  }
+
+  // 左侧节点
+  .@{prefix}-item-left {
+    .@{prefix}-item-content {
+      left: calc(50% - 4px);
+      width: calc(50% - 14px);
+      text-align: left;
+    }
+
+    .@{prefix}-item-label {
+      left: 0;
+      width: calc(50% - 14px);
+      text-align: right;
+    }
+  }
+
+  // 右侧节点
+  .@{prefix}-item-right {
+    .@{prefix}-item-content {
+      width: calc(50% - 14px);
+      margin: 0;
+      text-align: right;
+    }
+
+    .@{prefix}-item-label {
+      left: calc(50% + 14px);
+      width: calc(50% - 14px);
+      text-align: left;
+    }
+  }
+}
+
+// ============ 暗色模式适配 ============
+[data-theme='dark'],
+[data-prefers-color-scheme='dark'],
+[data-prefers-color='dark'] {
+  .@{prefix}-item-content {
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .@{prefix}-item-label {
+    color: rgba(255, 255, 255, 0.45);
+  }
+
+  .@{prefix}-item-tail {
+    border-color: #434343;
+  }
+
+  .@{prefix}-item-head {
+    background-color: #141414;
+  }
+
+  .@{prefix}-item-head-gray {
+    border-color: rgba(255, 255, 255, 0.25);
+    color: rgba(255, 255, 255, 0.25);
+  }
+
+  .@{prefix}-item-head-custom {
+    background: transparent;
+  }
+
+  .@{prefix}-right .@{prefix}-item-tail {
+    border-right-color: #434343;
+  }
+}
+

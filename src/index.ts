@@ -155,3 +155,27 @@ export type {
   FilterItem,
 } from './Table';
 
+export { default as Tag, CheckableTag } from './Tag';
+export type {
+  TagProps,
+  CheckableTagProps,
+  TagPresetColor,
+  TagPresetStatus,
+} from './Tag';
+
+export { default as Timeline, TimelineItem } from './Timeline';
+export type {
+  TimelineProps,
+  TimelineItemProps,
+  TimelineItemColor,
+  TimelineMode,
+} from './Timeline';
+
+export { default as Tooltip } from './Tooltip';
+export type {
+  TooltipProps,
+  TooltipPlacement,
+  TooltipTrigger,
+  TooltipColor,
+} from './Tooltip';
+
