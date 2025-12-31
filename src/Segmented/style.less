@@ -1,0 +1,167 @@
+@prefix: kage-segmented;
+
+// 颜色变量
+@primary-color: #1890ff;
+@text-color: rgba(0, 0, 0, 0.88);
+@text-color-secondary: rgba(0, 0, 0, 0.65);
+@disabled-color: rgba(0, 0, 0, 0.25);
+@border-color-base: #d9d9d9;
+@component-background: #ffffff;
+@bg-color: rgba(0, 0, 0, 0.04);
+
+// 深色模式变量
+@dark-bg: #141414;
+@dark-border-color: #424242;
+@dark-bg-color: rgba(255, 255, 255, 0.04);
+
+.@{prefix} {
+  display: inline-flex;
+  padding: 2px;
+  background-color: @bg-color;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: all 0.3s;
+
+  &-block {
+    display: flex;
+    width: 100%;
+  }
+
+  &-disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  // ========== 选项组 ==========
+  &-group {
+    position: relative;
+    display: flex;
+    width: 100%;
+  }
+
+  // ========== 滑动背景 ==========
+  &-thumb {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: @component-background;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  // ========== 选项 ==========
+  &-item {
+    position: relative;
+    flex: 1;
+    min-width: 0;
+    padding: 5px 11px;
+    color: @text-color;
+    text-align: center;
+    cursor: pointer;
+    user-select: none;
+    transition: color 0.3s;
+    z-index: 2;
+
+    &:hover {
+      color: @text-color;
+    }
+
+    &-selected {
+      color: @text-color;
+      font-weight: 500;
+    }
+
+    &-disabled {
+      color: @disabled-color;
+      cursor: not-allowed;
+
+      &:hover {
+        color: @disabled-color;
+      }
+    }
+  }
+
+  &-item-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    white-space: nowrap;
+  }
+
+  &-item-icon {
+    display: inline-flex;
+    align-items: center;
+    font-size: 16px;
+  }
+
+  // ========== 尺寸变体 ==========
+  &-large {
+    font-size: 16px;
+
+    .@{prefix}-item {
+      padding: 7px 15px;
+      line-height: 24px;
+    }
+
+    .@{prefix}-item-icon {
+      font-size: 18px;
+    }
+  }
+
+  &-small {
+    font-size: 12px;
+
+    .@{prefix}-item {
+      padding: 3px 7px;
+      line-height: 16px;
+    }
+
+    .@{prefix}-item-icon {
+      font-size: 14px;
+    }
+  }
+}
+
+// ========== 深色模式 ==========
+[data-theme='dark'],
+[data-prefers-color-scheme='dark'],
+[data-prefers-color='dark'] {
+  .@{prefix} {
+    background-color: rgba(255, 255, 255, 0.08);
+
+    &-thumb {
+      background-color: #434343;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+    }
+
+    &-item {
+      color: rgba(255, 255, 255, 0.65);
+
+      &:hover {
+        color: rgba(255, 255, 255, 0.85);
+      }
+
+      &-selected {
+        color: rgba(0, 0, 0, 0.88);
+        font-weight: 600;
+      }
+
+      &-disabled {
+        color: rgba(255, 255, 255, 0.25);
+
+        &:hover {
+          color: rgba(255, 255, 255, 0.25);
+        }
+      }
+    }
+
+    &-item-label {
+      color: inherit;
+    }
+  }
+}
+

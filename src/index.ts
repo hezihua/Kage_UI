@@ -133,3 +133,12 @@ export type { ImageProps } from './Image';
 export { default as Popover } from './Popover';
 export type { PopoverProps, PopoverPlacement, PopoverTrigger } from './Popover';
 
+export { default as QRCode } from './QRCode';
+export type { QRCodeProps } from './QRCode';
+
+export { default as Segmented } from './Segmented';
+export type { SegmentedProps, SegmentedOption, SegmentedValue } from './Segmented';
+
+export { default as Statistic } from './Statistic';
+export type { StatisticProps } from './Statistic';
+

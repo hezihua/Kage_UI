@@ -1,0 +1,94 @@
+@prefix: kage-statistic;
+
+// 颜色变量
+@text-color: rgba(0, 0, 0, 0.88);
+@text-color-secondary: rgba(0, 0, 0, 0.65);
+@primary-color: #1890ff;
+
+.@{prefix} {
+  display: flex;
+  flex-direction: column;
+
+  &-title {
+    margin-bottom: 4px;
+    color: @text-color-secondary;
+    font-size: 14px;
+    line-height: 22px;
+  }
+
+  &-skeleton {
+    padding: 8px 0;
+  }
+
+  &-skeleton-line {
+    width: 120px;
+    height: 24px;
+    background: linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.06) 25%,
+      rgba(0, 0, 0, 0.15) 37%,
+      rgba(0, 0, 0, 0.06) 63%
+    );
+    background-size: 400% 100%;
+    border-radius: 4px;
+    animation: skeleton-loading 1.4s ease infinite;
+  }
+
+  &-content {
+    display: flex;
+    align-items: baseline;
+    font-size: 24px;
+    line-height: 32px;
+    color: @text-color;
+    font-variant-numeric: tabular-nums;
+  }
+
+  &-content-prefix {
+    margin-right: 4px;
+    font-size: 14px;
+  }
+
+  &-content-value {
+    font-weight: 600;
+  }
+
+  &-content-suffix {
+    margin-left: 4px;
+    font-size: 14px;
+  }
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
+}
+
+// ========== 深色模式 ==========
+[data-theme='dark'],
+[data-prefers-color-scheme='dark'],
+[data-prefers-color='dark'] {
+  .@{prefix} {
+    &-title {
+      color: rgba(255, 255, 255, 0.65);
+    }
+
+    &-content {
+      color: rgba(255, 255, 255, 0.88);
+    }
+
+    &-skeleton-line {
+      background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.06) 25%,
+        rgba(255, 255, 255, 0.15) 37%,
+        rgba(255, 255, 255, 0.06) 63%
+      );
+      background-size: 400% 100%;
+    }
+  }
+}
+
