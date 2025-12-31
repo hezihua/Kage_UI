@@ -1,0 +1,663 @@
+// Table 表格组件样式
+
+@prefix: kage-table;
+
+// 颜色变量
+@table-bg: #fff;
+@table-header-bg: #fafafa;
+@table-header-color: rgba(0, 0, 0, 0.85);
+@table-row-hover-bg: #fafafa;
+@table-row-selected-bg: #e6f7ff;
+@table-row-striped-bg: #fafafa;
+@table-border-color: #f0f0f0;
+@table-cell-color: rgba(0, 0, 0, 0.85);
+@table-cell-color-secondary: rgba(0, 0, 0, 0.45);
+@table-expand-icon-bg: #fff;
+@table-primary-color: #1890ff;
+@table-sort-active-color: #1890ff;
+@table-filter-active-color: #1890ff;
+
+// 尺寸变量
+@table-padding-horizontal-default: 16px;
+@table-padding-vertical-default: 16px;
+@table-padding-horizontal-middle: 12px;
+@table-padding-vertical-middle: 12px;
+@table-padding-horizontal-small: 8px;
+@table-padding-vertical-small: 8px;
+
+// ============ 容器 ============
+.@{prefix} {
+  position: relative;
+  font-size: 14px;
+  line-height: 1.5715;
+  color: @table-cell-color;
+  background: @table-bg;
+  border-radius: 4px;
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+.@{prefix}-container {
+  position: relative;
+}
+
+// ============ 表格主体 ============
+.@{prefix} table {
+  width: 100%;
+  table-layout: auto;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+// ============ 表头 ============
+.@{prefix}-thead {
+  > tr {
+    > th {
+      position: relative;
+      padding: @table-padding-vertical-default @table-padding-horizontal-default;
+      color: @table-header-color;
+      font-weight: 500;
+      text-align: left;
+      background: @table-header-bg;
+      border-bottom: 1px solid @table-border-color;
+      transition: background 0.3s ease;
+
+      &:first-child {
+        border-top-left-radius: 4px;
+      }
+
+      &:last-child {
+        border-top-right-radius: 4px;
+      }
+    }
+  }
+}
+
+// ============ 表体 ============
+.@{prefix}-tbody {
+  > tr {
+    > td {
+      padding: @table-padding-vertical-default @table-padding-horizontal-default;
+      border-bottom: 1px solid @table-border-color;
+      transition: background 0.3s;
+    }
+
+    &:last-child > td {
+      border-bottom: none;
+    }
+  }
+}
+
+// ============ 单元格通用 ============
+.@{prefix}-cell {
+  &-left {
+    text-align: left;
+  }
+
+  &-center {
+    text-align: center;
+  }
+
+  &-right {
+    text-align: right;
+  }
+
+  &-ellipsis {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    word-break: keep-all;
+
+    .@{prefix}-cell-content {
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+
+  &-fix-left,
+  &-fix-right {
+    position: sticky;
+    z-index: 2;
+    background: inherit;
+  }
+
+  &-fix-left {
+    left: 0;
+  }
+
+  &-fix-right {
+    right: 0;
+  }
+}
+
+// ============ 行状态 ============
+.@{prefix}-hoverable {
+  .@{prefix}-tbody > tr:hover > td {
+    background: @table-row-hover-bg;
+  }
+}
+
+.@{prefix}-row {
+  &-selected {
+    > td {
+      background: @table-row-selected-bg !important;
+    }
+  }
+
+  &-striped {
+    > td {
+      background: @table-row-striped-bg;
+    }
+  }
+
+  &-expanded {
+    > td {
+      background: @table-row-hover-bg;
+    }
+  }
+}
+
+// ============ 展开行 ============
+.@{prefix}-expanded-row {
+  > td {
+    background: #fafafa;
+  }
+
+  .@{prefix}-expanded-row-cell {
+    padding: 16px 48px;
+  }
+}
+
+.@{prefix}-expand-icon-cell {
+  text-align: center;
+  width: 48px;
+}
+
+.@{prefix}-row-expand-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  color: @table-primary-color;
+  text-align: center;
+  background: @table-expand-icon-bg;
+  border: 1px solid @table-border-color;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s;
+  user-select: none;
+
+  &:hover {
+    color: @table-primary-color;
+    border-color: @table-primary-color;
+  }
+
+  &-expanded {
+    transform: rotate(0);
+  }
+
+  &-collapsed {
+    transform: rotate(0);
+  }
+}
+
+// ============ 选择列 ============
+.@{prefix}-selection-column {
+  text-align: center;
+  width: 48px;
+}
+
+// ============ 排序 ============
+.@{prefix}-column-has-sorters {
+  cursor: pointer;
+  user-select: none;
+
+  &:hover {
+    background: darken(@table-header-bg, 2%);
+  }
+}
+
+.@{prefix}-column-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.@{prefix}-column-sorter {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 4px;
+  color: @table-cell-color-secondary;
+  font-size: 10px;
+  line-height: 1;
+
+  &-up,
+  &-down {
+    display: block;
+    height: 10px;
+    color: inherit;
+    transition: color 0.3s;
+
+    &.active {
+      color: @table-sort-active-color;
+    }
+  }
+
+  &-up {
+    margin-bottom: -2px;
+  }
+}
+
+// ============ 筛选 ============
+.@{prefix}-filter-trigger-container {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.@{prefix}-filter-trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  margin-left: 4px;
+  color: @table-cell-color-secondary;
+  font-size: 10px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.3s;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.04);
+    color: @table-cell-color;
+  }
+
+  &.active {
+    color: @table-filter-active-color;
+  }
+}
+
+.@{prefix}-filter-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  z-index: 1050;
+  min-width: 120px;
+  padding: 8px;
+  background: #fff;
+  border-radius: 4px;
+  box-shadow: 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 6px 16px 0 rgba(0, 0, 0, 0.08),
+    0 9px 28px 8px rgba(0, 0, 0, 0.05);
+}
+
+.@{prefix}-filter-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.3s;
+
+  &:hover {
+    background: #f5f5f5;
+  }
+
+  input {
+    cursor: pointer;
+  }
+}
+
+.@{prefix}-filter-dropdown-btns {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 12px 0;
+  border-top: 1px solid @table-border-color;
+  margin-top: 8px;
+}
+
+.@{prefix}-filter-dropdown-link {
+  padding: 4px 8px;
+  color: @table-primary-color;
+  font-size: 12px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.3s;
+
+  &:hover {
+    color: darken(@table-primary-color, 10%);
+  }
+
+  &.confirm {
+    background: @table-primary-color;
+    color: #fff;
+    border-radius: 4px;
+
+    &:hover {
+      background: darken(@table-primary-color, 10%);
+    }
+  }
+}
+
+// ============ 加载状态 ============
+.@{prefix}-loading-wrapper {
+  position: relative;
+
+  .@{prefix}-container {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+}
+
+.@{prefix}-loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.5);
+  gap: 8px;
+}
+
+.@{prefix}-loading-spinner {
+  width: 24px;
+  height: 24px;
+  border: 2px solid @table-border-color;
+  border-top-color: @table-primary-color;
+  border-radius: 50%;
+  animation: kage-table-spin 1s linear infinite;
+}
+
+@keyframes kage-table-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+// ============ 空状态 ============
+.@{prefix}-placeholder {
+  .@{prefix}-cell {
+    text-align: center;
+    padding: 32px 16px;
+  }
+}
+
+// ============ 分页 ============
+.@{prefix}-pagination {
+  display: flex;
+  padding: 16px 0;
+
+  &-left {
+    justify-content: flex-start;
+  }
+
+  &-center {
+    justify-content: center;
+  }
+
+  &-right {
+    justify-content: flex-end;
+  }
+
+  &[data-position='top'] {
+    padding-top: 0;
+    padding-bottom: 16px;
+  }
+}
+
+// ============ 标题和底部 ============
+.@{prefix}-title,
+.@{prefix}-footer {
+  padding: 16px;
+  background: @table-header-bg;
+}
+
+.@{prefix}-title {
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  border-bottom: 1px solid @table-border-color;
+}
+
+.@{prefix}-footer {
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  border-top: 1px solid @table-border-color;
+}
+
+// ============ 摘要 ============
+.@{prefix}-summary {
+  background: @table-header-bg;
+
+  > tr > td {
+    padding: @table-padding-vertical-default @table-padding-horizontal-default;
+    border-bottom: 1px solid @table-border-color;
+    font-weight: 500;
+  }
+}
+
+// ============ 边框样式 ============
+.@{prefix}-bordered {
+  border: 1px solid @table-border-color;
+  border-radius: 4px;
+
+  .@{prefix}-container {
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  table {
+    border-collapse: collapse;
+  }
+
+  .@{prefix}-thead > tr > th,
+  .@{prefix}-tbody > tr > td,
+  .@{prefix}-summary > tr > td {
+    border-right: 1px solid @table-border-color;
+
+    &:last-child {
+      border-right: none;
+    }
+  }
+
+  .@{prefix}-thead > tr > th {
+    border-bottom: 1px solid @table-border-color;
+  }
+
+  .@{prefix}-tbody > tr:last-child > td {
+    border-bottom: none;
+  }
+
+  .@{prefix}-title {
+    border: none;
+    border-bottom: 1px solid @table-border-color;
+    border-radius: 0;
+  }
+
+  .@{prefix}-footer {
+    border: none;
+    border-top: 1px solid @table-border-color;
+    border-radius: 0;
+  }
+}
+
+// ============ 滚动 ============
+.@{prefix}-scroll {
+  .@{prefix}-container {
+    overflow: auto;
+  }
+}
+
+// ============ 粘性头部 ============
+.@{prefix}-sticky {
+  .@{prefix}-thead > tr > th {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+  }
+}
+
+// ============ 尺寸变体 ============
+.@{prefix}-middle {
+  .@{prefix}-thead > tr > th,
+  .@{prefix}-tbody > tr > td,
+  .@{prefix}-summary > tr > td {
+    padding: @table-padding-vertical-middle @table-padding-horizontal-middle;
+  }
+
+  .@{prefix}-title,
+  .@{prefix}-footer {
+    padding: 12px;
+  }
+}
+
+.@{prefix}-small {
+  font-size: 12px;
+
+  .@{prefix}-thead > tr > th,
+  .@{prefix}-tbody > tr > td,
+  .@{prefix}-summary > tr > td {
+    padding: @table-padding-vertical-small @table-padding-horizontal-small;
+  }
+
+  .@{prefix}-title,
+  .@{prefix}-footer {
+    padding: 8px;
+  }
+
+  .@{prefix}-pagination {
+    padding: 8px 0;
+  }
+}
+
+// ============ 暗色模式适配 ============
+[data-theme='dark'],
+[data-prefers-color-scheme='dark'],
+[data-prefers-color='dark'] {
+  .@{prefix} {
+    color: rgba(255, 255, 255, 0.85);
+    background: #141414;
+  }
+
+  .@{prefix}-thead > tr > th {
+    color: rgba(255, 255, 255, 0.85);
+    background: #1f1f1f;
+    border-bottom-color: #434343;
+  }
+
+  .@{prefix}-tbody > tr > td {
+    border-bottom-color: #434343;
+  }
+
+  .@{prefix}-hoverable .@{prefix}-tbody > tr:hover > td {
+    background: #262626;
+  }
+
+  .@{prefix}-row-selected > td {
+    background: #111d2c !important;
+  }
+
+  .@{prefix}-row-striped > td {
+    background: #1f1f1f;
+  }
+
+  .@{prefix}-expanded-row > td,
+  .@{prefix}-row-expanded > td {
+    background: #1f1f1f;
+  }
+
+  .@{prefix}-row-expand-icon {
+    background: #1f1f1f;
+    border-color: #434343;
+  }
+
+  .@{prefix}-column-has-sorters:hover {
+    background: #262626;
+  }
+
+  .@{prefix}-column-sorter {
+    color: rgba(255, 255, 255, 0.45);
+  }
+
+  .@{prefix}-filter-trigger {
+    color: rgba(255, 255, 255, 0.45);
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: rgba(255, 255, 255, 0.85);
+    }
+  }
+
+  .@{prefix}-filter-dropdown {
+    background: #1f1f1f;
+    box-shadow: 0 3px 6px -4px rgba(0, 0, 0, 0.48), 0 6px 16px 0 rgba(0, 0, 0, 0.32),
+      0 9px 28px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .@{prefix}-filter-item:hover {
+    background: #262626;
+  }
+
+  .@{prefix}-filter-dropdown-btns {
+    border-top-color: #434343;
+  }
+
+  .@{prefix}-loading {
+    background: rgba(20, 20, 20, 0.5);
+  }
+
+  .@{prefix}-loading-spinner {
+    border-color: #434343;
+    border-top-color: @table-primary-color;
+  }
+
+  .@{prefix}-title,
+  .@{prefix}-footer {
+    background: #1f1f1f;
+  }
+
+  .@{prefix}-summary {
+    background: #1f1f1f;
+
+    > tr > td {
+      border-bottom-color: #434343;
+    }
+  }
+
+  .@{prefix}-bordered {
+    border-color: #434343;
+
+    .@{prefix}-thead > tr > th,
+    .@{prefix}-tbody > tr > td,
+    .@{prefix}-summary > tr > td {
+      border-right-color: #434343;
+    }
+
+    .@{prefix}-thead > tr > th {
+      border-bottom-color: #434343;
+    }
+
+    .@{prefix}-title {
+      border-bottom-color: #434343;
+    }
+
+    .@{prefix}-footer {
+      border-top-color: #434343;
+    }
+  }
+}
+

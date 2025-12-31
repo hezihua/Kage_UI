@@ -142,3 +142,16 @@ export type { SegmentedProps, SegmentedOption, SegmentedValue } from './Segmente
 export { default as Statistic } from './Statistic';
 export type { StatisticProps } from './Statistic';
 
+export { default as Table } from './Table';
+export type {
+  TableProps,
+  ColumnType,
+  TableColumnType,
+  RowSelection,
+  TablePagination,
+  SortOrder,
+  AlignType,
+  TableSize,
+  FilterItem,
+} from './Table';
+
