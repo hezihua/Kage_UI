@@ -1,0 +1,266 @@
+// FloatButton 悬浮按钮组件样式
+
+@prefix: kage-float-btn;
+
+// 颜色变量
+@float-btn-default-bg: #fff;
+@float-btn-default-color: rgba(0, 0, 0, 0.85);
+@float-btn-primary-bg: #1890ff;
+@float-btn-primary-color: #fff;
+@float-btn-danger-bg: #ff4d4f;
+@float-btn-danger-color: #fff;
+@float-btn-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+
+// ============ 主容器 ============
+.@{prefix}-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+// ============ 悬浮按钮 ============
+.@{prefix} {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  padding: 0;
+  color: @float-btn-default-color;
+  font-size: 20px;
+  line-height: 1;
+  text-align: center;
+  background-color: @float-btn-default-bg;
+  border: none;
+  border-radius: 50%;
+  box-shadow: @float-btn-shadow;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  user-select: none;
+
+  &:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  &:active {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+  }
+
+  &:disabled {
+    color: rgba(0, 0, 0, 0.25);
+    background-color: #f5f5f5;
+    cursor: not-allowed;
+    box-shadow: none;
+
+    &:hover {
+      box-shadow: none;
+    }
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+// ============ 类型 ============
+.@{prefix}-primary {
+  color: @float-btn-primary-color;
+  background-color: @float-btn-primary-bg;
+
+  &:hover {
+    background-color: #40a9ff;
+  }
+
+  &:active {
+    background-color: #0958d9;
+  }
+
+  &:disabled {
+    color: rgba(0, 0, 0, 0.25);
+    background-color: #f5f5f5;
+  }
+}
+
+.@{prefix}-danger {
+  color: @float-btn-danger-color;
+  background-color: @float-btn-danger-bg;
+
+  &:hover {
+    background-color: #ff7875;
+  }
+
+  &:active {
+    background-color: #cf1322;
+  }
+
+  &:disabled {
+    color: rgba(0, 0, 0, 0.25);
+    background-color: #f5f5f5;
+  }
+}
+
+// ============ 形状 ============
+.@{prefix}-square {
+  border-radius: 8px;
+}
+
+// ============ 描述 ============
+.@{prefix}-description {
+  position: absolute;
+  right: 100%;
+  display: flex;
+  align-items: center;
+  height: 22px;
+  margin-right: 12px;
+  padding: 0 8px;
+  color: rgba(0, 0, 0, 0.85);
+  font-size: 14px;
+  line-height: 22px;
+  white-space: nowrap;
+  background-color: rgba(0, 0, 0, 0.75);
+  border-radius: 4px;
+  opacity: 0;
+  transform: scale(0.8);
+  transform-origin: right center;
+  transition: all 0.2s;
+  pointer-events: none;
+
+  &::after {
+    position: absolute;
+    top: 50%;
+    right: -4px;
+    width: 0;
+    height: 0;
+    border: 4px solid transparent;
+    border-left-color: rgba(0, 0, 0, 0.75);
+    transform: translateY(-50%);
+    content: '';
+  }
+}
+
+.@{prefix}-wrapper:hover .@{prefix}-description {
+  opacity: 1;
+  transform: scale(1);
+}
+
+// ============ 工具提示 ============
+.@{prefix}-tooltip {
+  position: absolute;
+  right: 100%;
+  display: flex;
+  align-items: center;
+  height: 22px;
+  margin-right: 12px;
+  padding: 0 8px;
+  color: #fff;
+  font-size: 14px;
+  line-height: 22px;
+  white-space: nowrap;
+  background-color: rgba(0, 0, 0, 0.75);
+  border-radius: 4px;
+  opacity: 0;
+  transform: scale(0.8);
+  transform-origin: right center;
+  transition: all 0.2s;
+  pointer-events: none;
+
+  &::after {
+    position: absolute;
+    top: 50%;
+    right: -4px;
+    width: 0;
+    height: 0;
+    border: 4px solid transparent;
+    border-left-color: rgba(0, 0, 0, 0.75);
+    transform: translateY(-50%);
+    content: '';
+  }
+}
+
+.@{prefix}-wrapper:hover .@{prefix}-tooltip {
+  opacity: 1;
+  transform: scale(1);
+}
+
+// ============ 按钮组 ============
+.@{prefix}-group {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+}
+
+.@{prefix}-group-open {
+  .@{prefix} {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.@{prefix}-group:not(.@{prefix}-group-open) {
+  > .@{prefix}:not(:first-child) {
+    opacity: 0;
+    transform: scale(0);
+    pointer-events: none;
+  }
+}
+
+// ============ 暗色模式适配 ============
+[data-theme='dark'],
+[data-prefers-color-scheme='dark'],
+[data-prefers-color='dark'],
+html.dark,
+body.dark,
+.dark {
+  .@{prefix} {
+    background-color: #1f1f1f;
+    color: rgba(255, 255, 255, 0.85);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+
+    &:hover {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    }
+
+    &:disabled {
+      color: rgba(255, 255, 255, 0.25);
+      background-color: rgba(255, 255, 255, 0.08);
+    }
+  }
+
+  .@{prefix}-primary {
+    background-color: #1890ff;
+
+    &:hover {
+      background-color: #40a9ff;
+    }
+
+    &:disabled {
+      background-color: rgba(255, 255, 255, 0.08);
+    }
+  }
+
+  .@{prefix}-danger {
+    background-color: #ff4d4f;
+
+    &:hover {
+      background-color: #ff7875;
+    }
+
+    &:disabled {
+      background-color: rgba(255, 255, 255, 0.08);
+    }
+  }
+
+  .@{prefix}-description,
+  .@{prefix}-tooltip {
+    background-color: rgba(255, 255, 255, 0.85);
+    color: rgba(0, 0, 0, 0.85);
+
+    &::after {
+      border-left-color: rgba(255, 255, 255, 0.85);
+    }
+  }
+}
+

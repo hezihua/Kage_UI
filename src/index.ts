@@ -238,3 +238,12 @@ export type {
   ResultStatus,
 } from './Result';
 
+export { default as FloatButton } from './FloatButton';
+export type {
+  FloatButtonProps,
+  FloatButtonGroupProps,
+  FloatButtonType,
+  FloatButtonShape,
+  FloatButtonTrigger,
+} from './FloatButton';
+
