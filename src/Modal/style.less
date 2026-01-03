@@ -1,0 +1,298 @@
+// Modal 对话框组件样式
+
+@prefix: kage-modal;
+
+// 颜色变量
+@modal-bg: #fff;
+@modal-mask-bg: rgba(0, 0, 0, 0.45);
+@modal-border-color: rgba(0, 0, 0, 0.06);
+@modal-title-color: rgba(0, 0, 0, 0.85);
+@modal-text-color: rgba(0, 0, 0, 0.65);
+@modal-shadow: 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 3px 6px -4px rgba(0, 0, 0, 0.12),
+  0 9px 28px 8px rgba(0, 0, 0, 0.05);
+
+// ============ 遮罩层 ============
+.@{prefix}-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: @modal-mask-bg;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+
+  &-open {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+// ============ Modal 主体 ============
+.@{prefix} {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s;
+
+  &-open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  &-centered {
+    align-items: center;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+// ============ Modal 包装器 ============
+.@{prefix}-wrap {
+  position: relative;
+  max-width: calc(100vw - 32px);
+  max-height: calc(100vh - 32px);
+  margin: 0 auto;
+  background-color: @modal-bg;
+  border-radius: 8px;
+  box-shadow: @modal-shadow;
+  transform: scale(0.9);
+  transition: transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  pointer-events: auto;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.@{prefix}-open .@{prefix}-wrap {
+  transform: scale(1);
+}
+
+// ============ 头部 ============
+.@{prefix}-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 16px 24px;
+  border-bottom: 1px solid @modal-border-color;
+  flex-shrink: 0;
+}
+
+.@{prefix}-title {
+  flex: 1;
+  margin: 0;
+  color: @modal-title-color;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// ============ 关闭按钮 ============
+.@{prefix}-close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  padding: 0;
+  margin: 0;
+  color: rgba(0, 0, 0, 0.45);
+  font-size: 16px;
+  line-height: 1;
+  text-align: center;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    color: rgba(0, 0, 0, 0.85);
+    background-color: rgba(0, 0, 0, 0.06);
+  }
+
+  &:active {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+}
+
+// ============ 内容区域 ============
+.@{prefix}-body {
+  flex: 1;
+  padding: 24px;
+  overflow: auto;
+  color: @modal-text-color;
+  font-size: 14px;
+  line-height: 1.5715;
+}
+
+// ============ 底部 ============
+.@{prefix}-footer-wrapper {
+  padding: 10px 16px;
+  border-top: 1px solid @modal-border-color;
+  flex-shrink: 0;
+}
+
+.@{prefix}-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.@{prefix}-ok-btn,
+.@{prefix}-cancel-btn {
+  padding: 4px 15px;
+  font-size: 14px;
+  line-height: 1.5715;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 1px solid #d9d9d9;
+  background: #fff;
+  color: rgba(0, 0, 0, 0.85);
+
+  &:hover {
+    color: #1890ff;
+    border-color: #1890ff;
+  }
+
+  &:active {
+    color: #0958d9;
+    border-color: #0958d9;
+  }
+
+  &:disabled {
+    color: rgba(0, 0, 0, 0.25);
+    background: #f5f5f5;
+    border-color: #d9d9d9;
+    cursor: not-allowed;
+
+    &:hover {
+      color: rgba(0, 0, 0, 0.25);
+      border-color: #d9d9d9;
+    }
+  }
+}
+
+.@{prefix}-ok-btn {
+  background: #1890ff;
+  border-color: #1890ff;
+  color: #fff;
+
+  &:hover {
+    background: #40a9ff;
+    border-color: #40a9ff;
+    color: #fff;
+  }
+
+  &:active {
+    background: #0958d9;
+    border-color: #0958d9;
+    color: #fff;
+  }
+
+  &:disabled {
+    background: #f5f5f5;
+    border-color: #d9d9d9;
+    color: rgba(0, 0, 0, 0.25);
+  }
+}
+
+// ============ 暗色模式适配 ============
+[data-theme='dark'],
+[data-prefers-color-scheme='dark'],
+[data-prefers-color='dark'],
+html.dark,
+body.dark,
+.dark {
+  .@{prefix}-mask {
+    background-color: rgba(0, 0, 0, 0.65);
+  }
+
+  .@{prefix}-wrap {
+    background-color: #1f1f1f;
+    box-shadow: 0 6px 16px 0 rgba(0, 0, 0, 0.48), 0 3px 6px -4px rgba(0, 0, 0, 0.32),
+      0 9px 28px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .@{prefix}-header {
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .@{prefix}-title {
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .@{prefix}-close {
+    color: rgba(255, 255, 255, 0.45);
+
+    &:hover {
+      color: rgba(255, 255, 255, 0.85);
+      background-color: rgba(255, 255, 255, 0.08);
+    }
+
+    &:active {
+      background-color: rgba(255, 255, 255, 0.12);
+    }
+  }
+
+  .@{prefix}-body {
+    color: rgba(255, 255, 255, 0.65);
+  }
+
+  .@{prefix}-footer-wrapper {
+    border-top-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .@{prefix}-cancel-btn {
+    background: #1f1f1f;
+    border-color: rgba(255, 255, 255, 0.3);
+    color: rgba(255, 255, 255, 0.85);
+
+    &:hover {
+      color: #1890ff;
+      border-color: #1890ff;
+    }
+
+    &:disabled {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.15);
+      color: rgba(255, 255, 255, 0.25);
+    }
+  }
+
+  .@{prefix}-ok-btn {
+    background: #1890ff;
+    border-color: #1890ff;
+    color: #fff;
+
+    &:hover {
+      background: #40a9ff;
+      border-color: #40a9ff;
+    }
+
+    &:disabled {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.15);
+      color: rgba(255, 255, 255, 0.25);
+    }
+  }
+}
+

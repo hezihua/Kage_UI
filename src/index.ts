@@ -205,3 +205,8 @@ export type {
   MessageType,
 } from './Message';
 
+export { default as Modal } from './Modal';
+export type {
+  ModalProps,
+} from './Modal';
+
