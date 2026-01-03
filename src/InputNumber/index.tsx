@@ -96,11 +96,11 @@ export const InputNumber = forwardRef<HTMLInputElement, InputNumberProps>((props
   // 设置 ref
   const setInputRef = useCallback(
     (node: HTMLInputElement | null) => {
-      inputRef.current = node;
+      (inputRef as React.MutableRefObject<HTMLInputElement | null>).current = node;
       if (typeof ref === 'function') {
         ref(node);
-      } else if (ref) {
-        (ref as React.MutableRefObject<HTMLInputElement | null>).current = node;
+      } else if (ref && 'current' in ref) {
+        (ref as any).current = node;
       }
     },
     [ref],
@@ -195,12 +195,13 @@ export const InputNumber = forwardRef<HTMLInputElement, InputNumberProps>((props
 
       const offset = type === 'up' ? step : -step;
       const baseValue = mergedValue ?? 0;
-      let newValue = baseValue + offset;
+      const newValue = baseValue + offset;
 
-      newValue = clampValue(newValue);
-
-      updateValue(newValue);
-      onStep?.(newValue, { offset, type });
+      const clampedValue = clampValue(newValue);
+      if (clampedValue !== null) {
+        updateValue(clampedValue);
+        onStep?.(clampedValue, { offset, type });
+      }
       
       // 立即更新显示值（步进操作后应该显示格式化后的值）
       setDisplayValue(formatNumber(newValue));

@@ -412,7 +412,7 @@ export const Select: React.FC<SelectProps> = ({
           {omittedCount > 0 && (
             <span className="kage-select-tag">
               {typeof maxTagPlaceholder === 'function'
-                ? maxTagPlaceholder(selectedOptions.slice(maxTagCount))
+                ? maxTagPlaceholder(selectedOptions.slice(maxTagCount).map(opt => opt.value))
                 : maxTagPlaceholder || `+${omittedCount}`}
             </span>
           )}

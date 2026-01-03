@@ -182,7 +182,7 @@ export const TimePicker: React.FC<TimePickerProps> = ({
   const generateOptions = useCallback((
     max: number,
     step: number,
-    disabledFn?: () => number[] | ((h: number) => number[]) | ((h: number, m: number) => number[]),
+    disabledFn?: (() => number[]) | ((h: number) => number[]) | ((h: number, m: number) => number[]),
     currentHour?: number,
     currentMinute?: number,
   ): number[] => {
@@ -192,7 +192,14 @@ export const TimePicker: React.FC<TimePickerProps> = ({
       
       if (disabledFn) {
         if (typeof disabledFn === 'function') {
-          const disabled = disabledFn(currentHour!, currentMinute!);
+          let disabled: number[] = [];
+          if (disabledFn.length === 0) {
+            disabled = (disabledFn as () => number[])();
+          } else if (disabledFn.length === 1) {
+            disabled = (disabledFn as (h: number) => number[])(currentHour!);
+          } else {
+            disabled = (disabledFn as (h: number, m: number) => number[])(currentHour!, currentMinute!);
+          }
           isDisabled = Array.isArray(disabled) && disabled.includes(i);
         }
       }

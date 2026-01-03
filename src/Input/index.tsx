@@ -7,7 +7,7 @@ import React, {
 import './style.less';
 
 export interface InputProps
-  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'> {
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size' | 'prefix'> {
   /** 控件大小 */
   size?: 'large' | 'middle' | 'small';
   /** 状态 */
@@ -52,7 +52,9 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     ...rest
   } = props;
 
-  const [internalValue, setInternalValue] = useState<string>(defaultValue);
+  const [internalValue, setInternalValue] = useState<string>(
+    typeof defaultValue === 'string' ? defaultValue : String(defaultValue ?? '')
+  );
   const [focused, setFocused] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -60,11 +62,11 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
 
   const setInputRef = useCallback(
     (node: HTMLInputElement | null) => {
-      inputRef.current = node;
+      (inputRef as React.MutableRefObject<HTMLInputElement | null>).current = node;
       if (typeof ref === 'function') {
         ref(node);
-      } else if (ref) {
-        (ref as React.MutableRefObject<HTMLInputElement | null>).current = node;
+      } else if (ref && 'current' in ref) {
+        (ref as any).current = node;
       }
     },
     [ref],
@@ -127,8 +129,10 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     [controlledValue, disabled, onChange],
   );
 
+  const valueStr = typeof mergedValue === 'string' ? mergedValue : String(mergedValue ?? '');
+  
   const showClear =
-    allowClear && !disabled && (mergedValue ?? '').toString().length > 0;
+    allowClear && !disabled && valueStr.length > 0;
 
   const wrapperClassNames = [
     'kage-input-wrapper',
@@ -153,8 +157,8 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
 
   const countText =
     maxLength !== undefined && maxLength >= 0
-      ? `${(mergedValue ?? '').length}/${maxLength}`
-      : (mergedValue ?? '').length;
+      ? `${valueStr.length}/${maxLength}`
+      : valueStr.length;
 
   return (
     <div className={groupClassNames} style={style}>
@@ -166,7 +170,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         <input
           ref={setInputRef}
           className="kage-input-element"
-          value={mergedValue}
+          value={valueStr}
           disabled={disabled}
           onChange={handleChange}
           onFocus={handleFocus}

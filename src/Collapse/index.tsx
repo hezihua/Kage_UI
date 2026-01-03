@@ -146,13 +146,39 @@ export const Collapse: React.FC<CollapseProps> & {
 
       if (accordion) {
         // 手风琴模式：只允许一个面板展开
-        newActiveKey = activeKeysSet.has(keyStr) ? [] : [key];
+        if (activeKeysSet.has(keyStr)) {
+          newActiveKey = typeof key === 'number' ? ([] as number[]) : ([] as string[]);
+        } else {
+          newActiveKey = typeof key === 'number' ? ([key] as number[]) : ([key] as string[]);
+        }
       } else {
         // 普通模式：允许多个面板展开
         if (activeKeysSet.has(keyStr)) {
-          newActiveKey = activeKeys.filter((k) => String(k) !== keyStr);
+          const filtered = activeKeys.filter((k) => String(k) !== keyStr);
+          // 根据第一个元素的类型确定数组类型
+          if (filtered.length === 0) {
+            newActiveKey = typeof key === 'number' ? ([] as number[]) : ([] as string[]);
+          } else {
+            const firstType = typeof filtered[0];
+            if (firstType === 'number') {
+              newActiveKey = filtered.filter((k): k is number => typeof k === 'number') as number[];
+            } else {
+              newActiveKey = filtered.filter((k): k is string => typeof k === 'string') as string[];
+            }
+          }
         } else {
-          newActiveKey = [...activeKeys, key];
+          // 根据第一个元素的类型确定数组类型
+          if (activeKeys.length === 0) {
+            newActiveKey = typeof key === 'number' ? ([key] as number[]) : ([key] as string[]);
+          } else {
+            const firstType = typeof activeKeys[0];
+            const newKeys = [...activeKeys, key];
+            if (firstType === 'number') {
+              newActiveKey = newKeys.filter((k): k is number => typeof k === 'number') as number[];
+            } else {
+              newActiveKey = newKeys.filter((k): k is string => typeof k === 'string') as string[];
+            }
+          }
         }
       }
 
@@ -160,7 +186,7 @@ export const Collapse: React.FC<CollapseProps> & {
         setInternalActiveKey(newActiveKey);
       }
 
-      onChange?.(newActiveKey);
+      onChange?.(newActiveKey as string | string[] | number | number[]);
     },
     [accordion, activeKeys, activeKeysSet, controlledActiveKey, onChange]
   );

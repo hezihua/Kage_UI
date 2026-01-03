@@ -21,7 +21,7 @@ export interface MentionOption {
 export interface MentionsProps
   extends Omit<
     React.TextareaHTMLAttributes<HTMLTextAreaElement>,
-    'value' | 'defaultValue' | 'onChange' | 'prefix'
+    'value' | 'defaultValue' | 'onChange' | 'prefix' | 'onSelect'
   > {
   /** 当前值 */
   value?: string;
@@ -128,11 +128,11 @@ export const Mentions = forwardRef<HTMLTextAreaElement, MentionsProps>((props, r
   // 设置 ref
   const setTextareaRef = useCallback(
     (node: HTMLTextAreaElement | null) => {
-      textareaRef.current = node;
+      (textareaRef as React.MutableRefObject<HTMLTextAreaElement | null>).current = node;
       if (typeof ref === 'function') {
         ref(node);
-      } else if (ref) {
-        (ref as React.MutableRefObject<HTMLTextAreaElement | null>).current = node;
+      } else if (ref && 'current' in ref) {
+        (ref as any).current = node;
       }
     },
     [ref],
