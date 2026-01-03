@@ -96,7 +96,7 @@ export const FloatButton: React.FC<FloatButtonProps> & {
         style={style}
         onClick={onClick}
         disabled={disabled}
-        aria-label={description || tooltip}
+        aria-label={typeof (description || tooltip) === 'string' ? (description || tooltip) as string : undefined}
       >
         {content}
       </button>

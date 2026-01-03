@@ -306,7 +306,7 @@ const notificationApi: NotificationApi = {
 };
 
 // ============ Notification 组件 ============
-export const Notification: React.FC = {} as NotificationApi & {
+export const Notification = {} as NotificationApi & {
   Container: typeof NotificationContainer;
 };
 

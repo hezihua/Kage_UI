@@ -217,7 +217,7 @@ const messageApi: MessageApi = {
 };
 
 // ============ Message 组件 ============
-export const Message: React.FC = {} as MessageApi & {
+export const Message = {} as MessageApi & {
   Container: typeof MessageContainer;
 };
 
