@@ -225,3 +225,10 @@ export type {
   PopconfirmTrigger,
 } from './Popconfirm';
 
+export { default as Progress } from './Progress';
+export type {
+  ProgressProps,
+  ProgressType,
+  ProgressStatus,
+} from './Progress';
+
