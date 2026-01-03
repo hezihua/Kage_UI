@@ -198,3 +198,10 @@ export type {
   DrawerPlacement,
 } from './Drawer';
 
+export { default as Message } from './Message';
+export type {
+  MessageApi,
+  MessageConfig,
+  MessageType,
+} from './Message';
+

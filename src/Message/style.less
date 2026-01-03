@@ -1,0 +1,183 @@
+// Message 全局提示样式
+
+@prefix: kage-message;
+
+// 颜色变量
+@message-bg: #fff;
+@message-success-color: #52c41a;
+@message-info-color: #1890ff;
+@message-warning-color: #faad14;
+@message-error-color: #ff4d4f;
+@message-text-color: rgba(0, 0, 0, 0.85);
+@message-shadow: 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 3px 6px -4px rgba(0, 0, 0, 0.12),
+  0 9px 28px 8px rgba(0, 0, 0, 0.05);
+
+// ============ 根容器 ============
+.kage-message-root {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  pointer-events: none;
+  z-index: 1010;
+}
+
+// ============ 消息容器 ============
+.@{prefix}-container {
+  position: fixed;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1010;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+// ============ 消息项 ============
+.@{prefix} {
+  display: flex;
+  align-items: center;
+  min-width: 200px;
+  max-width: 400px;
+  padding: 9px 12px;
+  background-color: @message-bg;
+  border-radius: 6px;
+  box-shadow: @message-shadow;
+  font-size: 14px;
+  line-height: 1.5715;
+  color: @message-text-color;
+  pointer-events: auto;
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+// ============ 图标 ============
+.@{prefix}-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+  font-size: 16px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+// ============ 内容 ============
+.@{prefix}-content {
+  flex: 1;
+  word-wrap: break-word;
+  word-break: break-word;
+}
+
+// ============ 不同类型 ============
+.@{prefix}-success {
+  .@{prefix}-icon {
+    color: @message-success-color;
+  }
+}
+
+.@{prefix}-info {
+  .@{prefix}-icon {
+    color: @message-info-color;
+  }
+}
+
+.@{prefix}-warning {
+  .@{prefix}-icon {
+    color: @message-warning-color;
+  }
+}
+
+.@{prefix}-error {
+  .@{prefix}-icon {
+    color: @message-error-color;
+  }
+}
+
+.@{prefix}-loading {
+  .@{prefix}-icon {
+    color: @message-info-color;
+    animation: messageLoading 1s linear infinite;
+  }
+}
+
+@keyframes messageLoading {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// ============ 关闭动画 ============
+.@{prefix}-closing {
+  opacity: 0;
+  transform: translateY(-20px);
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  padding-top: 0;
+  padding-bottom: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+// ============ 暗色模式适配 ============
+[data-theme='dark'],
+[data-prefers-color-scheme='dark'],
+[data-prefers-color='dark'],
+html.dark,
+body.dark,
+.dark {
+  .@{prefix} {
+    background-color: #1f1f1f;
+    color: rgba(255, 255, 255, 0.85);
+    box-shadow: 0 6px 16px 0 rgba(0, 0, 0, 0.48), 0 3px 6px -4px rgba(0, 0, 0, 0.32),
+      0 9px 28px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .@{prefix}-content {
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .@{prefix}-success {
+    .@{prefix}-icon {
+      color: #52c41a;
+    }
+  }
+
+  .@{prefix}-info {
+    .@{prefix}-icon {
+      color: #1890ff;
+    }
+  }
+
+  .@{prefix}-warning {
+    .@{prefix}-icon {
+      color: #faad14;
+    }
+  }
+
+  .@{prefix}-error {
+    .@{prefix}-icon {
+      color: #ff4d4f;
+    }
+  }
+
+  .@{prefix}-loading {
+    .@{prefix}-icon {
+      color: #1890ff;
+    }
+  }
+}
+
