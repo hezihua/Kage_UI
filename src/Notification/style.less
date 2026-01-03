@@ -1,0 +1,260 @@
+// Notification 通知提醒框样式
+
+@prefix: kage-notification;
+
+// 颜色变量
+@notification-bg: #fff;
+@notification-success-color: #52c41a;
+@notification-info-color: #1890ff;
+@notification-warning-color: #faad14;
+@notification-error-color: #ff4d4f;
+@notification-title-color: rgba(0, 0, 0, 0.85);
+@notification-text-color: rgba(0, 0, 0, 0.65);
+@notification-shadow: 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 3px 6px -4px rgba(0, 0, 0, 0.12),
+  0 9px 28px 8px rgba(0, 0, 0, 0.05);
+
+// ============ 根容器 ============
+.kage-notification-root {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 1010;
+}
+
+// ============ 通知容器 ============
+.@{prefix}-container {
+  position: fixed;
+  z-index: 1010;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 384px;
+}
+
+.@{prefix}-topLeft {
+  top: 24px;
+  left: 24px;
+  align-items: flex-start;
+}
+
+.@{prefix}-topRight {
+  top: 24px;
+  right: 24px;
+  align-items: flex-end;
+}
+
+.@{prefix}-bottomLeft {
+  bottom: 24px;
+  left: 24px;
+  align-items: flex-start;
+  flex-direction: column-reverse;
+}
+
+.@{prefix}-bottomRight {
+  bottom: 24px;
+  right: 24px;
+  align-items: flex-end;
+  flex-direction: column-reverse;
+}
+
+// ============ 通知项 ============
+.@{prefix} {
+  position: relative;
+  display: flex;
+  padding: 16px 24px;
+  background-color: @notification-bg;
+  border-radius: 8px;
+  box-shadow: @notification-shadow;
+  pointer-events: auto;
+  opacity: 1;
+  transform: translateX(0);
+  transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+// ============ 内容 ============
+.@{prefix}-content {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+}
+
+// ============ 图标 ============
+.@{prefix}-icon {
+  display: inline-flex;
+  align-items: flex-start;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  margin-right: 16px;
+  font-size: 24px;
+  line-height: 1;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+// ============ 主体 ============
+.@{prefix}-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.@{prefix}-message {
+  margin-bottom: 8px;
+  color: @notification-title-color;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  word-wrap: break-word;
+  word-break: break-word;
+}
+
+.@{prefix}-description {
+  color: @notification-text-color;
+  font-size: 14px;
+  line-height: 1.5715;
+  word-wrap: break-word;
+  word-break: break-word;
+}
+
+// ============ 关闭按钮 ============
+.@{prefix}-close-icon {
+  position: absolute;
+  top: 16px;
+  right: 22px;
+  padding: 0;
+  margin: 0;
+  color: rgba(0, 0, 0, 0.45);
+  font-size: 12px;
+  line-height: 1;
+  text-align: center;
+  background: transparent;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 0.2s;
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    color: rgba(0, 0, 0, 0.85);
+    background-color: rgba(0, 0, 0, 0.06);
+  }
+
+  &:active {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+}
+
+// ============ 不同类型 ============
+.@{prefix}-success {
+  .@{prefix}-icon {
+    color: @notification-success-color;
+  }
+}
+
+.@{prefix}-info {
+  .@{prefix}-icon {
+    color: @notification-info-color;
+  }
+}
+
+.@{prefix}-warning {
+  .@{prefix}-icon {
+    color: @notification-warning-color;
+  }
+}
+
+.@{prefix}-error {
+  .@{prefix}-icon {
+    color: @notification-error-color;
+  }
+}
+
+// ============ 关闭动画 ============
+.@{prefix}-closing {
+  opacity: 0;
+  transform: translateX(100px);
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  padding-top: 0;
+  padding-bottom: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.@{prefix}-topLeft .@{prefix}-closing,
+.@{prefix}-bottomLeft .@{prefix}-closing {
+  transform: translateX(-100px);
+}
+
+// ============ 暗色模式适配 ============
+[data-theme='dark'],
+[data-prefers-color-scheme='dark'],
+[data-prefers-color='dark'],
+html.dark,
+body.dark,
+.dark {
+  .@{prefix} {
+    background-color: #1f1f1f;
+    box-shadow: 0 6px 16px 0 rgba(0, 0, 0, 0.48), 0 3px 6px -4px rgba(0, 0, 0, 0.32),
+      0 9px 28px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .@{prefix}-message {
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .@{prefix}-description {
+    color: rgba(255, 255, 255, 0.65);
+  }
+
+  .@{prefix}-close-icon {
+    color: rgba(255, 255, 255, 0.45);
+
+    &:hover {
+      color: rgba(255, 255, 255, 0.85);
+      background-color: rgba(255, 255, 255, 0.08);
+    }
+
+    &:active {
+      background-color: rgba(255, 255, 255, 0.12);
+    }
+  }
+
+  .@{prefix}-success {
+    .@{prefix}-icon {
+      color: #52c41a;
+    }
+  }
+
+  .@{prefix}-info {
+    .@{prefix}-icon {
+      color: #1890ff;
+    }
+  }
+
+  .@{prefix}-warning {
+    .@{prefix}-icon {
+      color: #faad14;
+    }
+  }
+
+  .@{prefix}-error {
+    .@{prefix}-icon {
+      color: #ff4d4f;
+    }
+  }
+}
+

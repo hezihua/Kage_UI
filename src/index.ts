@@ -210,3 +210,11 @@ export type {
   ModalProps,
 } from './Modal';
 
+export { default as Notification } from './Notification';
+export type {
+  NotificationApi,
+  NotificationConfig,
+  NotificationType,
+  NotificationPlacement,
+} from './Notification';
+

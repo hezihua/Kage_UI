@@ -142,14 +142,14 @@ export const Modal: React.FC<ModalProps> = ({
   const handleOk = useCallback(
     (e: React.MouseEvent<HTMLButtonElement>) => {
       onOk?.(e);
-      // 如果 onOk 返回 false，则不关闭
+      // 如果 onOk 阻止了默认行为，则不关闭
       if (e.defaultPrevented) {
         return;
       }
-      // 默认情况下，点击确定后不自动关闭，需要手动调用 handleClose
-      // 如果需要自动关闭，可以在 onOk 中调用 handleClose
+      // 默认情况下，点击确定后自动关闭
+      handleClose(e);
     },
-    [onOk]
+    [onOk, handleClose]
   );
 
   // 处理遮罩点击
