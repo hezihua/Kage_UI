@@ -1,0 +1,215 @@
+// Drawer 抽屉组件样式
+
+@prefix: kage-drawer;
+
+// 颜色变量
+@drawer-bg: #fff;
+@drawer-mask-bg: rgba(0, 0, 0, 0.45);
+@drawer-border-color: rgba(0, 0, 0, 0.06);
+@drawer-title-color: rgba(0, 0, 0, 0.85);
+@drawer-text-color: rgba(0, 0, 0, 0.65);
+
+// ============ 遮罩层 ============
+.@{prefix}-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: @drawer-mask-bg;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+
+  &-open {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+// ============ 抽屉主体 ============
+.@{prefix} {
+  position: fixed;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  background-color: @drawer-bg;
+  box-shadow: -6px 0 16px 0 rgba(0, 0, 0, 0.08), -3px 0 6px -4px rgba(0, 0, 0, 0.12),
+    -9px 0 28px 8px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s cubic-bezier(0.7, 0.3, 0.1, 1), box-shadow 0.3s;
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+// ============ 位置 - 右侧 ============
+.@{prefix}-right {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 378px;
+  transform: translateX(100%);
+
+  &.@{prefix}-open {
+    transform: translateX(0);
+  }
+}
+
+// ============ 位置 - 左侧 ============
+.@{prefix}-left {
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 378px;
+  transform: translateX(-100%);
+
+  &.@{prefix}-open {
+    transform: translateX(0);
+  }
+}
+
+// ============ 位置 - 顶部 ============
+.@{prefix}-top {
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 378px;
+  transform: translateY(-100%);
+
+  &.@{prefix}-open {
+    transform: translateY(0);
+  }
+}
+
+// ============ 位置 - 底部 ============
+.@{prefix}-bottom {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 378px;
+  transform: translateY(100%);
+
+  &.@{prefix}-open {
+    transform: translateY(0);
+  }
+}
+
+// ============ 头部 ============
+.@{prefix}-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 16px 24px;
+  border-bottom: 1px solid @drawer-border-color;
+  flex-shrink: 0;
+}
+
+.@{prefix}-title {
+  flex: 1;
+  margin: 0;
+  color: @drawer-title-color;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// ============ 关闭按钮 ============
+.@{prefix}-close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  padding: 0;
+  margin: 0;
+  color: rgba(0, 0, 0, 0.45);
+  font-size: 16px;
+  line-height: 1;
+  text-align: center;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    color: rgba(0, 0, 0, 0.85);
+    background-color: rgba(0, 0, 0, 0.06);
+  }
+
+  &:active {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+}
+
+// ============ 内容区域 ============
+.@{prefix}-body {
+  flex: 1;
+  padding: 24px;
+  overflow: auto;
+  color: @drawer-text-color;
+  font-size: 14px;
+  line-height: 1.5715;
+}
+
+// ============ 底部 ============
+.@{prefix}-footer {
+  padding: 10px 16px;
+  border-top: 1px solid @drawer-border-color;
+  flex-shrink: 0;
+}
+
+// ============ 暗色模式适配 ============
+[data-theme='dark'],
+[data-prefers-color-scheme='dark'],
+[data-prefers-color='dark'],
+html.dark,
+body.dark,
+.dark {
+  .@{prefix} {
+    background-color: #1f1f1f;
+    box-shadow: -6px 0 16px 0 rgba(0, 0, 0, 0.48), -3px 0 6px -4px rgba(0, 0, 0, 0.32),
+      -9px 0 28px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .@{prefix}-mask {
+    background-color: rgba(0, 0, 0, 0.65);
+  }
+
+  .@{prefix}-header {
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .@{prefix}-title {
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .@{prefix}-close {
+    color: rgba(255, 255, 255, 0.45);
+
+    &:hover {
+      color: rgba(255, 255, 255, 0.85);
+      background-color: rgba(255, 255, 255, 0.08);
+    }
+
+    &:active {
+      background-color: rgba(255, 255, 255, 0.12);
+    }
+  }
+
+  .@{prefix}-body {
+    color: rgba(255, 255, 255, 0.65);
+  }
+
+  .@{prefix}-footer {
+    border-top-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
