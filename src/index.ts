@@ -179,3 +179,10 @@ export type {
   TooltipColor,
 } from './Tooltip';
 
+export { default as Tree } from './Tree';
+export type {
+  TreeProps,
+  TreeNode,
+  TreeSelectMode,
+} from './Tree';
+
