@@ -1,0 +1,487 @@
+// Skeleton 骨架屏组件样式
+
+@prefix: kage-skeleton;
+
+// 颜色变量
+@skeleton-color: #f2f2f2;
+@skeleton-to-color: #e6e6e6;
+@skeleton-avatar-size-default: 40px;
+@skeleton-avatar-size-small: 24px;
+@skeleton-avatar-size-large: 48px;
+
+// ============ 主容器 ============
+.@{prefix} {
+  display: flex;
+  padding: 16px 0;
+  box-sizing: border-box;
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+.@{prefix}-round {
+  .@{prefix}-title-content,
+  .@{prefix}-paragraph-line-content,
+  .@{prefix}-avatar-content,
+  .@{prefix}-button-content,
+  .@{prefix}-input-content,
+  .@{prefix}-image-content {
+    border-radius: 4px;
+  }
+}
+
+// ============ 头像 ============
+.@{prefix}-avatar {
+  flex-shrink: 0;
+  margin-right: 16px;
+  background-color: @skeleton-color;
+  border-radius: 50%;
+
+  &-content {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: @skeleton-color;
+    border-radius: 50%;
+  }
+
+  &-square {
+    border-radius: 4px;
+
+    .@{prefix}-avatar-content {
+      border-radius: 4px;
+    }
+  }
+
+  &-default {
+    width: @skeleton-avatar-size-default;
+    height: @skeleton-avatar-size-default;
+  }
+
+  &-small {
+    width: @skeleton-avatar-size-small;
+    height: @skeleton-avatar-size-small;
+  }
+
+  &-large {
+    width: @skeleton-avatar-size-large;
+    height: @skeleton-avatar-size-large;
+  }
+}
+
+// ============ 内容 ============
+.@{prefix}-content {
+  flex: 1;
+  min-width: 0;
+}
+
+// ============ 标题 ============
+.@{prefix}-title {
+  margin-bottom: 16px;
+
+  &-content {
+    display: block;
+    height: 16px;
+    background-color: @skeleton-color;
+    border-radius: 2px;
+  }
+}
+
+// ============ 段落 ============
+.@{prefix}-paragraph {
+  margin-bottom: 0;
+
+  &-line {
+    margin-bottom: 16px;
+
+    &:last-child {
+      margin-bottom: 0;
+      width: 61% !important;
+    }
+
+    &-content {
+      display: block;
+      height: 16px;
+      background-color: @skeleton-color;
+      border-radius: 2px;
+    }
+  }
+}
+
+// ============ 按钮 ============
+.@{prefix}-button {
+  display: inline-block;
+  vertical-align: middle;
+  background-color: @skeleton-color;
+  border-radius: 4px;
+
+  &-content {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: @skeleton-color;
+    border-radius: 4px;
+  }
+
+  &-default {
+    width: 80px;
+    height: 32px;
+  }
+
+  &-small {
+    width: 60px;
+    height: 24px;
+  }
+
+  &-large {
+    width: 100px;
+    height: 40px;
+  }
+
+  &-block {
+    display: block;
+    width: 100%;
+  }
+}
+
+// ============ 输入框 ============
+.@{prefix}-input {
+  display: inline-block;
+  vertical-align: middle;
+  background-color: @skeleton-color;
+  border-radius: 4px;
+
+  &-content {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: @skeleton-color;
+    border-radius: 4px;
+  }
+
+  &-default {
+    width: 200px;
+    height: 32px;
+  }
+
+  &-small {
+    width: 160px;
+    height: 24px;
+  }
+
+  &-large {
+    width: 240px;
+    height: 40px;
+  }
+
+  &-block {
+    display: block;
+    width: 100%;
+  }
+}
+
+// ============ 图片 ============
+.@{prefix}-image {
+  display: inline-block;
+  vertical-align: middle;
+  background-color: @skeleton-color;
+  border-radius: 4px;
+
+  &-content {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: @skeleton-color;
+    border-radius: 4px;
+  }
+}
+
+// ============ 动画 ============
+.@{prefix}-active {
+  .@{prefix}-title-content,
+  .@{prefix}-paragraph-line-content,
+  .@{prefix}-avatar-content,
+  .@{prefix}-button-content,
+  .@{prefix}-input-content,
+  .@{prefix}-image-content {
+    background: linear-gradient(
+      90deg,
+      @skeleton-color 25%,
+      @skeleton-to-color 37%,
+      @skeleton-color 63%
+    );
+    background-size: 400% 100%;
+    animation: skeleton-loading 1.4s ease infinite;
+  }
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+// ============ 暗色模式适配 ============
+[data-theme='dark'],
+[data-prefers-color-scheme='dark'],
+[data-prefers-color='dark'],
+html.dark,
+body.dark,
+.dark {
+  .@{prefix} {
+    // 标题和段落内容
+    .@{prefix}-title-content,
+    .@{prefix}-paragraph-line-content {
+      background-color: rgba(255, 255, 255, 0.08);
+    }
+
+    // 头像容器和内容
+    .@{prefix}-avatar {
+      background-color: rgba(255, 255, 255, 0.08);
+
+      &-content {
+        background-color: rgba(255, 255, 255, 0.08);
+      }
+    }
+
+    // 按钮容器和内容
+    .@{prefix}-button {
+      background-color: rgba(255, 255, 255, 0.08);
+
+      &-content {
+        background-color: rgba(255, 255, 255, 0.08);
+      }
+    }
+
+    // 输入框容器和内容
+    .@{prefix}-input {
+      background-color: rgba(255, 255, 255, 0.08);
+
+      &-content {
+        background-color: rgba(255, 255, 255, 0.08);
+      }
+    }
+
+    // 图片容器和内容
+    .@{prefix}-image {
+      background-color: rgba(255, 255, 255, 0.08);
+
+      &-content {
+        background-color: rgba(255, 255, 255, 0.08);
+      }
+    }
+  }
+
+  // 动画状态
+  .@{prefix}-active {
+    .@{prefix}-title-content,
+    .@{prefix}-paragraph-line-content {
+      background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.08) 25%,
+        rgba(255, 255, 255, 0.12) 37%,
+        rgba(255, 255, 255, 0.08) 63%
+      );
+      background-size: 400% 100%;
+    }
+
+    .@{prefix}-avatar {
+      background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.08) 25%,
+        rgba(255, 255, 255, 0.12) 37%,
+        rgba(255, 255, 255, 0.08) 63%
+      );
+      background-size: 400% 100%;
+
+      &-content {
+        background: linear-gradient(
+          90deg,
+          rgba(255, 255, 255, 0.08) 25%,
+          rgba(255, 255, 255, 0.12) 37%,
+          rgba(255, 255, 255, 0.08) 63%
+        );
+        background-size: 400% 100%;
+      }
+    }
+
+    .@{prefix}-button {
+      background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.08) 25%,
+        rgba(255, 255, 255, 0.12) 37%,
+        rgba(255, 255, 255, 0.08) 63%
+      );
+      background-size: 400% 100%;
+
+      &-content {
+        background: linear-gradient(
+          90deg,
+          rgba(255, 255, 255, 0.08) 25%,
+          rgba(255, 255, 255, 0.12) 37%,
+          rgba(255, 255, 255, 0.08) 63%
+        );
+        background-size: 400% 100%;
+      }
+    }
+
+    .@{prefix}-input {
+      background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.08) 25%,
+        rgba(255, 255, 255, 0.12) 37%,
+        rgba(255, 255, 255, 0.08) 63%
+      );
+      background-size: 400% 100%;
+
+      &-content {
+        background: linear-gradient(
+          90deg,
+          rgba(255, 255, 255, 0.08) 25%,
+          rgba(255, 255, 255, 0.12) 37%,
+          rgba(255, 255, 255, 0.08) 63%
+        );
+        background-size: 400% 100%;
+      }
+    }
+
+    .@{prefix}-image {
+      background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.08) 25%,
+        rgba(255, 255, 255, 0.12) 37%,
+        rgba(255, 255, 255, 0.08) 63%
+      );
+      background-size: 400% 100%;
+
+      &-content {
+        background: linear-gradient(
+          90deg,
+          rgba(255, 255, 255, 0.08) 25%,
+          rgba(255, 255, 255, 0.12) 37%,
+          rgba(255, 255, 255, 0.08) 63%
+        );
+        background-size: 400% 100%;
+      }
+    }
+  }
+
+  // 独立的子组件（Button, Input, Image, Avatar）
+  .@{prefix}-button {
+    background-color: rgba(255, 255, 255, 0.08);
+
+    &-content {
+      background-color: rgba(255, 255, 255, 0.08);
+    }
+  }
+
+  .@{prefix}-input {
+    background-color: rgba(255, 255, 255, 0.08);
+
+    &-content {
+      background-color: rgba(255, 255, 255, 0.08);
+    }
+  }
+
+  .@{prefix}-image {
+    background-color: rgba(255, 255, 255, 0.08);
+
+    &-content {
+      background-color: rgba(255, 255, 255, 0.08);
+    }
+  }
+
+  .@{prefix}-avatar {
+    background-color: rgba(255, 255, 255, 0.08);
+
+    &-content {
+      background-color: rgba(255, 255, 255, 0.08);
+    }
+  }
+
+  // 独立子组件的动画状态
+  .@{prefix}-button.kage-skeleton-active {
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.08) 25%,
+      rgba(255, 255, 255, 0.12) 37%,
+      rgba(255, 255, 255, 0.08) 63%
+    );
+    background-size: 400% 100%;
+
+    .@{prefix}-button-content {
+      background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.08) 25%,
+        rgba(255, 255, 255, 0.12) 37%,
+        rgba(255, 255, 255, 0.08) 63%
+      );
+      background-size: 400% 100%;
+    }
+  }
+
+  .@{prefix}-input.kage-skeleton-active {
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.08) 25%,
+      rgba(255, 255, 255, 0.12) 37%,
+      rgba(255, 255, 255, 0.08) 63%
+    );
+    background-size: 400% 100%;
+
+    .@{prefix}-input-content {
+      background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.08) 25%,
+        rgba(255, 255, 255, 0.12) 37%,
+        rgba(255, 255, 255, 0.08) 63%
+      );
+      background-size: 400% 100%;
+    }
+  }
+
+  .@{prefix}-image.kage-skeleton-active {
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.08) 25%,
+      rgba(255, 255, 255, 0.12) 37%,
+      rgba(255, 255, 255, 0.08) 63%
+    );
+    background-size: 400% 100%;
+
+    .@{prefix}-image-content {
+      background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.08) 25%,
+        rgba(255, 255, 255, 0.12) 37%,
+        rgba(255, 255, 255, 0.08) 63%
+      );
+      background-size: 400% 100%;
+    }
+  }
+
+  .@{prefix}-avatar.kage-skeleton-active {
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.08) 25%,
+      rgba(255, 255, 255, 0.12) 37%,
+      rgba(255, 255, 255, 0.08) 63%
+    );
+    background-size: 400% 100%;
+
+    .@{prefix}-avatar-content {
+      background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.08) 25%,
+        rgba(255, 255, 255, 0.12) 37%,
+        rgba(255, 255, 255, 0.08) 63%
+      );
+      background-size: 400% 100%;
+    }
+  }
+}
+

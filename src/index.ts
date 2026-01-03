@@ -247,3 +247,12 @@ export type {
   FloatButtonTrigger,
 } from './FloatButton';
 
+export { default as Skeleton } from './Skeleton';
+export type {
+  SkeletonProps,
+  SkeletonButtonProps,
+  SkeletonInputProps,
+  SkeletonImageProps,
+  SkeletonAvatarProps,
+} from './Skeleton';
+
