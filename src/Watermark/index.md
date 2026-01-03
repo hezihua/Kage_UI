@@ -3,8 +3,8 @@ nav:
   title: 组件
   order: 2
 group:
-  title: 其他
-  order: 9
+  title: 反馈
+  order: 7
 title: Watermark 水印
 ---
 
