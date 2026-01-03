@@ -1,0 +1,417 @@
+// Popconfirm 气泡确认框组件样式
+
+@prefix: kage-popconfirm;
+
+// 颜色变量
+@popconfirm-bg: #fff;
+@popconfirm-border-color: rgba(0, 0, 0, 0.06);
+@popconfirm-title-color: rgba(0, 0, 0, 0.85);
+@popconfirm-content-color: rgba(0, 0, 0, 0.65);
+@popconfirm-shadow: 0 3px 6px -4px rgba(0, 0, 0, 0.12),
+  0 6px 16px 0 rgba(0, 0, 0, 0.08),
+  0 9px 28px 8px rgba(0, 0, 0, 0.05);
+
+// 尺寸变量
+@popconfirm-arrow-size: 8px;
+@popconfirm-distance: 12px;
+
+// ============ 容器 ============
+.@{prefix}-wrapper {
+  position: relative;
+  display: inline-block;
+
+  &-disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+// ============ 气泡确认框 ============
+.@{prefix} {
+  position: absolute;
+  top: 0;           // 显式声明，防止定位偏移
+  left: 0;          // 显式声明
+  z-index: 1050;
+  // 1. 显式声明高度自适应，防止被某些全局样式或计算逻辑干扰
+  height: auto !important; 
+  
+  // 2. 确保 display 模式允许内容撑开
+  display: block; 
+  
+  // 3. 宽度保持之前的优化
+  width: max-content;
+  min-width: 200px;
+  max-width: 350px;
+  
+  background-color: @popconfirm-bg;
+  border: 1px solid @popconfirm-border-color;
+  border-radius: 8px;
+  box-shadow: @popconfirm-shadow;
+  
+  font-size: 14px;
+  line-height: 1.5715;
+  
+  // --- 状态控制优化 ---
+  // 初始隐藏状态：不建议在初始状态就使用 scale(0.95)，
+  // 如果容器在隐藏时位置计算错误，可以尝试先去掉 display: inline-block 改为 block
+  display: block;    
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none; // 隐藏时禁止鼠标事件
+  
+  transform: scale(0.95);
+  transform-origin: center;
+  transition: opacity 0.2s, transform 0.2s, visibility 0.2s;
+  
+  word-wrap: break-word;
+  word-break: break-word;
+  box-sizing: border-box;
+}
+
+.@{prefix}-open {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+  pointer-events: auto; // 显示时恢复鼠标事件
+}
+
+// ============ 内容 ============
+.@{prefix}-inner {
+  display: flex;
+  padding: 12px 16px;
+  gap: 12px;
+  
+  // 1. 关键修改：不要让宽度死锁
+  // width: 100%;       <-- 建议删掉，或改为 min-content/max-content
+  min-width: max-content; // 确保内部 flex 元素（图标+文字）能把这一层撑开
+  
+  // 2. 布局优化
+  align-items: flex-start;
+  box-sizing: border-box;
+  position: relative; // 必须是 relative，不能是 absolute！
+  z-index: 1;
+  
+  // 3. 防止文字在极窄空间下换行导致的坍塌
+  flex-wrap: nowrap; 
+}
+
+.@{prefix}-icon {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  margin-top: 2px;
+  font-size: 16px;
+  line-height: 1;
+  color: #faad14;
+  flex-shrink: 0;
+}
+
+.@{prefix}-content {
+  flex: 1;
+  min-width: 0;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.@{prefix}-title {
+  color: @popconfirm-title-color;
+  font-weight: 500;
+  margin-bottom: 4px;
+  line-height: 1.5;
+  display: block;
+  word-wrap: break-word;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.@{prefix}-description {
+  color: @popconfirm-content-color;
+  font-size: 14px;
+  line-height: 1.5715;
+  margin-bottom: 12px;
+  display: block;
+  word-wrap: break-word;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+// ============ 按钮 ============
+.@{prefix}-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 8px;
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.@{prefix}-ok-btn,
+.@{prefix}-cancel-btn {
+  padding: 4px 15px;
+  font-size: 14px;
+  line-height: 1.5715;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 1px solid #d9d9d9;
+  background: #fff;
+  color: rgba(0, 0, 0, 0.85);
+
+  &:hover {
+    color: #1890ff;
+    border-color: #1890ff;
+  }
+
+  &:active {
+    color: #0958d9;
+    border-color: #0958d9;
+  }
+
+  &:disabled {
+    color: rgba(0, 0, 0, 0.25);
+    background: #f5f5f5;
+    border-color: #d9d9d9;
+    cursor: not-allowed;
+
+    &:hover {
+      color: rgba(0, 0, 0, 0.25);
+      border-color: #d9d9d9;
+    }
+  }
+}
+
+.@{prefix}-ok-btn-primary {
+  background: #1890ff;
+  border-color: #1890ff;
+  color: #fff;
+
+  &:hover {
+    background: #40a9ff;
+    border-color: #40a9ff;
+    color: #fff;
+  }
+
+  &:active {
+    background: #0958d9;
+    border-color: #0958d9;
+    color: #fff;
+  }
+
+  &:disabled {
+    background: #f5f5f5;
+    border-color: #d9d9d9;
+    color: rgba(0, 0, 0, 0.25);
+  }
+}
+
+// ============ 箭头 ============
+.@{prefix}-arrow {
+  position: absolute;
+  width: @popconfirm-arrow-size * 2;
+  height: @popconfirm-arrow-size * 2;
+  background-color: @popconfirm-bg;
+  border: 1px solid @popconfirm-border-color;
+  pointer-events: none;
+  z-index: 1;
+}
+
+// ============ 位置 - 上方 ============
+.@{prefix}-placement-top,
+.@{prefix}-placement-topLeft,
+.@{prefix}-placement-topRight {
+  .@{prefix}-arrow {
+    bottom: -(@popconfirm-arrow-size + 1px);
+    border-top: none;
+    border-left: none;
+    transform: rotate(45deg);
+  }
+}
+
+.@{prefix}-placement-top {
+  .@{prefix}-arrow {
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+  }
+}
+
+.@{prefix}-placement-topLeft {
+  .@{prefix}-arrow {
+    left: 16px;
+  }
+}
+
+.@{prefix}-placement-topRight {
+  .@{prefix}-arrow {
+    right: 16px;
+  }
+}
+
+// ============ 位置 - 下方 ============
+.@{prefix}-placement-bottom,
+.@{prefix}-placement-bottomLeft,
+.@{prefix}-placement-bottomRight {
+  .@{prefix}-arrow {
+    top: -(@popconfirm-arrow-size + 1px);
+    border-bottom: none;
+    border-right: none;
+    transform: rotate(45deg);
+  }
+}
+
+.@{prefix}-placement-bottom {
+  .@{prefix}-arrow {
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+  }
+}
+
+.@{prefix}-placement-bottomLeft {
+  .@{prefix}-arrow {
+    left: 16px;
+  }
+}
+
+.@{prefix}-placement-bottomRight {
+  .@{prefix}-arrow {
+    right: 16px;
+  }
+}
+
+// ============ 位置 - 左侧 ============
+.@{prefix}-placement-left,
+.@{prefix}-placement-leftTop,
+.@{prefix}-placement-leftBottom {
+  .@{prefix}-arrow {
+    right: -(@popconfirm-arrow-size + 1px);
+    border-left: none;
+    border-bottom: none;
+    transform: rotate(45deg);
+  }
+}
+
+.@{prefix}-placement-left {
+  .@{prefix}-arrow {
+    top: 50%;
+    transform: translateY(-50%) rotate(45deg);
+  }
+}
+
+.@{prefix}-placement-leftTop {
+  .@{prefix}-arrow {
+    top: 16px;
+  }
+}
+
+.@{prefix}-placement-leftBottom {
+  .@{prefix}-arrow {
+    bottom: 16px;
+  }
+}
+
+// ============ 位置 - 右侧 ============
+.@{prefix}-placement-right,
+.@{prefix}-placement-rightTop,
+.@{prefix}-placement-rightBottom {
+  .@{prefix}-arrow {
+    left: -(@popconfirm-arrow-size + 1px);
+    border-right: none;
+    border-top: none;
+    transform: rotate(45deg);
+  }
+}
+
+.@{prefix}-placement-right {
+  .@{prefix}-arrow {
+    top: 50%;
+    transform: translateY(-50%) rotate(45deg);
+  }
+}
+
+.@{prefix}-placement-rightTop {
+  .@{prefix}-arrow {
+    top: 16px;
+  }
+}
+
+.@{prefix}-placement-rightBottom {
+  .@{prefix}-arrow {
+    bottom: 16px;
+  }
+}
+
+// ============ 暗色模式适配 ============
+[data-theme='dark'],
+[data-prefers-color-scheme='dark'],
+[data-prefers-color='dark'],
+html.dark,
+body.dark,
+.dark {
+  .@{prefix} {
+    background-color: #1f1f1f;
+    border-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 3px 6px -4px rgba(0, 0, 0, 0.32),
+      0 6px 16px 0 rgba(0, 0, 0, 0.48),
+      0 9px 28px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .@{prefix}-title {
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .@{prefix}-description {
+    color: rgba(255, 255, 255, 0.65);
+  }
+
+  .@{prefix}-icon {
+    color: #faad14;
+  }
+
+  .@{prefix}-arrow {
+    background-color: #1f1f1f;
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .@{prefix}-cancel-btn {
+    background: #1f1f1f;
+    border-color: rgba(255, 255, 255, 0.3);
+    color: rgba(255, 255, 255, 0.85);
+
+    &:hover {
+      color: #1890ff;
+      border-color: #1890ff;
+    }
+
+    &:disabled {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.15);
+      color: rgba(255, 255, 255, 0.25);
+    }
+  }
+
+  .@{prefix}-ok-btn-primary {
+    background: #1890ff;
+    border-color: #1890ff;
+    color: #fff;
+
+    &:hover {
+      background: #40a9ff;
+      border-color: #40a9ff;
+    }
+
+    &:disabled {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.15);
+      color: rgba(255, 255, 255, 0.25);
+    }
+  }
+}
+

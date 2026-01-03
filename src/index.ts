@@ -218,3 +218,10 @@ export type {
   NotificationPlacement,
 } from './Notification';
 
+export { default as Popconfirm } from './Popconfirm';
+export type {
+  PopconfirmProps,
+  PopconfirmPlacement,
+  PopconfirmTrigger,
+} from './Popconfirm';
+
