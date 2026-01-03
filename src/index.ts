@@ -259,3 +259,6 @@ export type {
 export { default as Spin } from './Spin';
 export type { SpinProps } from './Spin';
 
+export { default as Watermark } from './Watermark';
+export type { WatermarkProps } from './Watermark';
+

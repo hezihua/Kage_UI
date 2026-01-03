@@ -1,0 +1,31 @@
+// Watermark 水印组件样式
+
+@prefix: kage-watermark;
+
+// ============ 主容器 ============
+.@{prefix} {
+  position: relative;
+  overflow: hidden;
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+// ============ 水印内容 ============
+.@{prefix}-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9;
+}
+
+// ============ 子元素 ============
+.@{prefix}-children {
+  position: relative;
+  z-index: 1;
+}
+
