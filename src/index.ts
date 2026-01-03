@@ -256,3 +256,6 @@ export type {
   SkeletonAvatarProps,
 } from './Skeleton';
 
+export { default as Spin } from './Spin';
+export type { SpinProps } from './Spin';
+

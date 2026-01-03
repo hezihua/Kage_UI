@@ -1,0 +1,169 @@
+// Spin 加载动画组件样式
+
+@prefix: kage-spin;
+
+// 颜色变量
+@spin-color: #1890ff;
+@spin-tip-color: rgba(0, 0, 0, 0.45);
+
+// ============ 主容器 ============
+.@{prefix} {
+  position: relative;
+  display: inline-block;
+  color: @spin-color;
+  font-size: 14px;
+  line-height: 1;
+  text-align: center;
+  vertical-align: middle;
+  opacity: 0;
+  transition: opacity 0.3s;
+
+  &-spinning {
+    opacity: 1;
+  }
+}
+
+// ============ 尺寸 ============
+.@{prefix}-small {
+  font-size: 12px;
+}
+
+.@{prefix}-large {
+  font-size: 16px;
+}
+
+// ============ 默认指示符（四个点） ============
+.@{prefix}-dot {
+  position: relative;
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  font-size: 20px;
+  transform: rotate(45deg);
+  animation: kage-spin-rotate 1.2s infinite linear;
+}
+
+.@{prefix}-dot-item {
+  position: absolute;
+  display: block;
+  width: 9px;
+  height: 9px;
+  background-color: @spin-color;
+  border-radius: 100%;
+  transform: scale(0.75);
+  transform-origin: 50% 50%;
+  opacity: 0.3;
+  animation: kage-spin-dot-move 1.2s infinite linear alternate;
+
+  &:nth-child(1) {
+    top: 0;
+    left: 0;
+    animation-delay: 0s;
+  }
+
+  &:nth-child(2) {
+    top: 0;
+    right: 0;
+    animation-delay: 0.4s;
+  }
+
+  &:nth-child(3) {
+    right: 0;
+    bottom: 0;
+    animation-delay: 0.8s;
+  }
+
+  &:nth-child(4) {
+    bottom: 0;
+    left: 0;
+    animation-delay: 1.2s;
+  }
+}
+
+// 小尺寸
+.@{prefix}-small .@{prefix}-dot {
+  font-size: 14px;
+
+  .@{prefix}-dot-item {
+    width: 6px;
+    height: 6px;
+  }
+}
+
+// 大尺寸
+.@{prefix}-large .@{prefix}-dot {
+  font-size: 32px;
+
+  .@{prefix}-dot-item {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+// ============ 旋转动画 ============
+@keyframes kage-spin-rotate {
+  to {
+    transform: rotate(405deg);
+  }
+}
+
+@keyframes kage-spin-dot-move {
+  to {
+    opacity: 1;
+  }
+}
+
+// ============ 提示文字 ============
+.@{prefix}-tip {
+  margin-top: 8px;
+  color: @spin-tip-color;
+  font-size: 14px;
+}
+
+// ============ 包装容器 ============
+.@{prefix}-container {
+  position: relative;
+  transition: opacity 0.3s;
+
+  &-blur {
+    .@{prefix}-children {
+      opacity: 0.5;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .@{prefix} {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      z-index: 4;
+      display: block;
+      transform: translate(-50%, -50%);
+    }
+  }
+}
+
+.@{prefix}-children {
+  transition: opacity 0.3s;
+}
+
+// ============ 暗色模式适配 ============
+[data-theme='dark'],
+[data-prefers-color-scheme='dark'],
+[data-prefers-color='dark'],
+html.dark,
+body.dark,
+.dark {
+  .@{prefix} {
+    color: #1890ff;
+
+    &-tip {
+      color: rgba(255, 255, 255, 0.45);
+    }
+
+    &-dot-item {
+      background-color: #1890ff;
+    }
+  }
+}
+
