@@ -99,6 +99,10 @@ function getPlacementStyle(
   placement: TooltipPlacement,
   arrow: boolean
 ): Position {
+  if (typeof window === 'undefined' || typeof document === 'undefined') {
+    return { top: 0, left: 0 };
+  }
+  
   const gap = arrow ? 12 : 8;
   const scrollTop = window.scrollY || document.documentElement.scrollTop;
   const scrollLeft = window.scrollX || document.documentElement.scrollLeft;

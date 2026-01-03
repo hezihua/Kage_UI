@@ -66,7 +66,7 @@ export interface AnchorProps {
 
 // 获取元素距离顶部的距离
 const getOffsetTop = (element: HTMLElement, container: HTMLElement | Window): number => {
-  if (!element) return 0;
+  if (!element || typeof window === 'undefined') return 0;
   
   const rect = element.getBoundingClientRect();
   
@@ -80,6 +80,8 @@ const getOffsetTop = (element: HTMLElement, container: HTMLElement | Window): nu
 
 // 获取当前滚动位置
 const getScrollTop = (container: HTMLElement | Window): number => {
+  if (typeof window === 'undefined' || typeof document === 'undefined') return 0;
+  
   if (container === window) {
     return window.scrollY || document.documentElement.scrollTop;
   }
@@ -92,6 +94,8 @@ const scrollToElement = (
   container: HTMLElement | Window,
   offset: number = 0
 ) => {
+  if (typeof window === 'undefined') return;
+  
   const rect = element.getBoundingClientRect();
   
   if (container === window) {
@@ -218,6 +222,8 @@ export const Anchor: React.FC<AnchorProps> & { Link: typeof AnchorLink } = ({
       let currentActive = '';
       
       // 找到当前视口中最靠近顶部的锚点
+      if (typeof document === 'undefined') return;
+      
       for (const href of links) {
         const targetId = href.startsWith('#') ? href.slice(1) : href;
         const element = document.getElementById(targetId);
@@ -254,7 +260,7 @@ export const Anchor: React.FC<AnchorProps> & { Link: typeof AnchorLink } = ({
     e.preventDefault();
     
     // replace 模式下不滚动，只更新状态
-    if (!replace) {
+    if (!replace && typeof document !== 'undefined') {
       const targetId = item.href.startsWith('#') ? item.href.slice(1) : item.href;
       const element = document.getElementById(targetId);
       const container = getContainer();

@@ -350,7 +350,7 @@ const initContainer = () => {
 };
 
 // 在浏览器环境中初始化
-if (typeof window !== 'undefined') {
+if (typeof window !== 'undefined' && typeof document !== 'undefined') {
   if (document.readyState === 'complete' || document.readyState === 'interactive') {
     setTimeout(initContainer, 0);
   } else {

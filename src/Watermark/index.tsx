@@ -60,6 +60,8 @@ const generateWatermark = (
     fontFamily: string;
   }
 ): string => {
+  if (typeof document === 'undefined') return '';
+  
   const canvas = document.createElement('canvas');
   const ctx = canvas.getContext('2d');
   if (!ctx) return '';
@@ -121,7 +123,7 @@ const generateWatermark = (
 
 // ============ 检测深色模式 ============
 const isDarkMode = (): boolean => {
-  if (typeof window === 'undefined') return false;
+  if (typeof window === 'undefined' || typeof document === 'undefined') return false;
   
   // 优先检查页面主题属性（最可靠）
   if (
@@ -210,6 +212,8 @@ export const Watermark: React.FC<WatermarkProps> = ({
 
   // 监听深色模式变化
   useEffect(() => {
+    if (typeof window === 'undefined' || typeof document === 'undefined') return;
+    
     const checkDarkMode = () => {
       const newDarkMode = isDarkMode();
       setDarkMode(newDarkMode);
