@@ -184,7 +184,9 @@ export const Tooltip: React.FC<TooltipProps> = ({
   const [internalOpen, setInternalOpen] = useState(defaultOpen);
   const [position, setPosition] = useState<Position>({ top: 0, left: 0 });
   const [actualPlacement, setActualPlacement] = useState(placement);
-  const [mounted, setMounted] = useState(false);
+  // 如果 defaultOpen 为 true，初始时就应该 mounted
+  const [mounted, setMounted] = useState(defaultOpen);
+  const [positionCalculated, setPositionCalculated] = useState(false);
 
   const triggerRef = useRef<HTMLElement>(null);
   const tooltipRef = useRef<HTMLDivElement>(null);
@@ -235,6 +237,7 @@ export const Tooltip: React.FC<TooltipProps> = ({
 
     const pos = getPlacementStyle(triggerRect, tooltipRect, finalPlacement, arrow);
     setPosition(pos);
+    setPositionCalculated(true);
   }, [placement, arrow, autoAdjustOverflow]);
 
   // 显示
@@ -253,14 +256,21 @@ export const Tooltip: React.FC<TooltipProps> = ({
     }, mouseLeaveDelay * 1000);
   }, [mouseLeaveDelay, updateOpen]);
 
+  // 立即显示（用于点击触发）
+  const handleShowImmediate = useCallback(() => {
+    clearTimeout(leaveTimerRef.current);
+    clearTimeout(enterTimerRef.current);
+    updateOpen(true);
+  }, [updateOpen]);
+
   // 切换
   const handleToggle = useCallback(() => {
     if (isOpen) {
       handleHide();
     } else {
-      handleShow();
+      handleShowImmediate();
     }
-  }, [isOpen, handleShow, handleHide]);
+  }, [isOpen, handleShowImmediate, handleHide]);
 
   // 绑定触发事件
   const getTriggerProps = () => {
@@ -277,7 +287,10 @@ export const Tooltip: React.FC<TooltipProps> = ({
     }
 
     if (triggers.includes('click')) {
-      props.onClick = handleToggle;
+      props.onClick = (e: React.MouseEvent) => {
+        e.stopPropagation();
+        handleToggle();
+      };
     }
 
     if (triggers.includes('contextMenu')) {
@@ -305,20 +318,71 @@ export const Tooltip: React.FC<TooltipProps> = ({
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    // 使用 click 事件而不是 mousedown，避免在显示之前就关闭
+    // 延迟执行，确保点击触发的事件先执行
+    const timer = setTimeout(() => {
+      document.addEventListener('click', handleClickOutside, true);
+    }, 0);
+
+    return () => {
+      clearTimeout(timer);
+      document.removeEventListener('click', handleClickOutside, true);
+    };
   }, [isOpen, triggers, updateOpen]);
 
-  // 更新位置
+  // 当 isOpen 变化时，更新 mounted 状态
   useEffect(() => {
     if (isOpen) {
       setMounted(true);
-      // 等待 DOM 渲染
-      requestAnimationFrame(() => {
-        updatePosition();
-      });
+    } else {
+      setPositionCalculated(false);
+      // 如果 destroyTooltipOnHide 为 true，关闭时重置 mounted
+      if (destroyTooltipOnHide) {
+        setMounted(false);
+      }
     }
-  }, [isOpen, updatePosition]);
+  }, [isOpen, destroyTooltipOnHide]);
+
+  // 更新位置
+  useEffect(() => {
+    if (isOpen && mounted) {
+      setPositionCalculated(false); // 重置位置计算标志
+      // 等待 DOM 渲染完成后再计算位置
+      // 使用双重 requestAnimationFrame 确保 DOM 已完全渲染
+      const rafId1 = requestAnimationFrame(() => {
+        const rafId2 = requestAnimationFrame(() => {
+          if (tooltipRef.current && triggerRef.current) {
+            updatePosition();
+          }
+        });
+        return () => cancelAnimationFrame(rafId2);
+      });
+      return () => cancelAnimationFrame(rafId1);
+    }
+  }, [isOpen, mounted, updatePosition]);
+
+  // 当 tooltip 挂载后立即更新位置（用于确保位置正确）
+  useEffect(() => {
+    if (mounted && isOpen) {
+      // 多次尝试更新位置，确保 tooltip 已完全渲染
+      const timer1 = setTimeout(() => {
+        if (tooltipRef.current && triggerRef.current) {
+          updatePosition();
+        }
+      }, 0);
+      
+      const timer2 = setTimeout(() => {
+        if (tooltipRef.current && triggerRef.current) {
+          updatePosition();
+        }
+      }, 10);
+
+      return () => {
+        clearTimeout(timer1);
+        clearTimeout(timer2);
+      };
+    }
+  }, [mounted, isOpen, updatePosition]);
 
   // 窗口变化时更新位置
   useEffect(() => {
@@ -349,19 +413,74 @@ export const Tooltip: React.FC<TooltipProps> = ({
     return <>{children}</>;
   }
 
-  // 克隆子元素并添加 ref 和事件
+  // 检查子元素是否是原生 DOM 元素（如 button, span, a 等）
   const child = isValidElement(children) ? children : <span>{children}</span>;
-  const triggerElement = cloneElement(child as React.ReactElement, {
-    ref: triggerRef,
-    ...getTriggerProps(),
-    className: [
-      (child as React.ReactElement).props.className,
-      className,
-    ]
-      .filter(Boolean)
-      .join(' '),
-    style: { ...style, ...(child as React.ReactElement).props.style },
-  });
+  const isNativeElement = typeof (child as React.ReactElement).type === 'string';
+  
+  const triggerProps = getTriggerProps();
+  
+  let triggerElement: React.ReactElement;
+  
+  if (isNativeElement) {
+    // 如果是原生 DOM 元素，直接克隆并添加事件
+    const childProps = (child as React.ReactElement).props;
+    const mergedProps: any = {
+      ref: triggerRef,
+      ...triggerProps,
+      className: [
+        childProps.className,
+        className,
+      ]
+        .filter(Boolean)
+        .join(' '),
+      style: { ...style, ...childProps.style },
+    };
+
+    // 合并事件处理函数
+    const mergeEventHandler = (
+      tooltipHandler?: (e: any) => void,
+      childHandler?: (e: any) => void
+    ) => {
+      if (tooltipHandler && childHandler) {
+        return (e: any) => {
+          tooltipHandler(e);
+          childHandler(e);
+        };
+      }
+      return tooltipHandler || childHandler;
+    };
+
+    mergedProps.onClick = mergeEventHandler(triggerProps.onClick, childProps.onClick);
+    mergedProps.onMouseEnter = mergeEventHandler(triggerProps.onMouseEnter, childProps.onMouseEnter);
+    mergedProps.onMouseLeave = mergeEventHandler(triggerProps.onMouseLeave, childProps.onMouseLeave);
+    mergedProps.onFocus = mergeEventHandler(triggerProps.onFocus, childProps.onFocus);
+    mergedProps.onBlur = mergeEventHandler(triggerProps.onBlur, childProps.onBlur);
+    mergedProps.onContextMenu = mergeEventHandler(triggerProps.onContextMenu, childProps.onContextMenu);
+
+    triggerElement = cloneElement(child as React.ReactElement, mergedProps);
+  } else {
+    // 如果是 React 组件（如 Button），用 span 包裹并绑定事件
+    const childProps = (child as React.ReactElement).props;
+    triggerElement = (
+      <span
+        ref={triggerRef}
+        className={className}
+        style={{ display: 'inline-block', ...style }}
+        {...triggerProps}
+      >
+        {cloneElement(child as React.ReactElement, {
+          ...childProps,
+          // 合并子组件的 onClick（如果有）
+          onClick: triggerProps.onClick && childProps.onClick
+            ? (e: React.MouseEvent) => {
+                triggerProps.onClick?.(e);
+                childProps.onClick?.(e);
+              }
+            : childProps.onClick,
+        })}
+      </span>
+    );
+  }
 
   // 是否使用预设颜色
   const isPreset = isPresetColor(color);
@@ -384,7 +503,9 @@ export const Tooltip: React.FC<TooltipProps> = ({
     top: position.top,
     left: position.left,
     zIndex,
-    ...(isOpen ? { opacity: 1, visibility: 'visible' } : { opacity: 0, visibility: 'hidden' }),
+    // 先渲染 tooltip（即使位置还没计算），这样 updatePosition 才能获取到 tooltip 的尺寸
+    // 使用 opacity 控制显示，但保持 visibility: visible 以便 getBoundingClientRect 能获取到尺寸
+    ...(isOpen ? { opacity: positionCalculated ? 1 : 0, visibility: 'visible' } : { opacity: 0, visibility: 'hidden' }),
   };
 
   const innerStyle: CSSProperties = {
@@ -395,13 +516,15 @@ export const Tooltip: React.FC<TooltipProps> = ({
   const arrowStyle: CSSProperties = !isPreset && color ? { '--arrow-color': color } as CSSProperties : {};
 
   // 是否需要渲染
-  const shouldRender = destroyTooltipOnHide ? isOpen : mounted;
+  // 简化：只要 isOpen 为 true 就渲染，不依赖其他状态
+  // mounted 用于控制 tooltip 的显示状态（opacity），而不是渲染状态
+  const shouldRender = isOpen;
 
   // 获取容器
   const container = getPopupContainer?.() || document.body;
 
   // 渲染 Tooltip
-  const tooltipNode = shouldRender && (
+  const tooltipNode = shouldRender ? (
     <div
       ref={tooltipRef}
       className={tooltipClassNames}
@@ -414,7 +537,7 @@ export const Tooltip: React.FC<TooltipProps> = ({
         {title}
       </div>
     </div>
-  );
+  ) : null;
 
   return (
     <>
