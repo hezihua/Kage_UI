@@ -1,0 +1,248 @@
+// Alert 警告提示样式
+
+@prefix: kage-alert;
+
+// 颜色变量
+@alert-success-bg: #f6ffed;
+@alert-success-border: #b7eb8f;
+@alert-success-icon: #52c41a;
+@alert-info-bg: #e6f7ff;
+@alert-info-border: #91d5ff;
+@alert-info-icon: #1890ff;
+@alert-warning-bg: #fffbe6;
+@alert-warning-border: #ffe58f;
+@alert-warning-icon: #faad14;
+@alert-error-bg: #fff2f0;
+@alert-error-border: #ffccc7;
+@alert-error-icon: #ff4d4f;
+
+// ============ 主容器 ============
+.@{prefix} {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  padding: 8px 15px;
+  margin-bottom: 16px;
+  font-size: 14px;
+  line-height: 1.5715;
+  border: 1px solid;
+  border-radius: 6px;
+  transition: all 0.3s;
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+// ============ 不同类型 ============
+.@{prefix}-success {
+  background-color: @alert-success-bg;
+  border-color: @alert-success-border;
+  color: rgba(0, 0, 0, 0.85);
+
+  .@{prefix}-icon {
+    color: @alert-success-icon;
+  }
+}
+
+.@{prefix}-info {
+  background-color: @alert-info-bg;
+  border-color: @alert-info-border;
+  color: rgba(0, 0, 0, 0.85);
+
+  .@{prefix}-icon {
+    color: @alert-info-icon;
+  }
+}
+
+.@{prefix}-warning {
+  background-color: @alert-warning-bg;
+  border-color: @alert-warning-border;
+  color: rgba(0, 0, 0, 0.85);
+
+  .@{prefix}-icon {
+    color: @alert-warning-icon;
+  }
+}
+
+.@{prefix}-error {
+  background-color: @alert-error-bg;
+  border-color: @alert-error-border;
+  color: rgba(0, 0, 0, 0.85);
+
+  .@{prefix}-icon {
+    color: @alert-error-icon;
+  }
+}
+
+// ============ 图标 ============
+.@{prefix}-icon {
+  display: flex;
+  align-items: center;
+  margin-right: 8px;
+  font-size: 16px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.@{prefix}-with-icon {
+  padding-left: 37px;
+
+  .@{prefix}-icon {
+    position: absolute;
+    top: 8px;
+    left: 15px;
+  }
+}
+
+// ============ 内容区域 ============
+.@{prefix}-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.@{prefix}-message {
+  margin-bottom: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.5715;
+  color: rgba(0, 0, 0, 0.85);
+}
+
+.@{prefix}-description {
+  font-size: 14px;
+  line-height: 1.5715;
+  color: rgba(0, 0, 0, 0.65);
+}
+
+// ============ 操作按钮 ============
+.@{prefix}-action {
+  margin-left: 8px;
+  flex-shrink: 0;
+}
+
+// ============ 关闭按钮 ============
+.@{prefix}-close-icon {
+  position: absolute;
+  top: 8px;
+  right: 15px;
+  padding: 0;
+  margin: 0;
+  color: rgba(0, 0, 0, 0.45);
+  font-size: 12px;
+  line-height: 1;
+  text-align: center;
+  background: transparent;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 0.2s;
+  flex-shrink: 0;
+
+  &:hover {
+    color: rgba(0, 0, 0, 0.85);
+    background-color: rgba(0, 0, 0, 0.06);
+  }
+
+  &:active {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+}
+
+.@{prefix}-closable {
+  padding-right: 30px;
+}
+
+// ============ Banner 模式 ============
+.@{prefix}-banner {
+  border-radius: 0;
+  border-left: none;
+  border-right: none;
+  margin-bottom: 0;
+}
+
+// ============ 关闭动画 ============
+.@{prefix}-closing {
+  opacity: 0;
+  transform: scale(0.95);
+  margin-bottom: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+// ============ 暗色模式适配 ============
+[data-theme='dark'],
+[data-prefers-color-scheme='dark'],
+[data-prefers-color='dark'],
+html.dark,
+body.dark,
+.dark {
+  .@{prefix} {
+    background-color: #1f1f1f;
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .@{prefix}-success {
+    background-color: rgba(82, 196, 26, 0.1);
+    border-color: rgba(82, 196, 26, 0.3);
+    color: rgba(255, 255, 255, 0.85);
+
+    .@{prefix}-icon {
+      color: #52c41a;
+    }
+  }
+
+  .@{prefix}-info {
+    background-color: rgba(24, 144, 255, 0.1);
+    border-color: rgba(24, 144, 255, 0.3);
+    color: rgba(255, 255, 255, 0.85);
+
+    .@{prefix}-icon {
+      color: #1890ff;
+    }
+  }
+
+  .@{prefix}-warning {
+    background-color: rgba(250, 173, 20, 0.1);
+    border-color: rgba(250, 173, 20, 0.3);
+    color: rgba(255, 255, 255, 0.85);
+
+    .@{prefix}-icon {
+      color: #faad14;
+    }
+  }
+
+  .@{prefix}-error {
+    background-color: rgba(255, 77, 79, 0.1);
+    border-color: rgba(255, 77, 79, 0.3);
+    color: rgba(255, 255, 255, 0.85);
+
+    .@{prefix}-icon {
+      color: #ff4d4f;
+    }
+  }
+
+  .@{prefix}-message {
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .@{prefix}-description {
+    color: rgba(255, 255, 255, 0.65);
+  }
+
+  .@{prefix}-close-icon {
+    color: rgba(255, 255, 255, 0.45);
+
+    &:hover {
+      color: rgba(255, 255, 255, 0.85);
+      background-color: rgba(255, 255, 255, 0.08);
+    }
+
+    &:active {
+      background-color: rgba(255, 255, 255, 0.12);
+    }
+  }
+}
+

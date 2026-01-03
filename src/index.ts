@@ -186,3 +186,9 @@ export type {
   TreeSelectMode,
 } from './Tree';
 
+export { default as Alert } from './Alert';
+export type {
+  AlertProps,
+  AlertType,
+} from './Alert';
+
