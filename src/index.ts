@@ -232,3 +232,9 @@ export type {
   ProgressStatus,
 } from './Progress';
 
+export { default as Result } from './Result';
+export type {
+  ResultProps,
+  ResultStatus,
+} from './Result';
+

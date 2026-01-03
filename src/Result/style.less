@@ -1,0 +1,111 @@
+// Result 结果页组件样式
+
+@prefix: kage-result;
+
+// 颜色变量
+@result-success-color: #52c41a;
+@result-error-color: #ff4d4f;
+@result-info-color: #1890ff;
+@result-warning-color: #faad14;
+@result-title-color: rgba(0, 0, 0, 0.85);
+@result-subtitle-color: rgba(0, 0, 0, 0.45);
+
+// ============ 主容器 ============
+.@{prefix} {
+  padding: 48px 32px;
+  text-align: center;
+  box-sizing: border-box;
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+// ============ 图标 ============
+.@{prefix}-icon {
+  margin-bottom: 24px;
+  font-size: 72px;
+  line-height: 1;
+  text-align: center;
+}
+
+.@{prefix}-success .@{prefix}-icon {
+  color: @result-success-color;
+}
+
+.@{prefix}-error .@{prefix}-icon {
+  color: @result-error-color;
+}
+
+.@{prefix}-info .@{prefix}-icon {
+  color: @result-info-color;
+}
+
+.@{prefix}-warning .@{prefix}-icon {
+  color: @result-warning-color;
+}
+
+.@{prefix}-404 .@{prefix}-icon,
+.@{prefix}-403 .@{prefix}-icon,
+.@{prefix}-500 .@{prefix}-icon {
+  color: @result-title-color;
+  font-size: 120px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+// ============ 标题 ============
+.@{prefix}-title {
+  margin-bottom: 16px;
+  color: @result-title-color;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1.5;
+  text-align: center;
+}
+
+// ============ 副标题 ============
+.@{prefix}-subtitle {
+  margin-bottom: 24px;
+  color: @result-subtitle-color;
+  font-size: 14px;
+  line-height: 1.5715;
+  text-align: center;
+}
+
+// ============ 内容 ============
+.@{prefix}-content {
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+// ============ 操作区 ============
+.@{prefix}-extra {
+  margin-top: 32px;
+  text-align: center;
+}
+
+// ============ 暗色模式适配 ============
+[data-theme='dark'],
+[data-prefers-color-scheme='dark'],
+[data-prefers-color='dark'],
+html.dark,
+body.dark,
+.dark {
+  .@{prefix} {
+    .@{prefix}-title {
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .@{prefix}-subtitle {
+      color: rgba(255, 255, 255, 0.45);
+    }
+
+    .@{prefix}-404 .@{prefix}-icon,
+    .@{prefix}-403 .@{prefix}-icon,
+    .@{prefix}-500 .@{prefix}-icon {
+      color: rgba(255, 255, 255, 0.85);
+    }
+  }
+}
+
