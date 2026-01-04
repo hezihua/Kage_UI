@@ -1,6 +1,6 @@
 {
   "name": "wssf-kage-icon",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Kage Icon - Icon library for Kage UI",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
@@ -39,4 +39,3 @@
     "typescript": "^5.0.0"
   }
 }
-
