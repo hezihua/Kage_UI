@@ -50,18 +50,12 @@ import {
   FastForwardOutlined,
   ShrinkOutlined,
   ArrowsAltOutlined,
-  DownOutlined,
   UpOutlined,
-  LeftOutlined,
-  RightOutlined,
   CaretUpOutlined,
   CaretDownOutlined,
   CaretLeftOutlined,
   CaretRightOutlined,
   UpCircleOutlined,
-  DownCircleOutlined,
-  LeftCircleOutlined,
-  RightCircleOutlined,
 } from '../../../kage-icon/src/icons';
 
 const iconCategories = [
@@ -74,18 +68,12 @@ const iconCategories = [
       { name: 'FastForwardOutlined', component: FastForwardOutlined },
       { name: 'ShrinkOutlined', component: ShrinkOutlined },
       { name: 'ArrowsAltOutlined', component: ArrowsAltOutlined },
-      { name: 'DownOutlined', component: DownOutlined },
       { name: 'UpOutlined', component: UpOutlined },
-      { name: 'LeftOutlined', component: LeftOutlined },
-      { name: 'RightOutlined', component: RightOutlined },
       { name: 'CaretUpOutlined', component: CaretUpOutlined },
       { name: 'CaretDownOutlined', component: CaretDownOutlined },
       { name: 'CaretLeftOutlined', component: CaretLeftOutlined },
       { name: 'CaretRightOutlined', component: CaretRightOutlined },
       { name: 'UpCircleOutlined', component: UpCircleOutlined },
-      { name: 'DownCircleOutlined', component: DownCircleOutlined },
-      { name: 'LeftCircleOutlined', component: LeftCircleOutlined },
-      { name: 'RightCircleOutlined', component: RightCircleOutlined },
     ],
   },
 ];
@@ -174,9 +162,9 @@ import { Icon } from 'wssf-kage-ui';
 export default () => (
   <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
     <Icon name="UpOutlined" />
-    <Icon name="DownOutlined" size={24} />
-    <Icon name="LeftOutlined" size={32} />
-    <Icon name="RightOutlined" size={32} />
+    <Icon name="UpOutlined" rotate={180} size={24} />
+    <Icon name="UpOutlined" rotate={-90} size={32} />
+    <Icon name="UpOutlined" rotate={90} size={32} />
   </div>
 );
 ```
@@ -191,9 +179,9 @@ import { Icon } from 'wssf-kage-ui';
 export default () => (
   <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
     <Icon name="UpCircleOutlined" color="#ff4d4f" size={24} />
-    <Icon name="DownCircleOutlined" color="#faad14" size={24} />
-    <Icon name="LeftCircleOutlined" color="#52c41a" size={24} />
-    <Icon name="RightCircleOutlined" color="#1890ff" size={24} />
+    <Icon name="UpCircleOutlined" rotate={180} color="#faad14" size={24} />
+    <Icon name="UpCircleOutlined" rotate={-90} color="#52c41a" size={24} />
+    <Icon name="UpCircleOutlined" rotate={90} color="#1890ff" size={24} />
   </div>
 );
 ```
@@ -259,7 +247,7 @@ export default () => (
       onClick={() => alert('点击了图标')}
     />
     <Icon 
-      name="DownCircleOutlined" 
+      name="UpCircleOutlined" 
       size={24} 
       color="#faad14"
       onClick={() => console.log('收藏')}
@@ -297,16 +285,16 @@ import { Icon, Button } from 'wssf-kage-ui';
 export default () => (
   <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
     <Button>
-      <Icon name="DownOutlined" /> 下载
+      <Icon name="UpOutlined" rotate={180} /> 下载
     </Button>
     <Button type="primary">
       <Icon name="UpOutlined" /> 上传
     </Button>
     <Button>
-      <Icon name="LeftOutlined" /> 删除
+      <Icon name="UpOutlined" rotate={-90} /> 删除
     </Button>
     <Button type="primary">
-      <Icon name="RightOutlined" /> 保存
+      <Icon name="UpOutlined" rotate={90} /> 保存
     </Button>
   </div>
 );
