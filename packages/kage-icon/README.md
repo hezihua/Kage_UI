@@ -5,17 +5,17 @@ Kage UI 的图标库，提供丰富的 SVG 图标组件。
 ## 安装
 
 ```bash
-npm install kage-icon
+npm install wssf-kage-icon
 # 或
-yarn add kage-icon
+yarn add wssf-kage-icon
 # 或
-pnpm add kage-icon
+pnpm add wssf-kage-icon
 ```
 
 ## 使用
 
 ```tsx
-import { Icon } from 'kage-icon';
+import { Icon } from 'wssf-kage-icon';
 
 function App() {
   return <Icon name="home" size={24} color="#1890ff" />;

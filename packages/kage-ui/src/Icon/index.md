@@ -328,7 +328,7 @@ export default () => (
 
 ## 注意事项
 
-1. **依赖 kage-icon**: Icon 组件依赖 `wssf-kage-icon` 包，需要单独安装
+1. **依赖 wssf-kage-icon**: Icon 组件依赖 `wssf-kage-icon` 包，需要单独安装
 2. **图标名称**: 使用 `name` 属性指定图标名称，图标名称需要与 wssf-kage-icon 中定义的名称一致
 3. **颜色继承**: 默认使用 `currentColor`，图标颜色会继承父元素的文字颜色
 
