@@ -1,0 +1,12 @@
+{
+  "buildCommand": "pnpm install && pnpm --filter wssf-kage-ui docs:build",
+  "outputDirectory": "packages/kage-ui/docs-dist",
+  "installCommand": "pnpm install",
+  "framework": null,
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
