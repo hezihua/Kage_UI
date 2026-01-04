@@ -73,8 +73,8 @@ pnpm release
 ## 🔗 相关链接
 
 - [kage-ui 文档](https://github.com/hezihua/Kage_UI)
-- [kage-icon npm](https://www.npmjs.com/package/kage-icon)
-- [kage-ui npm](https://www.npmjs.com/package/kage-ui)
+- [kage-icon npm](https://www.npmjs.com/package/wssf-kage-icon)
+- [kage-ui npm](https://www.npmjs.com/package/wssf-kage-ui)
 
 ## 📄 License
 
