@@ -12,160 +12,32 @@ title: Icon 图标
 
 语义化的矢量图形。
 
+## 使用方法
+
+使用图标组件，你需要安装 `wssf-kage-icon` 图标组件包：
+
+```bash
+npm install wssf-kage-icon --save
+```
+
+```bash
+yarn add wssf-kage-icon
+```
+
+```bash
+pnpm add wssf-kage-icon
+```
+
+```bash
+bun add wssf-kage-icon
+```
+
+<!-- <code src="./usage-tip.tsx" /> -->
+
 ## 何时使用
 
 - 需要使用图标时
 - 需要自定义图标时
-
-## 代码演示
-
-### 基本使用
-
-最简单的用法。
-
-```tsx
-import { Icon } from 'kage-ui';
-
-export default () => (
-  <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
-    <Icon name="UpOutlined" />
-    <Icon name="DownOutlined" size={24} />
-    <Icon name="LeftOutlined" size={32} />
-    <Icon name="RightOutlined" size={32} />
-  </div>
-);
-```
-
-### 自定义颜色
-
-通过 `color` 属性自定义图标颜色。
-
-```tsx
-import { Icon } from 'kage-ui';
-
-export default () => (
-  <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
-    <Icon name="UpCircleOutlined" color="#ff4d4f" size={24} />
-    <Icon name="DownCircleOutlined" color="#faad14" size={24} />
-    <Icon name="LeftCircleOutlined" color="#52c41a" size={24} />
-    <Icon name="RightCircleOutlined" color="#1890ff" size={24} />
-  </div>
-);
-```
-
-### 旋转
-
-通过 `rotate` 属性旋转图标。
-
-```tsx
-import { Icon } from 'kage-ui';
-
-export default () => (
-  <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
-    <Icon name="ArrowsAltOutlined" rotate={90} size={24} />
-    <Icon name="ArrowsAltOutlined" rotate={180} size={24} />
-    <Icon name="ArrowsAltOutlined" rotate={270} size={24} />
-  </div>
-);
-```
-
-### 旋转动画
-
-通过 `spin` 属性添加旋转动画。
-
-```tsx
-import { Icon } from 'kage-ui';
-
-export default () => (
-  <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
-    <Icon name="ArrowsAltOutlined" spin size={24} />
-    <Icon name="ShrinkOutlined" spin size={24} />
-  </div>
-);
-```
-
-### 无限旋转
-
-通过 `rotate="infinite"` 实现无限旋转。
-
-```tsx
-import { Icon } from 'kage-ui';
-
-export default () => (
-  <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
-    <Icon name="ArrowsAltOutlined" rotate="infinite" size={24} />
-  </div>
-);
-```
-
-### 点击事件
-
-图标可以绑定点击事件。
-
-```tsx
-import { Icon } from 'kage-ui';
-
-export default () => (
-  <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
-    <Icon 
-      name="UpCircleOutlined" 
-      size={24} 
-      color="#ff4d4f"
-      onClick={() => alert('点击了图标')}
-    />
-    <Icon 
-      name="DownCircleOutlined" 
-      size={24} 
-      color="#faad14"
-      onClick={() => console.log('收藏')}
-    />
-  </div>
-);
-```
-
-### 不同尺寸
-
-通过 `size` 属性设置图标大小。
-
-```tsx
-import { Icon } from 'kage-ui';
-
-export default () => (
-  <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
-    <Icon name="UpOutlined" size={12} />
-    <Icon name="UpOutlined" size={16} />
-    <Icon name="UpOutlined" size={20} />
-    <Icon name="UpOutlined" size={24} />
-    <Icon name="UpOutlined" size={32} />
-    <Icon name="UpOutlined" size={48} />
-  </div>
-);
-```
-
-### 在按钮中使用
-
-图标可以配合按钮使用。
-
-```tsx
-import { Icon, Button } from 'kage-ui';
-
-export default () => (
-  <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-    <Button>
-      <Icon name="DownOutlined" /> 下载
-    </Button>
-    <Button type="primary">
-      <Icon name="UpOutlined" /> 上传
-    </Button>
-    <Button>
-      <Icon name="LeftOutlined" /> 删除
-    </Button>
-    <Button type="primary">
-      <Icon name="RightOutlined" /> 保存
-    </Button>
-  </div>
-);
-```
 
 ## 图标列表
 
@@ -234,7 +106,7 @@ export default () => {
   }, [searchText]);
   const filteredCount = filteredCategories.reduce((sum, cat) => sum + cat.icons.length, 0);
   const handleCopy = (iconName: string) => {
-    const code = `import { Icon } from 'kage-ui';\n\n<Icon name="${iconName}" />`;
+    const code = `import { Icon } from 'wssf-kage-ui';\n\n<Icon name="${iconName}" />`;
     if (navigator.clipboard) {
       navigator.clipboard.writeText(code).then(() => {
         setCopiedName(iconName);
@@ -289,6 +161,158 @@ export default () => {
 };
 ```
 
+
+## 代码演示
+
+### 基本使用
+
+最简单的用法。
+
+```tsx
+import { Icon } from 'wssf-kage-ui';
+
+export default () => (
+  <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+    <Icon name="UpOutlined" />
+    <Icon name="DownOutlined" size={24} />
+    <Icon name="LeftOutlined" size={32} />
+    <Icon name="RightOutlined" size={32} />
+  </div>
+);
+```
+
+### 自定义颜色
+
+通过 `color` 属性自定义图标颜色。
+
+```tsx
+import { Icon } from 'wssf-kage-ui';
+
+export default () => (
+  <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+    <Icon name="UpCircleOutlined" color="#ff4d4f" size={24} />
+    <Icon name="DownCircleOutlined" color="#faad14" size={24} />
+    <Icon name="LeftCircleOutlined" color="#52c41a" size={24} />
+    <Icon name="RightCircleOutlined" color="#1890ff" size={24} />
+  </div>
+);
+```
+
+### 旋转
+
+通过 `rotate` 属性旋转图标。
+
+```tsx
+import { Icon } from 'wssf-kage-ui';
+
+export default () => (
+  <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+    <Icon name="ArrowsAltOutlined" rotate={90} size={24} />
+    <Icon name="ArrowsAltOutlined" rotate={180} size={24} />
+    <Icon name="ArrowsAltOutlined" rotate={270} size={24} />
+  </div>
+);
+```
+
+### 旋转动画
+
+通过 `spin` 属性添加旋转动画。
+
+```tsx
+import { Icon } from 'wssf-kage-ui';
+
+export default () => (
+  <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+    <Icon name="ArrowsAltOutlined" spin size={24} />
+    <Icon name="ShrinkOutlined" spin size={24} />
+  </div>
+);
+```
+
+### 无限旋转
+
+通过 `rotate="infinite"` 实现无限旋转。
+
+```tsx
+import { Icon } from 'wssf-kage-ui';
+
+export default () => (
+  <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+    <Icon name="ArrowsAltOutlined" rotate="infinite" size={24} />
+  </div>
+);
+```
+
+### 点击事件
+
+图标可以绑定点击事件。
+
+```tsx
+import { Icon } from 'wssf-kage-ui';
+
+export default () => (
+  <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+    <Icon 
+      name="UpCircleOutlined" 
+      size={24} 
+      color="#ff4d4f"
+      onClick={() => alert('点击了图标')}
+    />
+    <Icon 
+      name="DownCircleOutlined" 
+      size={24} 
+      color="#faad14"
+      onClick={() => console.log('收藏')}
+    />
+  </div>
+);
+```
+
+### 不同尺寸
+
+通过 `size` 属性设置图标大小。
+
+```tsx
+import { Icon } from 'wssf-kage-ui';
+
+export default () => (
+  <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+    <Icon name="UpOutlined" size={12} />
+    <Icon name="UpOutlined" size={16} />
+    <Icon name="UpOutlined" size={20} />
+    <Icon name="UpOutlined" size={24} />
+    <Icon name="UpOutlined" size={32} />
+    <Icon name="UpOutlined" size={48} />
+  </div>
+);
+```
+
+### 在按钮中使用
+
+图标可以配合按钮使用。
+
+```tsx
+import { Icon, Button } from 'wssf-kage-ui';
+
+export default () => (
+  <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+    <Button>
+      <Icon name="DownOutlined" /> 下载
+    </Button>
+    <Button type="primary">
+      <Icon name="UpOutlined" /> 上传
+    </Button>
+    <Button>
+      <Icon name="LeftOutlined" /> 删除
+    </Button>
+    <Button type="primary">
+      <Icon name="RightOutlined" /> 保存
+    </Button>
+  </div>
+);
+```
+
+
 ## API
 
 | 参数 | 说明 | 类型 | 默认值 |
@@ -304,7 +328,7 @@ export default () => {
 
 ## 注意事项
 
-1. **依赖 kage-icon**: Icon 组件依赖 `kage-icon` 包，需要单独安装
-2. **图标名称**: 使用 `name` 属性指定图标名称，图标名称需要与 kage-icon 中定义的名称一致
+1. **依赖 kage-icon**: Icon 组件依赖 `wssf-kage-icon` 包，需要单独安装
+2. **图标名称**: 使用 `name` 属性指定图标名称，图标名称需要与 wssf-kage-icon 中定义的名称一致
 3. **颜色继承**: 默认使用 `currentColor`，图标颜色会继承父元素的文字颜色
 
