@@ -1,7 +1,12 @@
 import { defineConfig } from 'dumi';
+import path from 'path';
 
 export default defineConfig({
   outputPath: 'docs-dist',
+  // 禁用代码分割，避免 chunk 加载错误
+  codeSplitting: {
+    jsStrategy: 'granularChunks',
+  },
   themeConfig: {
     name: 'Kage UI',
     logo: false,  // 暂时不使用 logo 图片
@@ -18,7 +23,10 @@ export default defineConfig({
   // sass: {},
   // 配置别名
   alias: {
-    'wssf-kage-ui': '/src',
+    'kage-ui': path.resolve(__dirname, './src'),
+    'wssf-kage-ui': path.resolve(__dirname, './src'), // 兼容旧名称
+    'kage-icon': path.resolve(__dirname, '../kage-icon/src'), // 指向 kage-icon 源码（相对于 kage-ui 目录）
+    'wssf-kage-icon': path.resolve(__dirname, '../kage-icon/src'), // 指向 wssf-kage-icon 源码（相对于 kage-ui 目录）
   },
   // 配置 demo 的全局包裹组件
   // mountElementId: 'root',

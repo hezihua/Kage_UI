@@ -1,0 +1,56 @@
+// Icon 图标组件样式
+
+@prefix: kage-icon;
+
+// ============ 基础样式 ============
+.@{prefix} {
+  display: inline-block;
+  line-height: 0;
+  vertical-align: -0.125em;
+  transition: transform 0.3s;
+
+  svg {
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
+
+// ============ 旋转动画 ============
+.@{prefix}-spin {
+  animation: kage-icon-spin 1s linear infinite;
+}
+
+@keyframes kage-icon-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+// ============ 可点击 ============
+.@{prefix} {
+  &[onclick] {
+    cursor: pointer;
+    transition: opacity 0.2s;
+
+    &:hover {
+      opacity: 0.8;
+    }
+
+    &:active {
+      opacity: 0.6;
+    }
+  }
+}
+
+// ============ 暗色模式适配 ============
+[data-theme='dark'],
+[data-prefers-color-scheme='dark'],
+[data-prefers-color='dark'] {
+  .@{prefix} {
+    color: rgba(255, 255, 255, 0.85);
+  }
+}
+

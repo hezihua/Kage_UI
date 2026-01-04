@@ -1,75 +1,82 @@
-# Kage UI
+# Kage Monorepo
 
-🎨 一个现代化的 React 组件库，优雅且高效。
+Kage UI 的 monorepo 仓库，包含组件库和图标库。
 
-## ✨ 特性
+## 📦 包列表
 
-- 📦 开箱即用的高质量 React 组件
-- 💎 使用 TypeScript 开发，提供完整的类型定义
-- 🎨 支持主题定制
-- 🚀 支持 Tree Shaking，按需加载
+- **[kage-ui](./packages/kage-ui)** - React 组件库
+- **[kage-icon](./packages/kage-icon)** - 图标库
 
-## 📦 安装
+## 🚀 快速开始
 
-```bash
-npm install wssf-kage-ui
-# 或
-yarn add wssf-kage-ui
-# 或
-pnpm add wssf-kage-ui
-```
-
-## 🔨 使用
-
-```tsx
-import { Button } from 'wssf-kage-ui';
-
-function App() {
-  return <Button type="primary">Hello Kage UI</Button>;
-}
-```
-
-## 🛠️ 开发
+### 安装依赖
 
 ```bash
-# 安装依赖
-npm install
+pnpm install
+```
 
-# 启动文档开发服务器
-npm start
+### 开发
 
-# 构建组件库
-npm run build
+```bash
+# 启动 kage-ui 文档开发服务器
+pnpm dev
 
-# 构建文档站点
-npm run docs:build
+# 或单独启动
+pnpm --filter kage-ui start
+```
+
+### 构建
+
+```bash
+# 构建所有包
+pnpm build
+
+# 构建指定包
+pnpm build:ui
+pnpm build:icon
+```
+
+## 📝 版本管理
+
+本项目使用 [Changesets](https://github.com/changesets/changesets) 进行版本管理。
+
+### 创建变更集
+
+```bash
+pnpm changeset
+```
+
+### 版本更新
+
+```bash
+pnpm version
+```
+
+### 发布
+
+```bash
+pnpm release
 ```
 
 ## 📁 目录结构
 
 ```
-kage-ui/
-├── docs/                   # 文档目录
-│   ├── index.md           # 首页
-│   └── guide.md           # 指南
-├── src/                    # 组件源码
-│   ├── Button/            # Button 组件
-│   │   ├── index.tsx      # 组件实现
-│   │   ├── index.less     # 组件样式
-│   │   ├── index.ts       # 组件导出
-│   │   └── index.md       # 组件文档
-│   └── index.ts           # 入口文件
-├── .dumirc.ts             # dumi 配置
-├── .fatherrc.ts           # father 打包配置
-├── package.json
-└── tsconfig.json
+.
+├── packages/
+│   ├── kage-ui/      # 组件库
+│   └── kage-icon/    # 图标库
+├── .changeset/       # Changesets 配置
+├── pnpm-workspace.yaml
+└── package.json
 ```
 
-## 🤝 贡献
+## 🔗 相关链接
 
-欢迎贡献代码，请先阅读贡献指南。
+- [kage-ui 文档](https://github.com/hezihua/Kage_UI)
+- [kage-icon npm](https://www.npmjs.com/package/kage-icon)
+- [kage-ui npm](https://www.npmjs.com/package/kage-ui)
 
 ## 📄 License
 
-MIT © Kage UI
+MIT
 

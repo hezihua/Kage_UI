@@ -4,6 +4,9 @@
 export { Button } from './Button';
 export type { ButtonProps } from './Button';
 
+export { default as Icon } from './Icon';
+export type { IconProps, IconRotate } from './Icon';
+
 export { default as Typography, Title, Text, Paragraph, Link } from './Typography';
 export type { TitleProps, TextProps, ParagraphProps, LinkProps } from './Typography';
 

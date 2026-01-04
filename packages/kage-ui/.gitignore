@@ -1,11 +1,8 @@
 # dependencies
 node_modules
-.pnp
-.pnp.js
 
 # production
 dist
-build
 docs-dist
 
 # misc
@@ -25,7 +22,6 @@ pnpm-debug.log*
 .vscode
 *.swp
 *.swo
-*~
 
 # dumi
 .dumi/tmp
@@ -34,11 +30,8 @@ pnpm-debug.log*
 # husky
 .husky/_
 
-# changesets
-.changeset/*.md
-!.changeset/README.md
-
-# lock files (keep pnpm-lock.yaml)
-package-lock.json
-yarn.lock
+# lock files (optional, can keep one)
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
 
