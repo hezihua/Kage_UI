@@ -69,6 +69,18 @@ import {
   CheckCircleOutlined,
   CheckSquareOutlined,
   ClockCircleOutlined,
+  CopyOutlined,
+  ScissorOutlined,
+  DeleteOutlined,
+  SnippetsOutlined,
+  AlignCenterOutlined,
+  AlignLeftOutlined,
+  AlignRightOutlined,
+  BoldOutlined,
+  ItalicOutlined,
+  UnderlineOutlined,
+  FontSizeOutlined,
+  DragOutlined,
 } from '../../../kage-icon/src/icons';
 
 const iconCategories = [
@@ -105,6 +117,23 @@ const iconCategories = [
       { name: 'CheckCircleOutlined', component: CheckCircleOutlined },
       { name: 'CheckSquareOutlined', component: CheckSquareOutlined },
       { name: 'ClockCircleOutlined', component: ClockCircleOutlined },
+    ],
+  },
+  {
+    title: '编辑类图标',
+    icons: [
+      { name: 'CopyOutlined', component: CopyOutlined },
+      { name: 'ScissorOutlined', component: ScissorOutlined },
+      { name: 'DeleteOutlined', component: DeleteOutlined },
+      { name: 'SnippetsOutlined', component: SnippetsOutlined },
+      { name: 'AlignCenterOutlined', component: AlignCenterOutlined },
+      { name: 'AlignLeftOutlined', component: AlignLeftOutlined },
+      { name: 'AlignRightOutlined', component: AlignRightOutlined },
+      { name: 'BoldOutlined', component: BoldOutlined },
+      { name: 'ItalicOutlined', component: ItalicOutlined },
+      { name: 'UnderlineOutlined', component: UnderlineOutlined },
+      { name: 'FontSizeOutlined', component: FontSizeOutlined },
+      { name: 'DragOutlined', component: DragOutlined },
     ],
   },
 ];

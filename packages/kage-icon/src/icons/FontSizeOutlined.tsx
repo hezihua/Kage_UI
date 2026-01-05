@@ -1,0 +1,24 @@
+import React from 'react';
+import { IconProps } from '../index';
+
+export const FontSizeOutlined: React.FC<IconProps> = ({
+  size = 16,
+  color = 'currentColor',
+  style,
+  className,
+  onClick,
+}) => {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 1024 1024"
+      fill={color}
+      style={style}
+      className={className}
+      onClick={onClick}
+    >
+      <path d="M920 416H616c-4.4 0-8 3.6-8 8v112c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8v-56h60v320h-46c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h164c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8h-46V480h60v56c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V424c0-4.4-3.6-8-8-8zM656 304V168c0-4.4-3.6-8-8-8H104c-4.4 0-8 3.6-8 8v136c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-56h168v560h-92c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h264c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8h-92V248h168v56c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8z" />
+    </svg>
+  );
+};

@@ -29,6 +29,20 @@ export { CheckCircleOutlined } from './CheckCircleOutlined';
 export { CheckSquareOutlined } from './CheckSquareOutlined';
 export { ClockCircleOutlined } from './ClockCircleOutlined';
 
+// 编辑类图标
+export { CopyOutlined } from './CopyOutlined';
+export { ScissorOutlined } from './ScissorOutlined';
+export { DeleteOutlined } from './DeleteOutlined';
+export { SnippetsOutlined } from './SnippetsOutlined';
+export { AlignCenterOutlined } from './AlignCenterOutlined';
+export { AlignLeftOutlined } from './AlignLeftOutlined';
+export { AlignRightOutlined } from './AlignRightOutlined';
+export { BoldOutlined } from './BoldOutlined';
+export { ItalicOutlined } from './ItalicOutlined';
+export { UnderlineOutlined } from './UnderlineOutlined';
+export { FontSizeOutlined } from './FontSizeOutlined';
+export { DragOutlined } from './DragOutlined';
+
 // 导入所有图标组件
 import { StepBackwardOutlined } from './StepBackwardOutlined';
 import { StepForwardOutlined } from './StepForwardOutlined';
@@ -55,6 +69,18 @@ import { CheckOutlined } from './CheckOutlined';
 import { CheckCircleOutlined } from './CheckCircleOutlined';
 import { CheckSquareOutlined } from './CheckSquareOutlined';
 import { ClockCircleOutlined } from './ClockCircleOutlined';
+import { CopyOutlined } from './CopyOutlined';
+import { ScissorOutlined } from './ScissorOutlined';
+import { DeleteOutlined } from './DeleteOutlined';
+import { SnippetsOutlined } from './SnippetsOutlined';
+import { AlignCenterOutlined } from './AlignCenterOutlined';
+import { AlignLeftOutlined } from './AlignLeftOutlined';
+import { AlignRightOutlined } from './AlignRightOutlined';
+import { BoldOutlined } from './BoldOutlined';
+import { ItalicOutlined } from './ItalicOutlined';
+import { UnderlineOutlined } from './UnderlineOutlined';
+import { FontSizeOutlined } from './FontSizeOutlined';
+import { DragOutlined } from './DragOutlined';
 
 // 图标映射表
 export const iconMap: Record<string, React.ComponentType<any>> = {
@@ -83,6 +109,18 @@ export const iconMap: Record<string, React.ComponentType<any>> = {
   CheckCircleOutlined,
   CheckSquareOutlined,
   ClockCircleOutlined,
+  CopyOutlined,
+  ScissorOutlined,
+  DeleteOutlined,
+  SnippetsOutlined,
+  AlignCenterOutlined,
+  AlignLeftOutlined,
+  AlignRightOutlined,
+  BoldOutlined,
+  ItalicOutlined,
+  UnderlineOutlined,
+  FontSizeOutlined,
+  DragOutlined,
 };
 
 // 所有图标名称列表
