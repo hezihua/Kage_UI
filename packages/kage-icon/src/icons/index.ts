@@ -43,6 +43,14 @@ export { UnderlineOutlined } from './UnderlineOutlined';
 export { FontSizeOutlined } from './FontSizeOutlined';
 export { DragOutlined } from './DragOutlined';
 
+// 通用图标
+export { ToTopOutlined } from './ToTopOutlined';
+export { UngroupOutlined } from './UngroupOutlined';
+export { UnlockOutlined } from './UnlockOutlined';
+export { UploadOutlined } from './UploadOutlined';
+export { VideoCameraOutlined } from './VideoCameraOutlined';
+export { WalletOutlined } from './WalletOutlined';
+
 // 导入所有图标组件
 import { StepBackwardOutlined } from './StepBackwardOutlined';
 import { StepForwardOutlined } from './StepForwardOutlined';
@@ -81,6 +89,12 @@ import { ItalicOutlined } from './ItalicOutlined';
 import { UnderlineOutlined } from './UnderlineOutlined';
 import { FontSizeOutlined } from './FontSizeOutlined';
 import { DragOutlined } from './DragOutlined';
+import { ToTopOutlined } from './ToTopOutlined';
+import { UngroupOutlined } from './UngroupOutlined';
+import { UnlockOutlined } from './UnlockOutlined';
+import { UploadOutlined } from './UploadOutlined';
+import { VideoCameraOutlined } from './VideoCameraOutlined';
+import { WalletOutlined } from './WalletOutlined';
 
 // 图标映射表
 export const iconMap: Record<string, React.ComponentType<any>> = {
@@ -121,6 +135,12 @@ export const iconMap: Record<string, React.ComponentType<any>> = {
   UnderlineOutlined,
   FontSizeOutlined,
   DragOutlined,
+  ToTopOutlined,
+  UngroupOutlined,
+  UnlockOutlined,
+  UploadOutlined,
+  VideoCameraOutlined,
+  WalletOutlined,
 };
 
 // 所有图标名称列表

@@ -81,6 +81,12 @@ import {
   UnderlineOutlined,
   FontSizeOutlined,
   DragOutlined,
+  ToTopOutlined,
+  UngroupOutlined,
+  UnlockOutlined,
+  UploadOutlined,
+  VideoCameraOutlined,
+  WalletOutlined,
 } from '../../../kage-icon/src/icons';
 
 const iconCategories = [
@@ -134,6 +140,17 @@ const iconCategories = [
       { name: 'UnderlineOutlined', component: UnderlineOutlined },
       { name: 'FontSizeOutlined', component: FontSizeOutlined },
       { name: 'DragOutlined', component: DragOutlined },
+    ],
+  },
+  {
+    title: '通用图标',
+    icons: [
+      { name: 'ToTopOutlined', component: ToTopOutlined },
+      { name: 'UngroupOutlined', component: UngroupOutlined },
+      { name: 'UnlockOutlined', component: UnlockOutlined },
+      { name: 'UploadOutlined', component: UploadOutlined },
+      { name: 'VideoCameraOutlined', component: VideoCameraOutlined },
+      { name: 'WalletOutlined', component: WalletOutlined },
     ],
   },
 ];
